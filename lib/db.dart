@@ -4,9 +4,9 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
-import 'package:data/models.dart';
+import 'package:cognitive_data/models.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:data/errors.dart';
+import 'package:cognitive_data/errors.dart';
 
 part 'db.g.dart';
 
