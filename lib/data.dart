@@ -1,3 +1,3 @@
-library data;
+library cognitive_data;
 
-export 'package:data/db.dart';
+export 'package:cognitive_data/db.dart';
