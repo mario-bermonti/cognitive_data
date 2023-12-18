@@ -106,7 +106,7 @@ class DataBase extends _$DataBase {
   ///////////
 
   /// Add data for the current session to later be saved to the db
-  void addSessionData({
+  void addSessionMetaData({
     required int sessionID,
     required String participantId,
     required DateTime timeStart,
