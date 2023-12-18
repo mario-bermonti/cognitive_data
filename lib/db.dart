@@ -95,7 +95,7 @@ class DataBase extends _$DataBase {
 
   /// Returns the appropriate current session number for the current participant
   /// based on how many sessions the participant has completed before.
-  Future<int> getCurrentParticipantSessionNumber(String participantId) async {
+  Future<int> getCurrentParticipantsessionID(String participantId) async {
     final List<Session> result = await (select(sessions)
           ..where((session) => session.participantId.equals(participantId)))
         .get();
@@ -107,13 +107,13 @@ class DataBase extends _$DataBase {
 
   /// Add data for the current session to later be saved to the db
   void addSessionData({
-    required int sessionNumber,
+    required int sessionID,
     required String participantId,
     required DateTime timeStart,
     required DateTime timeEnd,
   }) {
     sessionData = SessionsCompanion(
-      sessionNumber: Value(sessionNumber),
+      sessionID: Value(sessionID),
       participantId: Value(participantId),
       timeStart: Value(timeStart),
       timeEnd: Value(timeEnd),
@@ -123,11 +123,11 @@ class DataBase extends _$DataBase {
   /// Add data for the current device to later be saved to the db
   void addDeviceData({
     required String participantId,
-    required int sessionNumber,
+    required int sessionID,
   }) {
     deviceData = DevicesCompanion(
       participantId: Value(participantId),
-      sessionNumber: Value(sessionNumber),
+      sessionID: Value(sessionID),
     );
   }
 
@@ -136,13 +136,13 @@ class DataBase extends _$DataBase {
     required String participantId,
     required String stim,
     required String resp,
-    required int sessionNumber,
+    required int sessionID,
   }) {
     TrialsCompanion trial = TrialsCompanion(
       participantId: Value(participantId),
       stim: Value(stim),
       resp: Value(resp),
-      sessionNumber: Value(sessionNumber),
+      sessionID: Value(sessionID),
     );
 
     trialsData.add(trial);
