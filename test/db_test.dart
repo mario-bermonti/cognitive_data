@@ -18,7 +18,7 @@
 //     /// exp
 //     var exp = const TrialsCompanion(
 //       participantId: Value('001'),
-//       sessionNumber: Value(1),
+//       sessionID: Value(1),
 //       stim: Value('gato'),
 //       resp: Value('gato'),
 //     );
@@ -41,8 +41,8 @@
 //       exp.participantId.value,
 //     );
 //     flutter_test.expect(
-//       obs.sessionNumber.value,
-//       exp.sessionNumber.value,
+//       obs.sessionID.value,
+//       exp.sessionID.value,
 //     );
 //     flutter_test.expect(
 //       obs.stim.value,
@@ -62,7 +62,7 @@
 //       participantId: Value('001'),
 //       stim: Value('gato'),
 //       resp: Value('gato'),
-//       sessionNumber: Value(1),
+//       sessionID: Value(1),
 //     );
 
 //     // trial 2
@@ -70,7 +70,7 @@
 //       participantId: Value('002'),
 //       stim: Value('perro'),
 //       resp: Value('perros'),
-//       sessionNumber: Value(2),
+//       sessionID: Value(2),
 //     );
 
 //     database.trialsData.addAll([exp1, exp2]);
@@ -86,8 +86,8 @@
 //       exp1.participantId.value,
 //     );
 //     flutter_test.expect(
-//       obs[0].sessionNumber,
-//       exp1.sessionNumber.value,
+//       obs[0].sessionID,
+//       exp1.sessionID.value,
 //     );
 //     flutter_test.expect(
 //       obs[0].stim,
@@ -103,8 +103,8 @@
 //       exp2.participantId.value,
 //     );
 //     flutter_test.expect(
-//       obs[1].sessionNumber,
-//       exp2.sessionNumber.value,
+//       obs[1].sessionID,
+//       exp2.sessionID.value,
 //     );
 //     flutter_test.expect(
 //       obs[1].stim,
@@ -116,10 +116,10 @@
 //     );
 //   });
 
-//   flutter_test.testWidgets('save sessionNumber to database', (tester) async {
+//   flutter_test.testWidgets('save sessionID to database', (tester) async {
 //     /// exp
 //     var exp = SessionsCompanion(
-//       sessionNumber: const Value(1),
+//       sessionID: const Value(1),
 //       participantId: const Value('001'),
 //       timeStart: Value(DateTime.now()),
 //       timeEnd: Value(DateTime.now()),
@@ -140,8 +140,8 @@
 //       exp.participantId.value,
 //     );
 //     flutter_test.expect(
-//       obs.sessionNumber.value,
-//       exp.sessionNumber.value,
+//       obs.sessionID.value,
+//       exp.sessionID.value,
 //     );
 
 //     /// TimeStart
@@ -183,7 +183,7 @@
 //     /// exp
 //     var exp = const DevicesCompanion(
 //       participantId: Value('001'),
-//       sessionNumber: Value(1),
+//       sessionID: Value(1),
 //     );
 //     final int expId = await database.insertDevice(exp);
 
@@ -208,49 +208,49 @@
 //       exp.participantId.value,
 //     );
 //     flutter_test.expect(
-//       obs.sessionNumber.value,
-//       exp.sessionNumber.value,
+//       obs.sessionID.value,
+//       exp.sessionID.value,
 //     );
 //   });
 
-//   flutter_test.testWidgets('get current sessionNumber id - first sessionNumber',
+//   flutter_test.testWidgets('get current sessionID id - first sessionID',
 //       (tester) async {
 //     const int exp = 1;
-//     final int obs = await database.getCurrentParticipantSessionNumber('001');
+//     final int obs = await database.getCurrentParticipantsessionID('001');
 //     flutter_test.expect(obs, exp);
 //   });
 
 //   /// TODO use max value instead or rethink this
 //   flutter_test.testWidgets(
-//       'get current sessionNumber id - second sessionNumber', (tester) async {
+//       'get current sessionID id - second sessionID', (tester) async {
 //     const int exp = 2;
 //     const participantId = '001';
 
 //     /// create previous sessions for user
-//     var sessionNumber = SessionsCompanion(
-//       sessionNumber: const Value(1),
+//     var sessionID = SessionsCompanion(
+//       sessionID: const Value(1),
 //       participantId: const Value(participantId),
 //       timeStart: Value(DateTime.now()),
 //       timeEnd: Value(DateTime.now()),
 //     );
-//     await database.insertSession(sessionNumber);
+//     await database.insertSession(sessionID);
 
 //     /// obs
 //     final int obs =
-//         await database.getCurrentParticipantSessionNumber(participantId);
+//         await database.getCurrentParticipantsessionID(participantId);
 
 //     /// check
 //     flutter_test.expect(obs, exp);
 //   });
 
-//   flutter_test.testWidgets('get current sessionNumber id - 3+ sessionNumber',
+//   flutter_test.testWidgets('get current sessionID id - 3+ sessionID',
 //       (tester) async {
 //     const int exp = 3;
 //     const participantId = '001';
 
 //     /// create previous sessions for user
 //     var session1 = SessionsCompanion(
-//       sessionNumber: const Value(1),
+//       sessionID: const Value(1),
 //       participantId: const Value(participantId),
 //       timeStart: Value(DateTime.now()),
 //       timeEnd: Value(DateTime.now()),
@@ -258,7 +258,7 @@
 //     await database.insertSession(session1);
 
 //     var session2 = SessionsCompanion(
-//       sessionNumber: const Value(2),
+//       sessionID: const Value(2),
 //       participantId: const Value(participantId),
 //       timeStart: Value(DateTime.now()),
 //       timeEnd: Value(DateTime.now()),
@@ -267,7 +267,7 @@
 
 //     /// obs
 //     final int obs =
-//         await database.getCurrentParticipantSessionNumber(participantId);
+//         await database.getCurrentParticipantsessionID(participantId);
 
 //     /// check
 //     flutter_test.expect(obs, exp);
@@ -278,18 +278,18 @@
 //     /// await database closing because it caused the  test to hang
 //     database.close();
 //   });
-//   flutter_test.testWidgets('add data to data manager - sessionNumber ',
+//   flutter_test.testWidgets('add data to data manager - sessionID ',
 //       (tester) async {
 //     // set up
 //     var exp = SessionsCompanion(
-//       sessionNumber: const Value(1),
+//       sessionID: const Value(1),
 //       participantId: const Value('001'),
 //       timeStart: Value(DateTime.now()),
 //       timeEnd: Value(DateTime.now()),
 //     );
 
 //     database.addSessionData(
-//       sessionNumber: exp.sessionNumber.value,
+//       sessionID: exp.sessionID.value,
 //       participantId: exp.participantId.value,
 //       timeStart: exp.timeStart.value,
 //       timeEnd: exp.timeEnd.value,
@@ -304,12 +304,12 @@
 //     // set up
 //     var exp = const DevicesCompanion(
 //       participantId: Value('001'),
-//       sessionNumber: Value(1),
+//       sessionID: Value(1),
 //     );
 
 //     database.addDeviceData(
 //       participantId: exp.participantId.value,
-//       sessionNumber: exp.sessionNumber.value,
+//       sessionID: exp.sessionID.value,
 //     );
 
 //     DevicesCompanion obs = database.deviceData;
@@ -324,14 +324,14 @@
 //       participantId: Value('001'),
 //       stim: Value('gato'),
 //       resp: Value('gato'),
-//       sessionNumber: Value(1),
+//       sessionID: Value(1),
 //     );
 
 //     database.addTrialData(
 //       participantId: exp.participantId.value,
 //       stim: exp.stim.value,
 //       resp: exp.resp.value,
-//       sessionNumber: exp.sessionNumber.value,
+//       sessionID: exp.sessionID.value,
 //     );
 
 //     TrialsCompanion obs = database.trialsData[0];
@@ -346,14 +346,14 @@
 //       participantId: Value('001'),
 //       stim: Value('gato'),
 //       resp: Value('gato'),
-//       sessionNumber: Value(1),
+//       sessionID: Value(1),
 //     );
 
 //     database.addTrialData(
 //       participantId: exp1.participantId.value,
 //       stim: exp1.stim.value,
 //       resp: exp1.resp.value,
-//       sessionNumber: exp1.sessionNumber.value,
+//       sessionID: exp1.sessionID.value,
 //     );
 
 //     TrialsCompanion obs1 = database.trialsData[0];
@@ -364,14 +364,14 @@
 //       participantId: Value('002'),
 //       stim: Value('perro'),
 //       resp: Value('perros'),
-//       sessionNumber: Value(2),
+//       sessionID: Value(2),
 //     );
 
 //     database.addTrialData(
 //       participantId: exp2.participantId.value,
 //       stim: exp2.stim.value,
 //       resp: exp2.resp.value,
-//       sessionNumber: exp2.sessionNumber.value,
+//       sessionID: exp2.sessionID.value,
 //     );
 
 //     TrialsCompanion obs2 = database.trialsData[1];
@@ -382,11 +382,11 @@
 //     // create objects
 //     var expDevice = const DevicesCompanion(
 //       participantId: Value('001'),
-//       sessionNumber: Value(1),
+//       sessionID: Value(1),
 //     );
 
 //     var expSession = SessionsCompanion(
-//       sessionNumber: const Value(1),
+//       sessionID: const Value(1),
 //       participantId: const Value('001'),
 //       timeStart: Value(DateTime.now()),
 //       timeEnd: Value(DateTime.now()),
@@ -394,7 +394,7 @@
 
 //     var expTrials = const TrialsCompanion(
 //       participantId: Value('001'),
-//       sessionNumber: Value(1),
+//       sessionID: Value(1),
 //       stim: Value('gato'),
 //       resp: Value('gato'),
 //     );
