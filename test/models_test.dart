@@ -4,13 +4,13 @@ import 'package:cognitive_data/models.dart';
 void main() {
   // testWidgets('models current date, time not included', (tester) async {
   //   // obs
-  //   sessionNumber sessionNumber = sessionNumber(
+  //   sessionID sessionID = sessionID(
   //     participantId: '01',
   //     timeStart: TimeOfDay.now(),
   //     timeEnd: TimeOfDay.now(),
   //   );
 
-  //   DateTime obs = DateTime(sessionNumber.date.month, sessionNumber.date.day);
+  //   DateTime obs = DateTime(sessionID.date.month, sessionID.date.day);
 
   //   // exp
   //   DateTime currentDateTime = DateTime.now().toLocal();
