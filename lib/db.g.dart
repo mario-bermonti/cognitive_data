@@ -9,13 +9,13 @@ part of 'db.dart';
 // ignore_for_file: type=lint
 class Session extends DataClass implements Insertable<Session> {
   final int id;
-  final int sessionNumber;
+  final int sessionID;
   final String participantId;
   final DateTime timeStart;
   final DateTime timeEnd;
   Session(
       {required this.id,
-      required this.sessionNumber,
+      required this.sessionID,
       required this.participantId,
       required this.timeStart,
       required this.timeEnd});
@@ -24,8 +24,8 @@ class Session extends DataClass implements Insertable<Session> {
     return Session(
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      sessionNumber: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}session_number'])!,
+      sessionID: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
       participantId: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}participant_id'])!,
       timeStart: const DateTimeType()
@@ -38,7 +38,7 @@ class Session extends DataClass implements Insertable<Session> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['session_number'] = Variable<int>(sessionNumber);
+    map['session_i_d'] = Variable<int>(sessionID);
     map['participant_id'] = Variable<String>(participantId);
     map['time_start'] = Variable<DateTime>(timeStart);
     map['time_end'] = Variable<DateTime>(timeEnd);
@@ -48,7 +48,7 @@ class Session extends DataClass implements Insertable<Session> {
   SessionsCompanion toCompanion(bool nullToAbsent) {
     return SessionsCompanion(
       id: Value(id),
-      sessionNumber: Value(sessionNumber),
+      sessionID: Value(sessionID),
       participantId: Value(participantId),
       timeStart: Value(timeStart),
       timeEnd: Value(timeEnd),
@@ -60,7 +60,7 @@ class Session extends DataClass implements Insertable<Session> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Session(
       id: serializer.fromJson<int>(json['id']),
-      sessionNumber: serializer.fromJson<int>(json['sessionNumber']),
+      sessionID: serializer.fromJson<int>(json['sessionID']),
       participantId: serializer.fromJson<String>(json['participantId']),
       timeStart: serializer.fromJson<DateTime>(json['timeStart']),
       timeEnd: serializer.fromJson<DateTime>(json['timeEnd']),
@@ -71,7 +71,7 @@ class Session extends DataClass implements Insertable<Session> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'sessionNumber': serializer.toJson<int>(sessionNumber),
+      'sessionID': serializer.toJson<int>(sessionID),
       'participantId': serializer.toJson<String>(participantId),
       'timeStart': serializer.toJson<DateTime>(timeStart),
       'timeEnd': serializer.toJson<DateTime>(timeEnd),
@@ -80,13 +80,13 @@ class Session extends DataClass implements Insertable<Session> {
 
   Session copyWith(
           {int? id,
-          int? sessionNumber,
+          int? sessionID,
           String? participantId,
           DateTime? timeStart,
           DateTime? timeEnd}) =>
       Session(
         id: id ?? this.id,
-        sessionNumber: sessionNumber ?? this.sessionNumber,
+        sessionID: sessionID ?? this.sessionID,
         participantId: participantId ?? this.participantId,
         timeStart: timeStart ?? this.timeStart,
         timeEnd: timeEnd ?? this.timeEnd,
@@ -95,7 +95,7 @@ class Session extends DataClass implements Insertable<Session> {
   String toString() {
     return (StringBuffer('Session(')
           ..write('id: $id, ')
-          ..write('sessionNumber: $sessionNumber, ')
+          ..write('sessionID: $sessionID, ')
           ..write('participantId: $participantId, ')
           ..write('timeStart: $timeStart, ')
           ..write('timeEnd: $timeEnd')
@@ -105,13 +105,13 @@ class Session extends DataClass implements Insertable<Session> {
 
   @override
   int get hashCode =>
-      Object.hash(id, sessionNumber, participantId, timeStart, timeEnd);
+      Object.hash(id, sessionID, participantId, timeStart, timeEnd);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is Session &&
           other.id == this.id &&
-          other.sessionNumber == this.sessionNumber &&
+          other.sessionID == this.sessionID &&
           other.participantId == this.participantId &&
           other.timeStart == this.timeStart &&
           other.timeEnd == this.timeEnd);
@@ -119,37 +119,37 @@ class Session extends DataClass implements Insertable<Session> {
 
 class SessionsCompanion extends UpdateCompanion<Session> {
   final Value<int> id;
-  final Value<int> sessionNumber;
+  final Value<int> sessionID;
   final Value<String> participantId;
   final Value<DateTime> timeStart;
   final Value<DateTime> timeEnd;
   const SessionsCompanion({
     this.id = const Value.absent(),
-    this.sessionNumber = const Value.absent(),
+    this.sessionID = const Value.absent(),
     this.participantId = const Value.absent(),
     this.timeStart = const Value.absent(),
     this.timeEnd = const Value.absent(),
   });
   SessionsCompanion.insert({
     this.id = const Value.absent(),
-    required int sessionNumber,
+    required int sessionID,
     required String participantId,
     required DateTime timeStart,
     required DateTime timeEnd,
-  })  : sessionNumber = Value(sessionNumber),
+  })  : sessionID = Value(sessionID),
         participantId = Value(participantId),
         timeStart = Value(timeStart),
         timeEnd = Value(timeEnd);
   static Insertable<Session> custom({
     Expression<int>? id,
-    Expression<int>? sessionNumber,
+    Expression<int>? sessionID,
     Expression<String>? participantId,
     Expression<DateTime>? timeStart,
     Expression<DateTime>? timeEnd,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (sessionNumber != null) 'session_number': sessionNumber,
+      if (sessionID != null) 'session_i_d': sessionID,
       if (participantId != null) 'participant_id': participantId,
       if (timeStart != null) 'time_start': timeStart,
       if (timeEnd != null) 'time_end': timeEnd,
@@ -158,13 +158,13 @@ class SessionsCompanion extends UpdateCompanion<Session> {
 
   SessionsCompanion copyWith(
       {Value<int>? id,
-      Value<int>? sessionNumber,
+      Value<int>? sessionID,
       Value<String>? participantId,
       Value<DateTime>? timeStart,
       Value<DateTime>? timeEnd}) {
     return SessionsCompanion(
       id: id ?? this.id,
-      sessionNumber: sessionNumber ?? this.sessionNumber,
+      sessionID: sessionID ?? this.sessionID,
       participantId: participantId ?? this.participantId,
       timeStart: timeStart ?? this.timeStart,
       timeEnd: timeEnd ?? this.timeEnd,
@@ -177,8 +177,8 @@ class SessionsCompanion extends UpdateCompanion<Session> {
     if (id.present) {
       map['id'] = Variable<int>(id.value);
     }
-    if (sessionNumber.present) {
-      map['session_number'] = Variable<int>(sessionNumber.value);
+    if (sessionID.present) {
+      map['session_i_d'] = Variable<int>(sessionID.value);
     }
     if (participantId.present) {
       map['participant_id'] = Variable<String>(participantId.value);
@@ -196,7 +196,7 @@ class SessionsCompanion extends UpdateCompanion<Session> {
   String toString() {
     return (StringBuffer('SessionsCompanion(')
           ..write('id: $id, ')
-          ..write('sessionNumber: $sessionNumber, ')
+          ..write('sessionID: $sessionID, ')
           ..write('participantId: $participantId, ')
           ..write('timeStart: $timeStart, ')
           ..write('timeEnd: $timeEnd')
@@ -217,11 +217,10 @@ class $SessionsTable extends Sessions with TableInfo<$SessionsTable, Session> {
       type: const IntType(),
       requiredDuringInsert: false,
       defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _sessionNumberMeta =
-      const VerificationMeta('sessionNumber');
+  final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
   @override
-  late final GeneratedColumn<int?> sessionNumber = GeneratedColumn<int?>(
-      'session_number', aliasedName, false,
+  late final GeneratedColumn<int?> sessionID = GeneratedColumn<int?>(
+      'session_i_d', aliasedName, false,
       type: const IntType(), requiredDuringInsert: true);
   final VerificationMeta _participantIdMeta =
       const VerificationMeta('participantId');
@@ -241,7 +240,7 @@ class $SessionsTable extends Sessions with TableInfo<$SessionsTable, Session> {
       type: const IntType(), requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, sessionNumber, participantId, timeStart, timeEnd];
+      [id, sessionID, participantId, timeStart, timeEnd];
   @override
   String get aliasedName => _alias ?? 'sessions';
   @override
@@ -254,13 +253,13 @@ class $SessionsTable extends Sessions with TableInfo<$SessionsTable, Session> {
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('session_number')) {
+    if (data.containsKey('session_i_d')) {
       context.handle(
-          _sessionNumberMeta,
-          sessionNumber.isAcceptableOrUnknown(
-              data['session_number']!, _sessionNumberMeta));
+          _sessionIDMeta,
+          sessionID.isAcceptableOrUnknown(
+              data['session_i_d']!, _sessionIDMeta));
     } else if (isInserting) {
-      context.missing(_sessionNumberMeta);
+      context.missing(_sessionIDMeta);
     }
     if (data.containsKey('participant_id')) {
       context.handle(
@@ -304,13 +303,13 @@ class Trial extends DataClass implements Insertable<Trial> {
   final String participantId;
   final String stim;
   final String resp;
-  final int sessionNumber;
+  final int sessionID;
   Trial(
       {required this.id,
       required this.participantId,
       required this.stim,
       required this.resp,
-      required this.sessionNumber});
+      required this.sessionID});
   factory Trial.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Trial(
@@ -322,8 +321,8 @@ class Trial extends DataClass implements Insertable<Trial> {
           .mapFromDatabaseResponse(data['${effectivePrefix}stim'])!,
       resp: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}resp'])!,
-      sessionNumber: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}session_number'])!,
+      sessionID: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
     );
   }
   @override
@@ -333,7 +332,7 @@ class Trial extends DataClass implements Insertable<Trial> {
     map['participant_id'] = Variable<String>(participantId);
     map['stim'] = Variable<String>(stim);
     map['resp'] = Variable<String>(resp);
-    map['session_number'] = Variable<int>(sessionNumber);
+    map['session_i_d'] = Variable<int>(sessionID);
     return map;
   }
 
@@ -343,7 +342,7 @@ class Trial extends DataClass implements Insertable<Trial> {
       participantId: Value(participantId),
       stim: Value(stim),
       resp: Value(resp),
-      sessionNumber: Value(sessionNumber),
+      sessionID: Value(sessionID),
     );
   }
 
@@ -355,7 +354,7 @@ class Trial extends DataClass implements Insertable<Trial> {
       participantId: serializer.fromJson<String>(json['participantId']),
       stim: serializer.fromJson<String>(json['stim']),
       resp: serializer.fromJson<String>(json['resp']),
-      sessionNumber: serializer.fromJson<int>(json['sessionNumber']),
+      sessionID: serializer.fromJson<int>(json['sessionID']),
     );
   }
   @override
@@ -366,7 +365,7 @@ class Trial extends DataClass implements Insertable<Trial> {
       'participantId': serializer.toJson<String>(participantId),
       'stim': serializer.toJson<String>(stim),
       'resp': serializer.toJson<String>(resp),
-      'sessionNumber': serializer.toJson<int>(sessionNumber),
+      'sessionID': serializer.toJson<int>(sessionID),
     };
   }
 
@@ -375,13 +374,13 @@ class Trial extends DataClass implements Insertable<Trial> {
           String? participantId,
           String? stim,
           String? resp,
-          int? sessionNumber}) =>
+          int? sessionID}) =>
       Trial(
         id: id ?? this.id,
         participantId: participantId ?? this.participantId,
         stim: stim ?? this.stim,
         resp: resp ?? this.resp,
-        sessionNumber: sessionNumber ?? this.sessionNumber,
+        sessionID: sessionID ?? this.sessionID,
       );
   @override
   String toString() {
@@ -390,13 +389,13 @@ class Trial extends DataClass implements Insertable<Trial> {
           ..write('participantId: $participantId, ')
           ..write('stim: $stim, ')
           ..write('resp: $resp, ')
-          ..write('sessionNumber: $sessionNumber')
+          ..write('sessionID: $sessionID')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, participantId, stim, resp, sessionNumber);
+  int get hashCode => Object.hash(id, participantId, stim, resp, sessionID);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -405,7 +404,7 @@ class Trial extends DataClass implements Insertable<Trial> {
           other.participantId == this.participantId &&
           other.stim == this.stim &&
           other.resp == this.resp &&
-          other.sessionNumber == this.sessionNumber);
+          other.sessionID == this.sessionID);
 }
 
 class TrialsCompanion extends UpdateCompanion<Trial> {
@@ -413,37 +412,37 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
   final Value<String> participantId;
   final Value<String> stim;
   final Value<String> resp;
-  final Value<int> sessionNumber;
+  final Value<int> sessionID;
   const TrialsCompanion({
     this.id = const Value.absent(),
     this.participantId = const Value.absent(),
     this.stim = const Value.absent(),
     this.resp = const Value.absent(),
-    this.sessionNumber = const Value.absent(),
+    this.sessionID = const Value.absent(),
   });
   TrialsCompanion.insert({
     this.id = const Value.absent(),
     required String participantId,
     required String stim,
     required String resp,
-    required int sessionNumber,
+    required int sessionID,
   })  : participantId = Value(participantId),
         stim = Value(stim),
         resp = Value(resp),
-        sessionNumber = Value(sessionNumber);
+        sessionID = Value(sessionID);
   static Insertable<Trial> custom({
     Expression<int>? id,
     Expression<String>? participantId,
     Expression<String>? stim,
     Expression<String>? resp,
-    Expression<int>? sessionNumber,
+    Expression<int>? sessionID,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (participantId != null) 'participant_id': participantId,
       if (stim != null) 'stim': stim,
       if (resp != null) 'resp': resp,
-      if (sessionNumber != null) 'session_number': sessionNumber,
+      if (sessionID != null) 'session_i_d': sessionID,
     });
   }
 
@@ -452,13 +451,13 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
       Value<String>? participantId,
       Value<String>? stim,
       Value<String>? resp,
-      Value<int>? sessionNumber}) {
+      Value<int>? sessionID}) {
     return TrialsCompanion(
       id: id ?? this.id,
       participantId: participantId ?? this.participantId,
       stim: stim ?? this.stim,
       resp: resp ?? this.resp,
-      sessionNumber: sessionNumber ?? this.sessionNumber,
+      sessionID: sessionID ?? this.sessionID,
     );
   }
 
@@ -477,8 +476,8 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
     if (resp.present) {
       map['resp'] = Variable<String>(resp.value);
     }
-    if (sessionNumber.present) {
-      map['session_number'] = Variable<int>(sessionNumber.value);
+    if (sessionID.present) {
+      map['session_i_d'] = Variable<int>(sessionID.value);
     }
     return map;
   }
@@ -490,7 +489,7 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
           ..write('participantId: $participantId, ')
           ..write('stim: $stim, ')
           ..write('resp: $resp, ')
-          ..write('sessionNumber: $sessionNumber')
+          ..write('sessionID: $sessionID')
           ..write(')'))
         .toString();
   }
@@ -524,17 +523,16 @@ class $TrialsTable extends Trials with TableInfo<$TrialsTable, Trial> {
   late final GeneratedColumn<String?> resp = GeneratedColumn<String?>(
       'resp', aliasedName, false,
       type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _sessionNumberMeta =
-      const VerificationMeta('sessionNumber');
+  final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
   @override
-  late final GeneratedColumn<int?> sessionNumber = GeneratedColumn<int?>(
-      'session_number', aliasedName, false,
+  late final GeneratedColumn<int?> sessionID = GeneratedColumn<int?>(
+      'session_i_d', aliasedName, false,
       type: const IntType(),
       requiredDuringInsert: true,
-      defaultConstraints: 'REFERENCES sessions (session_number)');
+      defaultConstraints: 'REFERENCES sessions (session_i_d)');
   @override
   List<GeneratedColumn> get $columns =>
-      [id, participantId, stim, resp, sessionNumber];
+      [id, participantId, stim, resp, sessionID];
   @override
   String get aliasedName => _alias ?? 'trials';
   @override
@@ -567,13 +565,13 @@ class $TrialsTable extends Trials with TableInfo<$TrialsTable, Trial> {
     } else if (isInserting) {
       context.missing(_respMeta);
     }
-    if (data.containsKey('session_number')) {
+    if (data.containsKey('session_i_d')) {
       context.handle(
-          _sessionNumberMeta,
-          sessionNumber.isAcceptableOrUnknown(
-              data['session_number']!, _sessionNumberMeta));
+          _sessionIDMeta,
+          sessionID.isAcceptableOrUnknown(
+              data['session_i_d']!, _sessionIDMeta));
     } else if (isInserting) {
-      context.missing(_sessionNumberMeta);
+      context.missing(_sessionIDMeta);
     }
     return context;
   }
@@ -599,7 +597,7 @@ class Device extends DataClass implements Insertable<Device> {
   final double height;
   final double width;
   final double aspectRatio;
-  final int sessionNumber;
+  final int sessionID;
   Device(
       {required this.id,
       required this.participantId,
@@ -607,7 +605,7 @@ class Device extends DataClass implements Insertable<Device> {
       required this.height,
       required this.width,
       required this.aspectRatio,
-      required this.sessionNumber});
+      required this.sessionID});
   factory Device.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Device(
@@ -623,8 +621,8 @@ class Device extends DataClass implements Insertable<Device> {
           .mapFromDatabaseResponse(data['${effectivePrefix}width'])!,
       aspectRatio: const RealType()
           .mapFromDatabaseResponse(data['${effectivePrefix}aspect_ratio'])!,
-      sessionNumber: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}session_number'])!,
+      sessionID: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
     );
   }
   @override
@@ -636,7 +634,7 @@ class Device extends DataClass implements Insertable<Device> {
     map['height'] = Variable<double>(height);
     map['width'] = Variable<double>(width);
     map['aspect_ratio'] = Variable<double>(aspectRatio);
-    map['session_number'] = Variable<int>(sessionNumber);
+    map['session_i_d'] = Variable<int>(sessionID);
     return map;
   }
 
@@ -648,7 +646,7 @@ class Device extends DataClass implements Insertable<Device> {
       height: Value(height),
       width: Value(width),
       aspectRatio: Value(aspectRatio),
-      sessionNumber: Value(sessionNumber),
+      sessionID: Value(sessionID),
     );
   }
 
@@ -662,7 +660,7 @@ class Device extends DataClass implements Insertable<Device> {
       height: serializer.fromJson<double>(json['height']),
       width: serializer.fromJson<double>(json['width']),
       aspectRatio: serializer.fromJson<double>(json['aspectRatio']),
-      sessionNumber: serializer.fromJson<int>(json['sessionNumber']),
+      sessionID: serializer.fromJson<int>(json['sessionID']),
     );
   }
   @override
@@ -675,7 +673,7 @@ class Device extends DataClass implements Insertable<Device> {
       'height': serializer.toJson<double>(height),
       'width': serializer.toJson<double>(width),
       'aspectRatio': serializer.toJson<double>(aspectRatio),
-      'sessionNumber': serializer.toJson<int>(sessionNumber),
+      'sessionID': serializer.toJson<int>(sessionID),
     };
   }
 
@@ -686,7 +684,7 @@ class Device extends DataClass implements Insertable<Device> {
           double? height,
           double? width,
           double? aspectRatio,
-          int? sessionNumber}) =>
+          int? sessionID}) =>
       Device(
         id: id ?? this.id,
         participantId: participantId ?? this.participantId,
@@ -694,7 +692,7 @@ class Device extends DataClass implements Insertable<Device> {
         height: height ?? this.height,
         width: width ?? this.width,
         aspectRatio: aspectRatio ?? this.aspectRatio,
-        sessionNumber: sessionNumber ?? this.sessionNumber,
+        sessionID: sessionID ?? this.sessionID,
       );
   @override
   String toString() {
@@ -705,14 +703,14 @@ class Device extends DataClass implements Insertable<Device> {
           ..write('height: $height, ')
           ..write('width: $width, ')
           ..write('aspectRatio: $aspectRatio, ')
-          ..write('sessionNumber: $sessionNumber')
+          ..write('sessionID: $sessionID')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(
-      id, participantId, platform, height, width, aspectRatio, sessionNumber);
+      id, participantId, platform, height, width, aspectRatio, sessionID);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -723,7 +721,7 @@ class Device extends DataClass implements Insertable<Device> {
           other.height == this.height &&
           other.width == this.width &&
           other.aspectRatio == this.aspectRatio &&
-          other.sessionNumber == this.sessionNumber);
+          other.sessionID == this.sessionID);
 }
 
 class DevicesCompanion extends UpdateCompanion<Device> {
@@ -733,7 +731,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
   final Value<double> height;
   final Value<double> width;
   final Value<double> aspectRatio;
-  final Value<int> sessionNumber;
+  final Value<int> sessionID;
   const DevicesCompanion({
     this.id = const Value.absent(),
     this.participantId = const Value.absent(),
@@ -741,7 +739,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
     this.height = const Value.absent(),
     this.width = const Value.absent(),
     this.aspectRatio = const Value.absent(),
-    this.sessionNumber = const Value.absent(),
+    this.sessionID = const Value.absent(),
   });
   DevicesCompanion.insert({
     this.id = const Value.absent(),
@@ -750,9 +748,9 @@ class DevicesCompanion extends UpdateCompanion<Device> {
     this.height = const Value.absent(),
     this.width = const Value.absent(),
     this.aspectRatio = const Value.absent(),
-    required int sessionNumber,
+    required int sessionID,
   })  : participantId = Value(participantId),
-        sessionNumber = Value(sessionNumber);
+        sessionID = Value(sessionID);
   static Insertable<Device> custom({
     Expression<int>? id,
     Expression<String>? participantId,
@@ -760,7 +758,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
     Expression<double>? height,
     Expression<double>? width,
     Expression<double>? aspectRatio,
-    Expression<int>? sessionNumber,
+    Expression<int>? sessionID,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -769,7 +767,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
       if (height != null) 'height': height,
       if (width != null) 'width': width,
       if (aspectRatio != null) 'aspect_ratio': aspectRatio,
-      if (sessionNumber != null) 'session_number': sessionNumber,
+      if (sessionID != null) 'session_i_d': sessionID,
     });
   }
 
@@ -780,7 +778,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
       Value<double>? height,
       Value<double>? width,
       Value<double>? aspectRatio,
-      Value<int>? sessionNumber}) {
+      Value<int>? sessionID}) {
     return DevicesCompanion(
       id: id ?? this.id,
       participantId: participantId ?? this.participantId,
@@ -788,7 +786,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
       height: height ?? this.height,
       width: width ?? this.width,
       aspectRatio: aspectRatio ?? this.aspectRatio,
-      sessionNumber: sessionNumber ?? this.sessionNumber,
+      sessionID: sessionID ?? this.sessionID,
     );
   }
 
@@ -813,8 +811,8 @@ class DevicesCompanion extends UpdateCompanion<Device> {
     if (aspectRatio.present) {
       map['aspect_ratio'] = Variable<double>(aspectRatio.value);
     }
-    if (sessionNumber.present) {
-      map['session_number'] = Variable<int>(sessionNumber.value);
+    if (sessionID.present) {
+      map['session_i_d'] = Variable<int>(sessionID.value);
     }
     return map;
   }
@@ -828,7 +826,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
           ..write('height: $height, ')
           ..write('width: $width, ')
           ..write('aspectRatio: $aspectRatio, ')
-          ..write('sessionNumber: $sessionNumber')
+          ..write('sessionID: $sessionID')
           ..write(')'))
         .toString();
   }
@@ -881,17 +879,16 @@ class $DevicesTable extends Devices with TableInfo<$DevicesTable, Device> {
       type: const RealType(),
       requiredDuringInsert: false,
       defaultValue: Constant(getAspectRatio));
-  final VerificationMeta _sessionNumberMeta =
-      const VerificationMeta('sessionNumber');
+  final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
   @override
-  late final GeneratedColumn<int?> sessionNumber = GeneratedColumn<int?>(
-      'session_number', aliasedName, false,
+  late final GeneratedColumn<int?> sessionID = GeneratedColumn<int?>(
+      'session_i_d', aliasedName, false,
       type: const IntType(),
       requiredDuringInsert: true,
-      defaultConstraints: 'REFERENCES sessions (session_number)');
+      defaultConstraints: 'REFERENCES sessions (session_i_d)');
   @override
   List<GeneratedColumn> get $columns =>
-      [id, participantId, platform, height, width, aspectRatio, sessionNumber];
+      [id, participantId, platform, height, width, aspectRatio, sessionID];
   @override
   String get aliasedName => _alias ?? 'devices';
   @override
@@ -930,13 +927,13 @@ class $DevicesTable extends Devices with TableInfo<$DevicesTable, Device> {
           aspectRatio.isAcceptableOrUnknown(
               data['aspect_ratio']!, _aspectRatioMeta));
     }
-    if (data.containsKey('session_number')) {
+    if (data.containsKey('session_i_d')) {
       context.handle(
-          _sessionNumberMeta,
-          sessionNumber.isAcceptableOrUnknown(
-              data['session_number']!, _sessionNumberMeta));
+          _sessionIDMeta,
+          sessionID.isAcceptableOrUnknown(
+              data['session_i_d']!, _sessionIDMeta));
     } else if (isInserting) {
-      context.missing(_sessionNumberMeta);
+      context.missing(_sessionIDMeta);
     }
     return context;
   }
