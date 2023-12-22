@@ -29,7 +29,7 @@ class Devices extends Table {
   RealColumn get height => real().withDefault(Constant(getHeight))();
   RealColumn get width => real().withDefault(Constant(getWidth))();
   RealColumn get aspectRatio => real().withDefault(Constant(getAspectRatio))();
-  IntColumn get sessionID => integer().references(Sessions, #sessionID)();
+  TextColumn get sessionID => text().references(Sessions, #sessionID)();
 
   double get getHeight => m.WidgetsBinding.instance.window.physicalSize.height;
   double get getWidth => m.WidgetsBinding.instance.window.physicalSize.width;
