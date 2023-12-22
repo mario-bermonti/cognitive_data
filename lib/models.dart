@@ -7,9 +7,6 @@ class Sessions extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get sessionID => integer()();
   TextColumn get participantId => text()();
-
-  /// [sessionType] can be 'practice' or 'experimental'
-  TextColumn get sessionType => text()();
   DateTimeColumn get timeStart => dateTime()();
   DateTimeColumn get timeEnd => dateTime()();
 }
