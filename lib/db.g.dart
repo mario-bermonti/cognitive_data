@@ -343,12 +343,16 @@ class Trial extends DataClass implements Insertable<Trial> {
   final String participantId;
   final String stim;
   final String resp;
+
+  /// [trialType] specifies the type of trial (practice or experimental)
+  final String trialType;
   final int sessionID;
   Trial(
       {required this.id,
       required this.participantId,
       required this.stim,
       required this.resp,
+      required this.trialType,
       required this.sessionID});
   factory Trial.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -361,6 +365,8 @@ class Trial extends DataClass implements Insertable<Trial> {
           .mapFromDatabaseResponse(data['${effectivePrefix}stim'])!,
       resp: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}resp'])!,
+      trialType: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}trial_type'])!,
       sessionID: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
     );
@@ -372,6 +378,7 @@ class Trial extends DataClass implements Insertable<Trial> {
     map['participant_id'] = Variable<String>(participantId);
     map['stim'] = Variable<String>(stim);
     map['resp'] = Variable<String>(resp);
+    map['trial_type'] = Variable<String>(trialType);
     map['session_i_d'] = Variable<int>(sessionID);
     return map;
   }
@@ -382,6 +389,7 @@ class Trial extends DataClass implements Insertable<Trial> {
       participantId: Value(participantId),
       stim: Value(stim),
       resp: Value(resp),
+      trialType: Value(trialType),
       sessionID: Value(sessionID),
     );
   }
@@ -394,6 +402,7 @@ class Trial extends DataClass implements Insertable<Trial> {
       participantId: serializer.fromJson<String>(json['participantId']),
       stim: serializer.fromJson<String>(json['stim']),
       resp: serializer.fromJson<String>(json['resp']),
+      trialType: serializer.fromJson<String>(json['trialType']),
       sessionID: serializer.fromJson<int>(json['sessionID']),
     );
   }
@@ -405,6 +414,7 @@ class Trial extends DataClass implements Insertable<Trial> {
       'participantId': serializer.toJson<String>(participantId),
       'stim': serializer.toJson<String>(stim),
       'resp': serializer.toJson<String>(resp),
+      'trialType': serializer.toJson<String>(trialType),
       'sessionID': serializer.toJson<int>(sessionID),
     };
   }
@@ -414,12 +424,14 @@ class Trial extends DataClass implements Insertable<Trial> {
           String? participantId,
           String? stim,
           String? resp,
+          String? trialType,
           int? sessionID}) =>
       Trial(
         id: id ?? this.id,
         participantId: participantId ?? this.participantId,
         stim: stim ?? this.stim,
         resp: resp ?? this.resp,
+        trialType: trialType ?? this.trialType,
         sessionID: sessionID ?? this.sessionID,
       );
   @override
@@ -429,13 +441,15 @@ class Trial extends DataClass implements Insertable<Trial> {
           ..write('participantId: $participantId, ')
           ..write('stim: $stim, ')
           ..write('resp: $resp, ')
+          ..write('trialType: $trialType, ')
           ..write('sessionID: $sessionID')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, participantId, stim, resp, sessionID);
+  int get hashCode =>
+      Object.hash(id, participantId, stim, resp, trialType, sessionID);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -444,6 +458,7 @@ class Trial extends DataClass implements Insertable<Trial> {
           other.participantId == this.participantId &&
           other.stim == this.stim &&
           other.resp == this.resp &&
+          other.trialType == this.trialType &&
           other.sessionID == this.sessionID);
 }
 
@@ -452,12 +467,14 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
   final Value<String> participantId;
   final Value<String> stim;
   final Value<String> resp;
+  final Value<String> trialType;
   final Value<int> sessionID;
   const TrialsCompanion({
     this.id = const Value.absent(),
     this.participantId = const Value.absent(),
     this.stim = const Value.absent(),
     this.resp = const Value.absent(),
+    this.trialType = const Value.absent(),
     this.sessionID = const Value.absent(),
   });
   TrialsCompanion.insert({
@@ -465,16 +482,19 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
     required String participantId,
     required String stim,
     required String resp,
+    required String trialType,
     required int sessionID,
   })  : participantId = Value(participantId),
         stim = Value(stim),
         resp = Value(resp),
+        trialType = Value(trialType),
         sessionID = Value(sessionID);
   static Insertable<Trial> custom({
     Expression<int>? id,
     Expression<String>? participantId,
     Expression<String>? stim,
     Expression<String>? resp,
+    Expression<String>? trialType,
     Expression<int>? sessionID,
   }) {
     return RawValuesInsertable({
@@ -482,6 +502,7 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
       if (participantId != null) 'participant_id': participantId,
       if (stim != null) 'stim': stim,
       if (resp != null) 'resp': resp,
+      if (trialType != null) 'trial_type': trialType,
       if (sessionID != null) 'session_i_d': sessionID,
     });
   }
@@ -491,12 +512,14 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
       Value<String>? participantId,
       Value<String>? stim,
       Value<String>? resp,
+      Value<String>? trialType,
       Value<int>? sessionID}) {
     return TrialsCompanion(
       id: id ?? this.id,
       participantId: participantId ?? this.participantId,
       stim: stim ?? this.stim,
       resp: resp ?? this.resp,
+      trialType: trialType ?? this.trialType,
       sessionID: sessionID ?? this.sessionID,
     );
   }
@@ -516,6 +539,9 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
     if (resp.present) {
       map['resp'] = Variable<String>(resp.value);
     }
+    if (trialType.present) {
+      map['trial_type'] = Variable<String>(trialType.value);
+    }
     if (sessionID.present) {
       map['session_i_d'] = Variable<int>(sessionID.value);
     }
@@ -529,6 +555,7 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
           ..write('participantId: $participantId, ')
           ..write('stim: $stim, ')
           ..write('resp: $resp, ')
+          ..write('trialType: $trialType, ')
           ..write('sessionID: $sessionID')
           ..write(')'))
         .toString();
@@ -563,6 +590,11 @@ class $TrialsTable extends Trials with TableInfo<$TrialsTable, Trial> {
   late final GeneratedColumn<String?> resp = GeneratedColumn<String?>(
       'resp', aliasedName, false,
       type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _trialTypeMeta = const VerificationMeta('trialType');
+  @override
+  late final GeneratedColumn<String?> trialType = GeneratedColumn<String?>(
+      'trial_type', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
   final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
   @override
   late final GeneratedColumn<int?> sessionID = GeneratedColumn<int?>(
@@ -572,7 +604,7 @@ class $TrialsTable extends Trials with TableInfo<$TrialsTable, Trial> {
       defaultConstraints: 'REFERENCES sessions (session_i_d)');
   @override
   List<GeneratedColumn> get $columns =>
-      [id, participantId, stim, resp, sessionID];
+      [id, participantId, stim, resp, trialType, sessionID];
   @override
   String get aliasedName => _alias ?? 'trials';
   @override
@@ -604,6 +636,12 @@ class $TrialsTable extends Trials with TableInfo<$TrialsTable, Trial> {
           _respMeta, resp.isAcceptableOrUnknown(data['resp']!, _respMeta));
     } else if (isInserting) {
       context.missing(_respMeta);
+    }
+    if (data.containsKey('trial_type')) {
+      context.handle(_trialTypeMeta,
+          trialType.isAcceptableOrUnknown(data['trial_type']!, _trialTypeMeta));
+    } else if (isInserting) {
+      context.missing(_trialTypeMeta);
     }
     if (data.containsKey('session_i_d')) {
       context.handle(
