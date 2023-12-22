@@ -5,7 +5,7 @@ import 'package:drift/drift.dart';
 
 class Sessions extends Table {
   IntColumn get id => integer().autoIncrement()();
-  IntColumn get sessionID => integer()();
+  TextColumn get sessionID => text()();
   TextColumn get participantId => text()();
   DateTimeColumn get timeStart => dateTime()();
   DateTimeColumn get timeEnd => dateTime()();
@@ -19,7 +19,7 @@ class Trials extends Table {
 
   /// [trialType] specifies the type of trial (practice or experimental)
   TextColumn get trialType => text()();
-  IntColumn get sessionID => integer().references(Sessions, #sessionID)();
+  TextColumn get sessionID => text().references(Sessions, #sessionID)();
 }
 
 class Devices extends Table {
@@ -29,7 +29,7 @@ class Devices extends Table {
   RealColumn get height => real().withDefault(Constant(getHeight))();
   RealColumn get width => real().withDefault(Constant(getWidth))();
   RealColumn get aspectRatio => real().withDefault(Constant(getAspectRatio))();
-  IntColumn get sessionID => integer().references(Sessions, #sessionID)();
+  TextColumn get sessionID => text().references(Sessions, #sessionID)();
 
   double get getHeight => m.WidgetsBinding.instance.window.physicalSize.height;
   double get getWidth => m.WidgetsBinding.instance.window.physicalSize.width;

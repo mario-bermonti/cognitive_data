@@ -9,7 +9,7 @@ part of 'db.dart';
 // ignore_for_file: type=lint
 class Session extends DataClass implements Insertable<Session> {
   final int id;
-  final int sessionID;
+  final String sessionID;
   final String participantId;
   final DateTime timeStart;
   final DateTime timeEnd;
@@ -24,7 +24,7 @@ class Session extends DataClass implements Insertable<Session> {
     return Session(
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      sessionID: const IntType()
+      sessionID: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
       participantId: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}participant_id'])!,
@@ -38,7 +38,7 @@ class Session extends DataClass implements Insertable<Session> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['session_i_d'] = Variable<int>(sessionID);
+    map['session_i_d'] = Variable<String>(sessionID);
     map['participant_id'] = Variable<String>(participantId);
     map['time_start'] = Variable<DateTime>(timeStart);
     map['time_end'] = Variable<DateTime>(timeEnd);
@@ -60,7 +60,7 @@ class Session extends DataClass implements Insertable<Session> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Session(
       id: serializer.fromJson<int>(json['id']),
-      sessionID: serializer.fromJson<int>(json['sessionID']),
+      sessionID: serializer.fromJson<String>(json['sessionID']),
       participantId: serializer.fromJson<String>(json['participantId']),
       timeStart: serializer.fromJson<DateTime>(json['timeStart']),
       timeEnd: serializer.fromJson<DateTime>(json['timeEnd']),
@@ -71,7 +71,7 @@ class Session extends DataClass implements Insertable<Session> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'sessionID': serializer.toJson<int>(sessionID),
+      'sessionID': serializer.toJson<String>(sessionID),
       'participantId': serializer.toJson<String>(participantId),
       'timeStart': serializer.toJson<DateTime>(timeStart),
       'timeEnd': serializer.toJson<DateTime>(timeEnd),
@@ -80,7 +80,7 @@ class Session extends DataClass implements Insertable<Session> {
 
   Session copyWith(
           {int? id,
-          int? sessionID,
+          String? sessionID,
           String? participantId,
           DateTime? timeStart,
           DateTime? timeEnd}) =>
@@ -119,7 +119,7 @@ class Session extends DataClass implements Insertable<Session> {
 
 class SessionsCompanion extends UpdateCompanion<Session> {
   final Value<int> id;
-  final Value<int> sessionID;
+  final Value<String> sessionID;
   final Value<String> participantId;
   final Value<DateTime> timeStart;
   final Value<DateTime> timeEnd;
@@ -132,7 +132,7 @@ class SessionsCompanion extends UpdateCompanion<Session> {
   });
   SessionsCompanion.insert({
     this.id = const Value.absent(),
-    required int sessionID,
+    required String sessionID,
     required String participantId,
     required DateTime timeStart,
     required DateTime timeEnd,
@@ -142,7 +142,7 @@ class SessionsCompanion extends UpdateCompanion<Session> {
         timeEnd = Value(timeEnd);
   static Insertable<Session> custom({
     Expression<int>? id,
-    Expression<int>? sessionID,
+    Expression<String>? sessionID,
     Expression<String>? participantId,
     Expression<DateTime>? timeStart,
     Expression<DateTime>? timeEnd,
@@ -158,7 +158,7 @@ class SessionsCompanion extends UpdateCompanion<Session> {
 
   SessionsCompanion copyWith(
       {Value<int>? id,
-      Value<int>? sessionID,
+      Value<String>? sessionID,
       Value<String>? participantId,
       Value<DateTime>? timeStart,
       Value<DateTime>? timeEnd}) {
@@ -178,7 +178,7 @@ class SessionsCompanion extends UpdateCompanion<Session> {
       map['id'] = Variable<int>(id.value);
     }
     if (sessionID.present) {
-      map['session_i_d'] = Variable<int>(sessionID.value);
+      map['session_i_d'] = Variable<String>(sessionID.value);
     }
     if (participantId.present) {
       map['participant_id'] = Variable<String>(participantId.value);
@@ -219,9 +219,9 @@ class $SessionsTable extends Sessions with TableInfo<$SessionsTable, Session> {
       defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
   @override
-  late final GeneratedColumn<int?> sessionID = GeneratedColumn<int?>(
+  late final GeneratedColumn<String?> sessionID = GeneratedColumn<String?>(
       'session_i_d', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
+      type: const StringType(), requiredDuringInsert: true);
   final VerificationMeta _participantIdMeta =
       const VerificationMeta('participantId');
   @override
@@ -306,7 +306,7 @@ class Trial extends DataClass implements Insertable<Trial> {
 
   /// [trialType] specifies the type of trial (practice or experimental)
   final String trialType;
-  final int sessionID;
+  final String sessionID;
   Trial(
       {required this.id,
       required this.participantId,
@@ -327,7 +327,7 @@ class Trial extends DataClass implements Insertable<Trial> {
           .mapFromDatabaseResponse(data['${effectivePrefix}resp'])!,
       trialType: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}trial_type'])!,
-      sessionID: const IntType()
+      sessionID: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
     );
   }
@@ -339,7 +339,7 @@ class Trial extends DataClass implements Insertable<Trial> {
     map['stim'] = Variable<String>(stim);
     map['resp'] = Variable<String>(resp);
     map['trial_type'] = Variable<String>(trialType);
-    map['session_i_d'] = Variable<int>(sessionID);
+    map['session_i_d'] = Variable<String>(sessionID);
     return map;
   }
 
@@ -363,7 +363,7 @@ class Trial extends DataClass implements Insertable<Trial> {
       stim: serializer.fromJson<String>(json['stim']),
       resp: serializer.fromJson<String>(json['resp']),
       trialType: serializer.fromJson<String>(json['trialType']),
-      sessionID: serializer.fromJson<int>(json['sessionID']),
+      sessionID: serializer.fromJson<String>(json['sessionID']),
     );
   }
   @override
@@ -375,7 +375,7 @@ class Trial extends DataClass implements Insertable<Trial> {
       'stim': serializer.toJson<String>(stim),
       'resp': serializer.toJson<String>(resp),
       'trialType': serializer.toJson<String>(trialType),
-      'sessionID': serializer.toJson<int>(sessionID),
+      'sessionID': serializer.toJson<String>(sessionID),
     };
   }
 
@@ -385,7 +385,7 @@ class Trial extends DataClass implements Insertable<Trial> {
           String? stim,
           String? resp,
           String? trialType,
-          int? sessionID}) =>
+          String? sessionID}) =>
       Trial(
         id: id ?? this.id,
         participantId: participantId ?? this.participantId,
@@ -428,7 +428,7 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
   final Value<String> stim;
   final Value<String> resp;
   final Value<String> trialType;
-  final Value<int> sessionID;
+  final Value<String> sessionID;
   const TrialsCompanion({
     this.id = const Value.absent(),
     this.participantId = const Value.absent(),
@@ -443,7 +443,7 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
     required String stim,
     required String resp,
     required String trialType,
-    required int sessionID,
+    required String sessionID,
   })  : participantId = Value(participantId),
         stim = Value(stim),
         resp = Value(resp),
@@ -455,7 +455,7 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
     Expression<String>? stim,
     Expression<String>? resp,
     Expression<String>? trialType,
-    Expression<int>? sessionID,
+    Expression<String>? sessionID,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -473,7 +473,7 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
       Value<String>? stim,
       Value<String>? resp,
       Value<String>? trialType,
-      Value<int>? sessionID}) {
+      Value<String>? sessionID}) {
     return TrialsCompanion(
       id: id ?? this.id,
       participantId: participantId ?? this.participantId,
@@ -503,7 +503,7 @@ class TrialsCompanion extends UpdateCompanion<Trial> {
       map['trial_type'] = Variable<String>(trialType.value);
     }
     if (sessionID.present) {
-      map['session_i_d'] = Variable<int>(sessionID.value);
+      map['session_i_d'] = Variable<String>(sessionID.value);
     }
     return map;
   }
@@ -557,9 +557,9 @@ class $TrialsTable extends Trials with TableInfo<$TrialsTable, Trial> {
       type: const StringType(), requiredDuringInsert: true);
   final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
   @override
-  late final GeneratedColumn<int?> sessionID = GeneratedColumn<int?>(
+  late final GeneratedColumn<String?> sessionID = GeneratedColumn<String?>(
       'session_i_d', aliasedName, false,
-      type: const IntType(),
+      type: const StringType(),
       requiredDuringInsert: true,
       defaultConstraints: 'REFERENCES sessions (session_i_d)');
   @override
@@ -635,7 +635,7 @@ class Device extends DataClass implements Insertable<Device> {
   final double height;
   final double width;
   final double aspectRatio;
-  final int sessionID;
+  final String sessionID;
   Device(
       {required this.id,
       required this.participantId,
@@ -659,7 +659,7 @@ class Device extends DataClass implements Insertable<Device> {
           .mapFromDatabaseResponse(data['${effectivePrefix}width'])!,
       aspectRatio: const RealType()
           .mapFromDatabaseResponse(data['${effectivePrefix}aspect_ratio'])!,
-      sessionID: const IntType()
+      sessionID: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
     );
   }
@@ -672,7 +672,7 @@ class Device extends DataClass implements Insertable<Device> {
     map['height'] = Variable<double>(height);
     map['width'] = Variable<double>(width);
     map['aspect_ratio'] = Variable<double>(aspectRatio);
-    map['session_i_d'] = Variable<int>(sessionID);
+    map['session_i_d'] = Variable<String>(sessionID);
     return map;
   }
 
@@ -698,7 +698,7 @@ class Device extends DataClass implements Insertable<Device> {
       height: serializer.fromJson<double>(json['height']),
       width: serializer.fromJson<double>(json['width']),
       aspectRatio: serializer.fromJson<double>(json['aspectRatio']),
-      sessionID: serializer.fromJson<int>(json['sessionID']),
+      sessionID: serializer.fromJson<String>(json['sessionID']),
     );
   }
   @override
@@ -711,7 +711,7 @@ class Device extends DataClass implements Insertable<Device> {
       'height': serializer.toJson<double>(height),
       'width': serializer.toJson<double>(width),
       'aspectRatio': serializer.toJson<double>(aspectRatio),
-      'sessionID': serializer.toJson<int>(sessionID),
+      'sessionID': serializer.toJson<String>(sessionID),
     };
   }
 
@@ -722,7 +722,7 @@ class Device extends DataClass implements Insertable<Device> {
           double? height,
           double? width,
           double? aspectRatio,
-          int? sessionID}) =>
+          String? sessionID}) =>
       Device(
         id: id ?? this.id,
         participantId: participantId ?? this.participantId,
@@ -769,7 +769,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
   final Value<double> height;
   final Value<double> width;
   final Value<double> aspectRatio;
-  final Value<int> sessionID;
+  final Value<String> sessionID;
   const DevicesCompanion({
     this.id = const Value.absent(),
     this.participantId = const Value.absent(),
@@ -786,7 +786,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
     this.height = const Value.absent(),
     this.width = const Value.absent(),
     this.aspectRatio = const Value.absent(),
-    required int sessionID,
+    required String sessionID,
   })  : participantId = Value(participantId),
         sessionID = Value(sessionID);
   static Insertable<Device> custom({
@@ -796,7 +796,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
     Expression<double>? height,
     Expression<double>? width,
     Expression<double>? aspectRatio,
-    Expression<int>? sessionID,
+    Expression<String>? sessionID,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -816,7 +816,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
       Value<double>? height,
       Value<double>? width,
       Value<double>? aspectRatio,
-      Value<int>? sessionID}) {
+      Value<String>? sessionID}) {
     return DevicesCompanion(
       id: id ?? this.id,
       participantId: participantId ?? this.participantId,
@@ -850,7 +850,7 @@ class DevicesCompanion extends UpdateCompanion<Device> {
       map['aspect_ratio'] = Variable<double>(aspectRatio.value);
     }
     if (sessionID.present) {
-      map['session_i_d'] = Variable<int>(sessionID.value);
+      map['session_i_d'] = Variable<String>(sessionID.value);
     }
     return map;
   }
@@ -919,9 +919,9 @@ class $DevicesTable extends Devices with TableInfo<$DevicesTable, Device> {
       defaultValue: Constant(getAspectRatio));
   final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
   @override
-  late final GeneratedColumn<int?> sessionID = GeneratedColumn<int?>(
+  late final GeneratedColumn<String?> sessionID = GeneratedColumn<String?>(
       'session_i_d', aliasedName, false,
-      type: const IntType(),
+      type: const StringType(),
       requiredDuringInsert: true,
       defaultConstraints: 'REFERENCES sessions (session_i_d)');
   @override

@@ -107,7 +107,7 @@ class DataBase extends _$DataBase {
 
   /// Add data for the current session to later be saved to the db
   void addSessionMetaData({
-    required int sessionID,
+    required String sessionID,
     required String participantId,
     required String sessionType,
     required DateTime timeStart,
@@ -125,7 +125,7 @@ class DataBase extends _$DataBase {
   /// Add data for the current device to later be saved to the db
   void addDeviceData({
     required String participantId,
-    required int sessionID,
+    required String sessionID,
   }) {
     deviceData = DevicesCompanion(
       participantId: Value(participantId),
@@ -138,7 +138,7 @@ class DataBase extends _$DataBase {
     required String participantId,
     required String stim,
     required String resp,
-    required int sessionID,
+    required String sessionID,
   }) {
     TrialsCompanion trial = TrialsCompanion(
       participantId: Value(participantId),
