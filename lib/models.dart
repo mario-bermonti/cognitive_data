@@ -7,9 +7,6 @@ class Sessions extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get sessionID => integer()();
   TextColumn get participantId => text()();
-
-  /// [sessionType] can be 'practice' or 'experimental'
-  TextColumn get sessionType => text()();
   DateTimeColumn get timeStart => dateTime()();
   DateTimeColumn get timeEnd => dateTime()();
 }
@@ -19,6 +16,9 @@ class Trials extends Table {
   TextColumn get participantId => text()();
   TextColumn get stim => text()();
   TextColumn get resp => text()();
+
+  /// [trialType] specifies the type of trial (practice or experimental)
+  TextColumn get trialType => text()();
   IntColumn get sessionID => integer().references(Sessions, #sessionID)();
 }
 
