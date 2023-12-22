@@ -19,7 +19,7 @@ class Trials extends Table {
 
   /// [trialType] specifies the type of trial (practice or experimental)
   TextColumn get trialType => text()();
-  IntColumn get sessionID => integer().references(Sessions, #sessionID)();
+  TextColumn get sessionID => text().references(Sessions, #sessionID)();
 }
 
 class Devices extends Table {
