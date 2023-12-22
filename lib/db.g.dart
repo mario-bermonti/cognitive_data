@@ -11,16 +11,12 @@ class Session extends DataClass implements Insertable<Session> {
   final int id;
   final int sessionID;
   final String participantId;
-
-  /// [sessionType] can be 'practice' or 'experimental'
-  final String sessionType;
   final DateTime timeStart;
   final DateTime timeEnd;
   Session(
       {required this.id,
       required this.sessionID,
       required this.participantId,
-      required this.sessionType,
       required this.timeStart,
       required this.timeEnd});
   factory Session.fromData(Map<String, dynamic> data, {String? prefix}) {
@@ -32,8 +28,6 @@ class Session extends DataClass implements Insertable<Session> {
           .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
       participantId: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}participant_id'])!,
-      sessionType: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}session_type'])!,
       timeStart: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}time_start'])!,
       timeEnd: const DateTimeType()
@@ -46,7 +40,6 @@ class Session extends DataClass implements Insertable<Session> {
     map['id'] = Variable<int>(id);
     map['session_i_d'] = Variable<int>(sessionID);
     map['participant_id'] = Variable<String>(participantId);
-    map['session_type'] = Variable<String>(sessionType);
     map['time_start'] = Variable<DateTime>(timeStart);
     map['time_end'] = Variable<DateTime>(timeEnd);
     return map;
@@ -57,7 +50,6 @@ class Session extends DataClass implements Insertable<Session> {
       id: Value(id),
       sessionID: Value(sessionID),
       participantId: Value(participantId),
-      sessionType: Value(sessionType),
       timeStart: Value(timeStart),
       timeEnd: Value(timeEnd),
     );
@@ -70,7 +62,6 @@ class Session extends DataClass implements Insertable<Session> {
       id: serializer.fromJson<int>(json['id']),
       sessionID: serializer.fromJson<int>(json['sessionID']),
       participantId: serializer.fromJson<String>(json['participantId']),
-      sessionType: serializer.fromJson<String>(json['sessionType']),
       timeStart: serializer.fromJson<DateTime>(json['timeStart']),
       timeEnd: serializer.fromJson<DateTime>(json['timeEnd']),
     );
@@ -82,7 +73,6 @@ class Session extends DataClass implements Insertable<Session> {
       'id': serializer.toJson<int>(id),
       'sessionID': serializer.toJson<int>(sessionID),
       'participantId': serializer.toJson<String>(participantId),
-      'sessionType': serializer.toJson<String>(sessionType),
       'timeStart': serializer.toJson<DateTime>(timeStart),
       'timeEnd': serializer.toJson<DateTime>(timeEnd),
     };
@@ -92,14 +82,12 @@ class Session extends DataClass implements Insertable<Session> {
           {int? id,
           int? sessionID,
           String? participantId,
-          String? sessionType,
           DateTime? timeStart,
           DateTime? timeEnd}) =>
       Session(
         id: id ?? this.id,
         sessionID: sessionID ?? this.sessionID,
         participantId: participantId ?? this.participantId,
-        sessionType: sessionType ?? this.sessionType,
         timeStart: timeStart ?? this.timeStart,
         timeEnd: timeEnd ?? this.timeEnd,
       );
@@ -109,7 +97,6 @@ class Session extends DataClass implements Insertable<Session> {
           ..write('id: $id, ')
           ..write('sessionID: $sessionID, ')
           ..write('participantId: $participantId, ')
-          ..write('sessionType: $sessionType, ')
           ..write('timeStart: $timeStart, ')
           ..write('timeEnd: $timeEnd')
           ..write(')'))
@@ -117,8 +104,8 @@ class Session extends DataClass implements Insertable<Session> {
   }
 
   @override
-  int get hashCode => Object.hash(
-      id, sessionID, participantId, sessionType, timeStart, timeEnd);
+  int get hashCode =>
+      Object.hash(id, sessionID, participantId, timeStart, timeEnd);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -126,7 +113,6 @@ class Session extends DataClass implements Insertable<Session> {
           other.id == this.id &&
           other.sessionID == this.sessionID &&
           other.participantId == this.participantId &&
-          other.sessionType == this.sessionType &&
           other.timeStart == this.timeStart &&
           other.timeEnd == this.timeEnd);
 }
@@ -135,14 +121,12 @@ class SessionsCompanion extends UpdateCompanion<Session> {
   final Value<int> id;
   final Value<int> sessionID;
   final Value<String> participantId;
-  final Value<String> sessionType;
   final Value<DateTime> timeStart;
   final Value<DateTime> timeEnd;
   const SessionsCompanion({
     this.id = const Value.absent(),
     this.sessionID = const Value.absent(),
     this.participantId = const Value.absent(),
-    this.sessionType = const Value.absent(),
     this.timeStart = const Value.absent(),
     this.timeEnd = const Value.absent(),
   });
@@ -150,19 +134,16 @@ class SessionsCompanion extends UpdateCompanion<Session> {
     this.id = const Value.absent(),
     required int sessionID,
     required String participantId,
-    required String sessionType,
     required DateTime timeStart,
     required DateTime timeEnd,
   })  : sessionID = Value(sessionID),
         participantId = Value(participantId),
-        sessionType = Value(sessionType),
         timeStart = Value(timeStart),
         timeEnd = Value(timeEnd);
   static Insertable<Session> custom({
     Expression<int>? id,
     Expression<int>? sessionID,
     Expression<String>? participantId,
-    Expression<String>? sessionType,
     Expression<DateTime>? timeStart,
     Expression<DateTime>? timeEnd,
   }) {
@@ -170,7 +151,6 @@ class SessionsCompanion extends UpdateCompanion<Session> {
       if (id != null) 'id': id,
       if (sessionID != null) 'session_i_d': sessionID,
       if (participantId != null) 'participant_id': participantId,
-      if (sessionType != null) 'session_type': sessionType,
       if (timeStart != null) 'time_start': timeStart,
       if (timeEnd != null) 'time_end': timeEnd,
     });
@@ -180,14 +160,12 @@ class SessionsCompanion extends UpdateCompanion<Session> {
       {Value<int>? id,
       Value<int>? sessionID,
       Value<String>? participantId,
-      Value<String>? sessionType,
       Value<DateTime>? timeStart,
       Value<DateTime>? timeEnd}) {
     return SessionsCompanion(
       id: id ?? this.id,
       sessionID: sessionID ?? this.sessionID,
       participantId: participantId ?? this.participantId,
-      sessionType: sessionType ?? this.sessionType,
       timeStart: timeStart ?? this.timeStart,
       timeEnd: timeEnd ?? this.timeEnd,
     );
@@ -205,9 +183,6 @@ class SessionsCompanion extends UpdateCompanion<Session> {
     if (participantId.present) {
       map['participant_id'] = Variable<String>(participantId.value);
     }
-    if (sessionType.present) {
-      map['session_type'] = Variable<String>(sessionType.value);
-    }
     if (timeStart.present) {
       map['time_start'] = Variable<DateTime>(timeStart.value);
     }
@@ -223,7 +198,6 @@ class SessionsCompanion extends UpdateCompanion<Session> {
           ..write('id: $id, ')
           ..write('sessionID: $sessionID, ')
           ..write('participantId: $participantId, ')
-          ..write('sessionType: $sessionType, ')
           ..write('timeStart: $timeStart, ')
           ..write('timeEnd: $timeEnd')
           ..write(')'))
@@ -254,12 +228,6 @@ class $SessionsTable extends Sessions with TableInfo<$SessionsTable, Session> {
   late final GeneratedColumn<String?> participantId = GeneratedColumn<String?>(
       'participant_id', aliasedName, false,
       type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _sessionTypeMeta =
-      const VerificationMeta('sessionType');
-  @override
-  late final GeneratedColumn<String?> sessionType = GeneratedColumn<String?>(
-      'session_type', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
   final VerificationMeta _timeStartMeta = const VerificationMeta('timeStart');
   @override
   late final GeneratedColumn<DateTime?> timeStart = GeneratedColumn<DateTime?>(
@@ -272,7 +240,7 @@ class $SessionsTable extends Sessions with TableInfo<$SessionsTable, Session> {
       type: const IntType(), requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, sessionID, participantId, sessionType, timeStart, timeEnd];
+      [id, sessionID, participantId, timeStart, timeEnd];
   @override
   String get aliasedName => _alias ?? 'sessions';
   @override
@@ -300,14 +268,6 @@ class $SessionsTable extends Sessions with TableInfo<$SessionsTable, Session> {
               data['participant_id']!, _participantIdMeta));
     } else if (isInserting) {
       context.missing(_participantIdMeta);
-    }
-    if (data.containsKey('session_type')) {
-      context.handle(
-          _sessionTypeMeta,
-          sessionType.isAcceptableOrUnknown(
-              data['session_type']!, _sessionTypeMeta));
-    } else if (isInserting) {
-      context.missing(_sessionTypeMeta);
     }
     if (data.containsKey('time_start')) {
       context.handle(_timeStartMeta,
