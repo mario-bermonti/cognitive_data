@@ -116,7 +116,6 @@ class DataBase extends _$DataBase {
     sessionData = SessionsCompanion(
       sessionID: Value(sessionID),
       participantId: Value(participantId),
-      sessionType: Value(sessionType),
       timeStart: Value(timeStart),
       timeEnd: Value(timeEnd),
     );
