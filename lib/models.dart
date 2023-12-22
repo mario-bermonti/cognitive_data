@@ -5,7 +5,7 @@ import 'package:drift/drift.dart';
 
 class Sessions extends Table {
   IntColumn get id => integer().autoIncrement()();
-  IntColumn get sessionID => integer()();
+  TextColumn get sessionID => text()();
   TextColumn get participantId => text()();
   DateTimeColumn get timeStart => dateTime()();
   DateTimeColumn get timeEnd => dateTime()();
