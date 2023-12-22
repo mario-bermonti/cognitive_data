@@ -19,6 +19,9 @@ class Trials extends Table {
   TextColumn get participantId => text()();
   TextColumn get stim => text()();
   TextColumn get resp => text()();
+
+  /// [trialType] specifies the type of trial (practice or experimental)
+  TextColumn get trialType => text()();
   IntColumn get sessionID => integer().references(Sessions, #sessionID)();
 }
 
