@@ -8,6 +8,8 @@ import 'package:cognitive_data/models.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:cognitive_data/errors.dart';
 
+import 'trial_type.dart';
+
 part 'db.g.dart';
 
 /// Get permission to use the path provided if necessary
@@ -137,12 +139,14 @@ class DataBase extends _$DataBase {
     required String participantId,
     required String stim,
     required String resp,
+    required TrialType trialType,
     required String sessionID,
   }) {
     TrialsCompanion trial = TrialsCompanion(
       participantId: Value(participantId),
       stim: Value(stim),
       resp: Value(resp),
+      trialType: Value(trialType.name),
       sessionID: Value(sessionID),
     );
 
