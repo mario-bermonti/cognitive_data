@@ -111,7 +111,6 @@ class DataBase extends _$DataBase {
   void addSessionMetaData({
     required String sessionID,
     required String participantId,
-    required String sessionType,
     required DateTime timeStart,
     required DateTime timeEnd,
   }) {
