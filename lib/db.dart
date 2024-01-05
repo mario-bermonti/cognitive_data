@@ -153,10 +153,10 @@ class DataBase extends _$DataBase {
   }
 
   /// Save all collected data to db (disk)
-  void saveData() {
-    insertSession(sessionData);
-    insertDevice(deviceData);
-    insertTrials();
+  Future<void> saveData() async {
+    await insertSession(sessionData);
+    await insertDevice(deviceData);
+    await insertTrials();
   }
 }
 
