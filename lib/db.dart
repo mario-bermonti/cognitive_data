@@ -86,6 +86,11 @@ class DataBase extends _$DataBase {
     return await select(sessions).get();
   }
 
+  /// Get all rows from the devices table
+  Future<List<Device>> getDevices() async {
+    return await select(devices).get();
+  }
+
   Future<Device> getDevice(int id) {
     return (select(devices)..where((device) => device.id.equals(id)))
         .getSingle();
