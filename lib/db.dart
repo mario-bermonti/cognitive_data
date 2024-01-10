@@ -74,7 +74,7 @@ class DataBase extends _$DataBase {
     return (select(trials)..where((trial) => trial.id.equals(id))).getSingle();
   }
 
-  Future<List<Trial>> getTrials() => select(trials).get();
+  Future<List<Trial>> getTrials() async => await select(trials).get();
 
   Future<Session> getSession(int id) {
     return (select(sessions)..where((session) => session.id.equals(id)))
