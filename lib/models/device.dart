@@ -24,8 +24,8 @@ class Device {
 
   @override
   String toString() {
-    return "Device(participantID: $participantID, sessionID: $sessionID,"
-        "platform: $platform, height: $height, width: $width,"
+    return "Device(participantID: $participantID, sessionID: $sessionID, "
+        "platform: $platform, height: $height, width: $width, "
         "aspectRatio: $aspectRatio)";
   }
 }
