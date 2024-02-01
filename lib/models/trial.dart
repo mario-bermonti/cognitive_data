@@ -4,21 +4,23 @@ import 'trial_type.dart';
 class Trial {
   final String participantID;
   final String sessionID;
-  final TrialType trialType;
+  late final String trialType;
   final String stim;
   final String response;
 
   Trial({
     required this.participantID,
     required this.sessionID,
-    required this.trialType,
+    required TrialType trialType,
     required this.stim,
     required this.response,
-  });
+  }) {
+    this.trialType = trialType.name;
+  }
 
   @override
   String toString() {
-    return "Trial(participantID: $participantID, sessionID: $sessionID,"
+    return "Trial(participantID: $participantID, sessionID: $sessionID, "
         "trialType: $trialType, stim: $stim, response: $response)";
   }
 }
