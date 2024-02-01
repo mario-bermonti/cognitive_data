@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+
 /// Represents the characteristics of the device on which the data
 /// was collected.
 class Device {
