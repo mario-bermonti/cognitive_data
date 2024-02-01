@@ -14,7 +14,7 @@ class SessionMetadata {
 
   @override
   String toString() {
-    return "Session(participantID: $participantID, sessionID: $sessionID"
+    return "Session(participantID: $participantID, sessionID: $sessionID, "
         "startTime: $startTime, endTime: $endTime)";
   }
 }
