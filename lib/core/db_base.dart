@@ -3,7 +3,7 @@ import 'trial_type.dart';
 /// Serves as the design contract between the different implementations of
 /// the databases.
 abstract class DB {
-  void addSession({
+  void addSessionMetadata({
     required String sessionID,
     required String participantId,
     required DateTime timeStart,
