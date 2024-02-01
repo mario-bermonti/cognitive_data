@@ -3,10 +3,10 @@
 class Device {
   final String participantID;
   final String sessionID;
-  final String platform;
-  final double height;
-  final double width;
-  final double aspectRatio;
+  late final String platform;
+  late final double height;
+  late final double width;
+  late final double aspectRatio;
 
   Device({
     required this.participantID,
