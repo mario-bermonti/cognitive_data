@@ -2,7 +2,7 @@
 - add session
 - add device
 - add trial 
-- init db?
+- init db
 
 # Data manager
 ## Manager 
