@@ -1,4 +1,4 @@
 library cognitive_data;
 
 export 'package:cognitive_data/db.dart';
-export 'package:cognitive_data/trial_type.dart';
+export 'package:cognitive_data/models/trial_type.dart';
