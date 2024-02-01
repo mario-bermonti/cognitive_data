@@ -1,8 +1,8 @@
 # ABC to standardize db implementations
-- init db?
-- add trial
 - add session
 - add device
+- add trial 
+- init db
 
 # Data manager
 ## Manager 
