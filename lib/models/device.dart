@@ -11,4 +11,7 @@ class Device {
   Device({
     required this.participantID,
     required this.sessionID,
+  }) {
+    platform = Platform.operatingSystem;
+  }
 }
