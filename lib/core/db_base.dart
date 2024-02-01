@@ -1,5 +1,7 @@
 import 'trial_type.dart';
 
+/// Serves as the design contract between the different implementations of
+/// the databases.
 abstract class DB {
   void addSession({
     required String sessionID,
