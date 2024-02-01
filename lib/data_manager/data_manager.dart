@@ -9,6 +9,7 @@ class DataManager implements DB {
   late final SessionMetadata sessionMetadata;
   final List<Trial> trials = <Trial>[];
 
+  /// Add metadata about the device used to collect data
   @override
   void addDevice({
     required String sessionID,
