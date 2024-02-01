@@ -21,6 +21,7 @@ class DataManager implements DB {
     );
   }
 
+  /// Add metadata about the data collection session
   @override
   void addSessionMetadata(
       {required String sessionID,
