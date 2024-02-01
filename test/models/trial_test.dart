@@ -3,7 +3,7 @@ import 'package:cognitive_data/models/trial_type.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('toString produces correct representation', () {
+  test('Trial.toString produces correct representation', () {
     const String strRep = "Trial(participantID: 101, sessionID: 001, "
         "trialType: practice, stim: stimuli, "
         "response: participant response)";
