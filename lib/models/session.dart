@@ -11,4 +11,10 @@ class SessionMetadata {
     required this.startTime,
     required this.endTime,
   });
+
+  @override
+  String toString() {
+    return "Session(participantID: $participantID, sessionID: $sessionID"
+        "startTime: $startTime, endTime: $endTime)";
+  }
 }
