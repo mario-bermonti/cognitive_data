@@ -13,5 +13,6 @@ class Device {
     required this.sessionID,
   }) {
     platform = Platform.operatingSystem;
+    height = WidgetsBinding.instance.window.physicalSize.height;
   }
 }
