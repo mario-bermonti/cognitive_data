@@ -14,5 +14,6 @@ class Device {
   }) {
     platform = Platform.operatingSystem;
     height = WidgetsBinding.instance.window.physicalSize.height;
+    width = WidgetsBinding.instance.window.physicalSize.width;
   }
 }
