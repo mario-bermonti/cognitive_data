@@ -11,9 +11,4 @@ class Device {
   Device({
     required this.participantID,
     required this.sessionID,
-    required this.platform,
-    required this.height,
-    required this.width,
-    required this.aspectRatio,
-  });
 }
