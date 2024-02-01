@@ -27,7 +27,12 @@ class DataManager implements DB {
       required String participantId,
       required DateTime timeStart,
       required DateTime timeEnd}) {
-    // TODO: implement addSessionMetadata
+    sessionMetadata = SessionMetadata(
+      participantID: participantId,
+      sessionID: sessionID,
+      startTime: timeStart,
+      endTime: timeEnd,
+    );
   }
 
   @override
