@@ -21,13 +21,19 @@ class DataManager implements DB {
     );
   }
 
+  /// Add metadata about the data collection session
   @override
   void addSessionMetadata(
       {required String sessionID,
       required String participantId,
       required DateTime timeStart,
       required DateTime timeEnd}) {
-    // TODO: implement addSessionMetadata
+    sessionMetadata = SessionMetadata(
+      participantID: participantId,
+      sessionID: sessionID,
+      startTime: timeStart,
+      endTime: timeEnd,
+    );
   }
 
   @override
