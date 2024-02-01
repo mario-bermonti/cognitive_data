@@ -21,4 +21,11 @@ class Device {
     width = WidgetsBinding.instance.window.physicalSize.width;
     aspectRatio = WidgetsBinding.instance.window.physicalSize.aspectRatio;
   }
+
+  @override
+  String toString() {
+    return "Device(participantID: $participantID, sessionID: $sessionID,"
+        "platform: $platform, height: $height, width: $width,"
+        "aspectRatio: $aspectRatio)";
+  }
 }
