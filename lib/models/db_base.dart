@@ -22,6 +22,4 @@ abstract class DB {
     required String resp,
     required TrialType trialType,
   }) {}
-
-  void initDB() {}
 }
