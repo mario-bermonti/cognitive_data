@@ -18,12 +18,6 @@
 - session
 - device
 
-## Util
-- get platform
-- get height
-- get width
-- get aspect ratio
-
 # Drift db
 ## db
 - insert trial
