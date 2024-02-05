@@ -52,9 +52,4 @@ class DataManager implements DB {
     );
     trials.add(trial);
   }
-
-  @override
-  void initDB() {
-    // TODO: implement initDB
-  }
 }
