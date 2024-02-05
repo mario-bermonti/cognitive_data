@@ -36,6 +36,7 @@ class DataManager implements DB {
     );
   }
 
+  /// Add data for a single trial
   @override
   void addTrial(
       {required String sessionID,
