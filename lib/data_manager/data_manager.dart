@@ -13,10 +13,10 @@ class DataManager implements DB {
   @override
   void addDevice({
     required String sessionID,
-    required String participantId,
+    required String participantID,
   }) {
     device = Device(
-      participantID: participantId,
+      participantID: participantID,
       sessionID: sessionID,
     );
   }
@@ -25,11 +25,11 @@ class DataManager implements DB {
   @override
   void addSessionMetadata(
       {required String sessionID,
-      required String participantId,
+      required String participantID,
       required DateTime timeStart,
       required DateTime timeEnd}) {
     sessionMetadata = SessionMetadata(
-      participantID: participantId,
+      participantID: participantID,
       sessionID: sessionID,
       startTime: timeStart,
       endTime: timeEnd,
@@ -39,11 +39,18 @@ class DataManager implements DB {
   @override
   void addTrial(
       {required String sessionID,
-      required String participantId,
+      required String participantID,
       required String stim,
       required String resp,
       required TrialType trialType}) {
-    // TODO: implement addTrial
+    final Trial trial = Trial(
+      participantID: participantID,
+      sessionID: sessionID,
+      trialType: trialType,
+      stim: stim,
+      response: resp,
+    );
+    trials.add(trial);
   }
 
   @override
