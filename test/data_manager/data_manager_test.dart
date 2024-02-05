@@ -33,7 +33,7 @@ void main() {
     final DataManager manager = DataManager();
     manager.addSessionMetadata(
       sessionID: metadata.sessionID,
-      participantId: metadata.participantID,
+      participantID: metadata.participantID,
       timeStart: metadata.startTime,
       timeEnd: metadata.endTime,
     );
@@ -57,7 +57,7 @@ void main() {
 
     manager.addTrial(
       sessionID: trial.sessionID,
-      participantId: trial.participantID,
+      participantID: trial.participantID,
       stim: trial.stim,
       resp: trial.response,
       trialType: TrialType.practice,
