@@ -12,7 +12,7 @@ void main() {
     final Device device = Device(participantID: '101', sessionID: '001');
     final DataManager manager = DataManager();
     manager.addDevice(
-        sessionID: device.sessionID, participantId: device.participantID);
+        sessionID: device.sessionID, participantID: device.participantID);
 
     expect(manager.device.participantID, device.participantID);
     expect(manager.device.sessionID, device.sessionID);
