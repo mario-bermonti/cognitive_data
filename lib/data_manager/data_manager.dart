@@ -43,7 +43,14 @@ class DataManager implements DB {
       required String stim,
       required String resp,
       required TrialType trialType}) {
-    // TODO: implement addTrial
+    final Trial trial = Trial(
+      participantID: participantID,
+      sessionID: sessionID,
+      trialType: trialType,
+      stim: stim,
+      response: resp,
+    );
+    trials.add(trial);
   }
 
   @override
