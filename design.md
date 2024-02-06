@@ -2,7 +2,6 @@
 - add session
 - add device
 - add trial 
-- init db
 
 # Data manager
 ## Manager 
@@ -20,6 +19,7 @@
 
 # Drift db
 ## db
+- init db
 - insert trial
 - insert trials
 - insert session
