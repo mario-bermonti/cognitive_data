@@ -26,13 +26,13 @@ class DataManager implements DB {
   void addSessionMetadata(
       {required String sessionID,
       required String participantID,
-      required DateTime timeStart,
-      required DateTime timeEnd}) {
+      required DateTime startTime,
+      required DateTime endTime}) {
     sessionMetadata = SessionMetadata(
       participantID: participantID,
       sessionID: sessionID,
-      startTime: timeStart,
-      endTime: timeEnd,
+      startTime: startTime,
+      endTime: endTime,
     );
   }
 
