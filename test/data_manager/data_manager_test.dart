@@ -34,8 +34,8 @@ void main() {
     manager.addSessionMetadata(
       sessionID: metadata.sessionID,
       participantID: metadata.participantID,
-      timeStart: metadata.startTime,
-      timeEnd: metadata.endTime,
+      startTime: metadata.startTime,
+      endTime: metadata.endTime,
     );
 
     expect(manager.sessionMetadata.participantID, metadata.participantID);

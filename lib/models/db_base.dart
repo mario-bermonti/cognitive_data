@@ -6,8 +6,8 @@ abstract class DB {
   void addSessionMetadata({
     required String sessionID,
     required String participantID,
-    required DateTime timeStart,
-    required DateTime timeEnd,
+    required DateTime startTime,
+    required DateTime endTime,
   }) {}
 
   void addDevice({
