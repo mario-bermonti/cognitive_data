@@ -3,7 +3,7 @@ import 'package:drift/drift.dart';
 
 part 'drift_db.g.dart';
 
-@DriftDatabase(tables: [SessionMetadata])
+@DriftDatabase(tables: [DriftSessionMetadata])
 class DriftDB extends _$DriftDB {
   DriftDB(QueryExecutor dbConnection) : super(dbConnection);
 

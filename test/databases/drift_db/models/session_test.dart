@@ -15,21 +15,22 @@ void main() {
     await db.close();
   });
 
-  test('Correctly instantiate a Drift.Session object from a base session model',
+  test(
+      'Correctly instantiate a DriftSessionMetadata object from a base SessionMetadata model',
       () async {
-    final BaseSessionMetadata baseSession = BaseSessionMetadata(
+    final SessionMetadata baseSession = SessionMetadata(
       participantID: '101',
       sessionID: '001',
       startTime: DateTime.now(),
       endTime: DateTime.now(),
     );
 
-    final SessionMetadataCompanion session =
-        await SessionMetadata.fromSessionMetadata(baseSession);
+    final DriftSessionMetadataCompanion driftSession =
+        await DriftSessionMetadata.fromSessionMetadata(baseSession);
 
-    expect(session.participantID.value, baseSession.participantID);
-    expect(session.sessionID.value, baseSession.sessionID);
-    expect(session.startTime.value, baseSession.startTime);
-    expect(session.endTime.value, baseSession.endTime);
+    expect(driftSession.participantID.value, baseSession.participantID);
+    expect(driftSession.sessionID.value, baseSession.sessionID);
+    expect(driftSession.startTime.value, baseSession.startTime);
+    expect(driftSession.endTime.value, baseSession.endTime);
   });
 }

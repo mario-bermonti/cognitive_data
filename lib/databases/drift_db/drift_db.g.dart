@@ -7,23 +7,23 @@ part of 'drift_db.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
-class SessionMetadataData extends DataClass
-    implements Insertable<SessionMetadataData> {
+class DriftSessionMetadataData extends DataClass
+    implements Insertable<DriftSessionMetadataData> {
   final int id;
   final String participantID;
   final String sessionID;
   final DateTime startTime;
   final DateTime endTime;
-  SessionMetadataData(
+  DriftSessionMetadataData(
       {required this.id,
       required this.participantID,
       required this.sessionID,
       required this.startTime,
       required this.endTime});
-  factory SessionMetadataData.fromData(Map<String, dynamic> data,
+  factory DriftSessionMetadataData.fromData(Map<String, dynamic> data,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return SessionMetadataData(
+    return DriftSessionMetadataData(
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       participantID: const StringType()
@@ -47,8 +47,8 @@ class SessionMetadataData extends DataClass
     return map;
   }
 
-  SessionMetadataCompanion toCompanion(bool nullToAbsent) {
-    return SessionMetadataCompanion(
+  DriftSessionMetadataCompanion toCompanion(bool nullToAbsent) {
+    return DriftSessionMetadataCompanion(
       id: Value(id),
       participantID: Value(participantID),
       sessionID: Value(sessionID),
@@ -57,10 +57,10 @@ class SessionMetadataData extends DataClass
     );
   }
 
-  factory SessionMetadataData.fromJson(Map<String, dynamic> json,
+  factory DriftSessionMetadataData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return SessionMetadataData(
+    return DriftSessionMetadataData(
       id: serializer.fromJson<int>(json['id']),
       participantID: serializer.fromJson<String>(json['participantID']),
       sessionID: serializer.fromJson<String>(json['sessionID']),
@@ -80,13 +80,13 @@ class SessionMetadataData extends DataClass
     };
   }
 
-  SessionMetadataData copyWith(
+  DriftSessionMetadataData copyWith(
           {int? id,
           String? participantID,
           String? sessionID,
           DateTime? startTime,
           DateTime? endTime}) =>
-      SessionMetadataData(
+      DriftSessionMetadataData(
         id: id ?? this.id,
         participantID: participantID ?? this.participantID,
         sessionID: sessionID ?? this.sessionID,
@@ -95,7 +95,7 @@ class SessionMetadataData extends DataClass
       );
   @override
   String toString() {
-    return (StringBuffer('SessionMetadataData(')
+    return (StringBuffer('DriftSessionMetadataData(')
           ..write('id: $id, ')
           ..write('participantID: $participantID, ')
           ..write('sessionID: $sessionID, ')
@@ -111,7 +111,7 @@ class SessionMetadataData extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is SessionMetadataData &&
+      (other is DriftSessionMetadataData &&
           other.id == this.id &&
           other.participantID == this.participantID &&
           other.sessionID == this.sessionID &&
@@ -119,20 +119,21 @@ class SessionMetadataData extends DataClass
           other.endTime == this.endTime);
 }
 
-class SessionMetadataCompanion extends UpdateCompanion<SessionMetadataData> {
+class DriftSessionMetadataCompanion
+    extends UpdateCompanion<DriftSessionMetadataData> {
   final Value<int> id;
   final Value<String> participantID;
   final Value<String> sessionID;
   final Value<DateTime> startTime;
   final Value<DateTime> endTime;
-  const SessionMetadataCompanion({
+  const DriftSessionMetadataCompanion({
     this.id = const Value.absent(),
     this.participantID = const Value.absent(),
     this.sessionID = const Value.absent(),
     this.startTime = const Value.absent(),
     this.endTime = const Value.absent(),
   });
-  SessionMetadataCompanion.insert({
+  DriftSessionMetadataCompanion.insert({
     this.id = const Value.absent(),
     required String participantID,
     required String sessionID,
@@ -142,7 +143,7 @@ class SessionMetadataCompanion extends UpdateCompanion<SessionMetadataData> {
         sessionID = Value(sessionID),
         startTime = Value(startTime),
         endTime = Value(endTime);
-  static Insertable<SessionMetadataData> custom({
+  static Insertable<DriftSessionMetadataData> custom({
     Expression<int>? id,
     Expression<String>? participantID,
     Expression<String>? sessionID,
@@ -158,13 +159,13 @@ class SessionMetadataCompanion extends UpdateCompanion<SessionMetadataData> {
     });
   }
 
-  SessionMetadataCompanion copyWith(
+  DriftSessionMetadataCompanion copyWith(
       {Value<int>? id,
       Value<String>? participantID,
       Value<String>? sessionID,
       Value<DateTime>? startTime,
       Value<DateTime>? endTime}) {
-    return SessionMetadataCompanion(
+    return DriftSessionMetadataCompanion(
       id: id ?? this.id,
       participantID: participantID ?? this.participantID,
       sessionID: sessionID ?? this.sessionID,
@@ -196,7 +197,7 @@ class SessionMetadataCompanion extends UpdateCompanion<SessionMetadataData> {
 
   @override
   String toString() {
-    return (StringBuffer('SessionMetadataCompanion(')
+    return (StringBuffer('DriftSessionMetadataCompanion(')
           ..write('id: $id, ')
           ..write('participantID: $participantID, ')
           ..write('sessionID: $sessionID, ')
@@ -207,12 +208,12 @@ class SessionMetadataCompanion extends UpdateCompanion<SessionMetadataData> {
   }
 }
 
-class $SessionMetadataTable extends SessionMetadata
-    with TableInfo<$SessionMetadataTable, SessionMetadataData> {
+class $DriftSessionMetadataTable extends DriftSessionMetadata
+    with TableInfo<$DriftSessionMetadataTable, DriftSessionMetadataData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $SessionMetadataTable(this.attachedDatabase, [this._alias]);
+  $DriftSessionMetadataTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
@@ -245,12 +246,12 @@ class $SessionMetadataTable extends SessionMetadata
   List<GeneratedColumn> get $columns =>
       [id, participantID, sessionID, startTime, endTime];
   @override
-  String get aliasedName => _alias ?? 'session_metadata';
+  String get aliasedName => _alias ?? 'drift_session_metadata';
   @override
-  String get actualTableName => 'session_metadata';
+  String get actualTableName => 'drift_session_metadata';
   @override
   VerificationContext validateIntegrity(
-      Insertable<SessionMetadataData> instance,
+      Insertable<DriftSessionMetadataData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -291,23 +292,24 @@ class $SessionMetadataTable extends SessionMetadata
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  SessionMetadataData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return SessionMetadataData.fromData(data,
+  DriftSessionMetadataData map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    return DriftSessionMetadataData.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
-  $SessionMetadataTable createAlias(String alias) {
-    return $SessionMetadataTable(attachedDatabase, alias);
+  $DriftSessionMetadataTable createAlias(String alias) {
+    return $DriftSessionMetadataTable(attachedDatabase, alias);
   }
 }
 
 abstract class _$DriftDB extends GeneratedDatabase {
   _$DriftDB(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
-  late final $SessionMetadataTable sessionMetadata =
-      $SessionMetadataTable(this);
+  late final $DriftSessionMetadataTable driftSessionMetadata =
+      $DriftSessionMetadataTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [sessionMetadata];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [driftSessionMetadata];
 }
