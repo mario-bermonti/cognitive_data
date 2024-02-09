@@ -15,6 +15,8 @@ class DriftDevice extends Table {
   RealColumn get width => real()();
   RealColumn get aspectRatio => real()();
 
+  /// Instantiate a [DriftDeviceCompanion] from a Device base model. This
+  /// method serves as a constructor.
   static DriftDeviceCompanion fromDevice(Device baseDevice) {
     final DriftDeviceCompanion driftDevice = DriftDeviceCompanion(
         participantID: Value(baseDevice.participantID),
