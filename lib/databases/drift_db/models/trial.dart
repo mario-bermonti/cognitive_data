@@ -11,5 +11,5 @@ class DriftTrial extends Table {
   /// [trialType] specifies the type of trial (practice or experimental)
   TextColumn get trialType => text()();
   TextColumn get stim => text()();
-  TextColumn get resp => text()();
+  TextColumn get response => text()();
 }

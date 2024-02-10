@@ -683,14 +683,14 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
   /// [trialType] specifies the type of trial (practice or experimental)
   final String trialType;
   final String stim;
-  final String resp;
+  final String response;
   DriftTrialData(
       {required this.id,
       required this.participantID,
       required this.sessionID,
       required this.trialType,
       required this.stim,
-      required this.resp});
+      required this.response});
   factory DriftTrialData.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return DriftTrialData(
@@ -704,8 +704,8 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
           .mapFromDatabaseResponse(data['${effectivePrefix}trial_type'])!,
       stim: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}stim'])!,
-      resp: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}resp'])!,
+      response: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}response'])!,
     );
   }
   @override
@@ -716,7 +716,7 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
     map['session_i_d'] = Variable<String>(sessionID);
     map['trial_type'] = Variable<String>(trialType);
     map['stim'] = Variable<String>(stim);
-    map['resp'] = Variable<String>(resp);
+    map['response'] = Variable<String>(response);
     return map;
   }
 
@@ -727,7 +727,7 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
       sessionID: Value(sessionID),
       trialType: Value(trialType),
       stim: Value(stim),
-      resp: Value(resp),
+      response: Value(response),
     );
   }
 
@@ -740,7 +740,7 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
       sessionID: serializer.fromJson<String>(json['sessionID']),
       trialType: serializer.fromJson<String>(json['trialType']),
       stim: serializer.fromJson<String>(json['stim']),
-      resp: serializer.fromJson<String>(json['resp']),
+      response: serializer.fromJson<String>(json['response']),
     );
   }
   @override
@@ -752,7 +752,7 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
       'sessionID': serializer.toJson<String>(sessionID),
       'trialType': serializer.toJson<String>(trialType),
       'stim': serializer.toJson<String>(stim),
-      'resp': serializer.toJson<String>(resp),
+      'response': serializer.toJson<String>(response),
     };
   }
 
@@ -762,14 +762,14 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
           String? sessionID,
           String? trialType,
           String? stim,
-          String? resp}) =>
+          String? response}) =>
       DriftTrialData(
         id: id ?? this.id,
         participantID: participantID ?? this.participantID,
         sessionID: sessionID ?? this.sessionID,
         trialType: trialType ?? this.trialType,
         stim: stim ?? this.stim,
-        resp: resp ?? this.resp,
+        response: response ?? this.response,
       );
   @override
   String toString() {
@@ -779,14 +779,14 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
           ..write('sessionID: $sessionID, ')
           ..write('trialType: $trialType, ')
           ..write('stim: $stim, ')
-          ..write('resp: $resp')
+          ..write('response: $response')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode =>
-      Object.hash(id, participantID, sessionID, trialType, stim, resp);
+      Object.hash(id, participantID, sessionID, trialType, stim, response);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -796,7 +796,7 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
           other.sessionID == this.sessionID &&
           other.trialType == this.trialType &&
           other.stim == this.stim &&
-          other.resp == this.resp);
+          other.response == this.response);
 }
 
 class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
@@ -805,14 +805,14 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
   final Value<String> sessionID;
   final Value<String> trialType;
   final Value<String> stim;
-  final Value<String> resp;
+  final Value<String> response;
   const DriftTrialCompanion({
     this.id = const Value.absent(),
     this.participantID = const Value.absent(),
     this.sessionID = const Value.absent(),
     this.trialType = const Value.absent(),
     this.stim = const Value.absent(),
-    this.resp = const Value.absent(),
+    this.response = const Value.absent(),
   });
   DriftTrialCompanion.insert({
     this.id = const Value.absent(),
@@ -820,19 +820,19 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
     required String sessionID,
     required String trialType,
     required String stim,
-    required String resp,
+    required String response,
   })  : participantID = Value(participantID),
         sessionID = Value(sessionID),
         trialType = Value(trialType),
         stim = Value(stim),
-        resp = Value(resp);
+        response = Value(response);
   static Insertable<DriftTrialData> custom({
     Expression<int>? id,
     Expression<String>? participantID,
     Expression<String>? sessionID,
     Expression<String>? trialType,
     Expression<String>? stim,
-    Expression<String>? resp,
+    Expression<String>? response,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -840,7 +840,7 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
       if (sessionID != null) 'session_i_d': sessionID,
       if (trialType != null) 'trial_type': trialType,
       if (stim != null) 'stim': stim,
-      if (resp != null) 'resp': resp,
+      if (response != null) 'response': response,
     });
   }
 
@@ -850,14 +850,14 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
       Value<String>? sessionID,
       Value<String>? trialType,
       Value<String>? stim,
-      Value<String>? resp}) {
+      Value<String>? response}) {
     return DriftTrialCompanion(
       id: id ?? this.id,
       participantID: participantID ?? this.participantID,
       sessionID: sessionID ?? this.sessionID,
       trialType: trialType ?? this.trialType,
       stim: stim ?? this.stim,
-      resp: resp ?? this.resp,
+      response: response ?? this.response,
     );
   }
 
@@ -879,8 +879,8 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
     if (stim.present) {
       map['stim'] = Variable<String>(stim.value);
     }
-    if (resp.present) {
-      map['resp'] = Variable<String>(resp.value);
+    if (response.present) {
+      map['response'] = Variable<String>(response.value);
     }
     return map;
   }
@@ -893,7 +893,7 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
           ..write('sessionID: $sessionID, ')
           ..write('trialType: $trialType, ')
           ..write('stim: $stim, ')
-          ..write('resp: $resp')
+          ..write('response: $response')
           ..write(')'))
         .toString();
   }
@@ -938,14 +938,14 @@ class $DriftTrialTable extends DriftTrial
   late final GeneratedColumn<String?> stim = GeneratedColumn<String?>(
       'stim', aliasedName, false,
       type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _respMeta = const VerificationMeta('resp');
+  final VerificationMeta _responseMeta = const VerificationMeta('response');
   @override
-  late final GeneratedColumn<String?> resp = GeneratedColumn<String?>(
-      'resp', aliasedName, false,
+  late final GeneratedColumn<String?> response = GeneratedColumn<String?>(
+      'response', aliasedName, false,
       type: const StringType(), requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, participantID, sessionID, trialType, stim, resp];
+      [id, participantID, sessionID, trialType, stim, response];
   @override
   String get aliasedName => _alias ?? 'drift_trial';
   @override
@@ -986,11 +986,11 @@ class $DriftTrialTable extends DriftTrial
     } else if (isInserting) {
       context.missing(_stimMeta);
     }
-    if (data.containsKey('resp')) {
-      context.handle(
-          _respMeta, resp.isAcceptableOrUnknown(data['resp']!, _respMeta));
+    if (data.containsKey('response')) {
+      context.handle(_responseMeta,
+          response.isAcceptableOrUnknown(data['response']!, _responseMeta));
     } else if (isInserting) {
-      context.missing(_respMeta);
+      context.missing(_responseMeta);
     }
     return context;
   }
