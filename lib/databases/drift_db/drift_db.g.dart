@@ -304,12 +304,385 @@ class $DriftSessionMetadataTable extends DriftSessionMetadata
   }
 }
 
+class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
+  final int id;
+  final String participantID;
+  final String sessionID;
+  final String platform;
+  final double height;
+  final double width;
+  final double aspectRatio;
+  DriftDeviceData(
+      {required this.id,
+      required this.participantID,
+      required this.sessionID,
+      required this.platform,
+      required this.height,
+      required this.width,
+      required this.aspectRatio});
+  factory DriftDeviceData.fromData(Map<String, dynamic> data,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return DriftDeviceData(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      participantID: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}participant_i_d'])!,
+      sessionID: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
+      platform: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}platform'])!,
+      height: const RealType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}height'])!,
+      width: const RealType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}width'])!,
+      aspectRatio: const RealType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}aspect_ratio'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['participant_i_d'] = Variable<String>(participantID);
+    map['session_i_d'] = Variable<String>(sessionID);
+    map['platform'] = Variable<String>(platform);
+    map['height'] = Variable<double>(height);
+    map['width'] = Variable<double>(width);
+    map['aspect_ratio'] = Variable<double>(aspectRatio);
+    return map;
+  }
+
+  DriftDeviceCompanion toCompanion(bool nullToAbsent) {
+    return DriftDeviceCompanion(
+      id: Value(id),
+      participantID: Value(participantID),
+      sessionID: Value(sessionID),
+      platform: Value(platform),
+      height: Value(height),
+      width: Value(width),
+      aspectRatio: Value(aspectRatio),
+    );
+  }
+
+  factory DriftDeviceData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DriftDeviceData(
+      id: serializer.fromJson<int>(json['id']),
+      participantID: serializer.fromJson<String>(json['participantID']),
+      sessionID: serializer.fromJson<String>(json['sessionID']),
+      platform: serializer.fromJson<String>(json['platform']),
+      height: serializer.fromJson<double>(json['height']),
+      width: serializer.fromJson<double>(json['width']),
+      aspectRatio: serializer.fromJson<double>(json['aspectRatio']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'participantID': serializer.toJson<String>(participantID),
+      'sessionID': serializer.toJson<String>(sessionID),
+      'platform': serializer.toJson<String>(platform),
+      'height': serializer.toJson<double>(height),
+      'width': serializer.toJson<double>(width),
+      'aspectRatio': serializer.toJson<double>(aspectRatio),
+    };
+  }
+
+  DriftDeviceData copyWith(
+          {int? id,
+          String? participantID,
+          String? sessionID,
+          String? platform,
+          double? height,
+          double? width,
+          double? aspectRatio}) =>
+      DriftDeviceData(
+        id: id ?? this.id,
+        participantID: participantID ?? this.participantID,
+        sessionID: sessionID ?? this.sessionID,
+        platform: platform ?? this.platform,
+        height: height ?? this.height,
+        width: width ?? this.width,
+        aspectRatio: aspectRatio ?? this.aspectRatio,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('DriftDeviceData(')
+          ..write('id: $id, ')
+          ..write('participantID: $participantID, ')
+          ..write('sessionID: $sessionID, ')
+          ..write('platform: $platform, ')
+          ..write('height: $height, ')
+          ..write('width: $width, ')
+          ..write('aspectRatio: $aspectRatio')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, participantID, sessionID, platform, height, width, aspectRatio);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DriftDeviceData &&
+          other.id == this.id &&
+          other.participantID == this.participantID &&
+          other.sessionID == this.sessionID &&
+          other.platform == this.platform &&
+          other.height == this.height &&
+          other.width == this.width &&
+          other.aspectRatio == this.aspectRatio);
+}
+
+class DriftDeviceCompanion extends UpdateCompanion<DriftDeviceData> {
+  final Value<int> id;
+  final Value<String> participantID;
+  final Value<String> sessionID;
+  final Value<String> platform;
+  final Value<double> height;
+  final Value<double> width;
+  final Value<double> aspectRatio;
+  const DriftDeviceCompanion({
+    this.id = const Value.absent(),
+    this.participantID = const Value.absent(),
+    this.sessionID = const Value.absent(),
+    this.platform = const Value.absent(),
+    this.height = const Value.absent(),
+    this.width = const Value.absent(),
+    this.aspectRatio = const Value.absent(),
+  });
+  DriftDeviceCompanion.insert({
+    this.id = const Value.absent(),
+    required String participantID,
+    required String sessionID,
+    required String platform,
+    required double height,
+    required double width,
+    required double aspectRatio,
+  })  : participantID = Value(participantID),
+        sessionID = Value(sessionID),
+        platform = Value(platform),
+        height = Value(height),
+        width = Value(width),
+        aspectRatio = Value(aspectRatio);
+  static Insertable<DriftDeviceData> custom({
+    Expression<int>? id,
+    Expression<String>? participantID,
+    Expression<String>? sessionID,
+    Expression<String>? platform,
+    Expression<double>? height,
+    Expression<double>? width,
+    Expression<double>? aspectRatio,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (participantID != null) 'participant_i_d': participantID,
+      if (sessionID != null) 'session_i_d': sessionID,
+      if (platform != null) 'platform': platform,
+      if (height != null) 'height': height,
+      if (width != null) 'width': width,
+      if (aspectRatio != null) 'aspect_ratio': aspectRatio,
+    });
+  }
+
+  DriftDeviceCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? participantID,
+      Value<String>? sessionID,
+      Value<String>? platform,
+      Value<double>? height,
+      Value<double>? width,
+      Value<double>? aspectRatio}) {
+    return DriftDeviceCompanion(
+      id: id ?? this.id,
+      participantID: participantID ?? this.participantID,
+      sessionID: sessionID ?? this.sessionID,
+      platform: platform ?? this.platform,
+      height: height ?? this.height,
+      width: width ?? this.width,
+      aspectRatio: aspectRatio ?? this.aspectRatio,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (participantID.present) {
+      map['participant_i_d'] = Variable<String>(participantID.value);
+    }
+    if (sessionID.present) {
+      map['session_i_d'] = Variable<String>(sessionID.value);
+    }
+    if (platform.present) {
+      map['platform'] = Variable<String>(platform.value);
+    }
+    if (height.present) {
+      map['height'] = Variable<double>(height.value);
+    }
+    if (width.present) {
+      map['width'] = Variable<double>(width.value);
+    }
+    if (aspectRatio.present) {
+      map['aspect_ratio'] = Variable<double>(aspectRatio.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DriftDeviceCompanion(')
+          ..write('id: $id, ')
+          ..write('participantID: $participantID, ')
+          ..write('sessionID: $sessionID, ')
+          ..write('platform: $platform, ')
+          ..write('height: $height, ')
+          ..write('width: $width, ')
+          ..write('aspectRatio: $aspectRatio')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $DriftDeviceTable extends DriftDevice
+    with TableInfo<$DriftDeviceTable, DriftDeviceData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DriftDeviceTable(this.attachedDatabase, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      type: const IntType(),
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _participantIDMeta =
+      const VerificationMeta('participantID');
+  @override
+  late final GeneratedColumn<String?> participantID = GeneratedColumn<String?>(
+      'participant_i_d', aliasedName, false,
+      type: const StringType(),
+      requiredDuringInsert: true,
+      defaultConstraints:
+          'REFERENCES drift_session_metadata (participant_i_d)');
+  final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
+  @override
+  late final GeneratedColumn<String?> sessionID = GeneratedColumn<String?>(
+      'session_i_d', aliasedName, false,
+      type: const StringType(),
+      requiredDuringInsert: true,
+      defaultConstraints: 'REFERENCES drift_session_metadata (session_i_d)');
+  final VerificationMeta _platformMeta = const VerificationMeta('platform');
+  @override
+  late final GeneratedColumn<String?> platform = GeneratedColumn<String?>(
+      'platform', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _heightMeta = const VerificationMeta('height');
+  @override
+  late final GeneratedColumn<double?> height = GeneratedColumn<double?>(
+      'height', aliasedName, false,
+      type: const RealType(), requiredDuringInsert: true);
+  final VerificationMeta _widthMeta = const VerificationMeta('width');
+  @override
+  late final GeneratedColumn<double?> width = GeneratedColumn<double?>(
+      'width', aliasedName, false,
+      type: const RealType(), requiredDuringInsert: true);
+  final VerificationMeta _aspectRatioMeta =
+      const VerificationMeta('aspectRatio');
+  @override
+  late final GeneratedColumn<double?> aspectRatio = GeneratedColumn<double?>(
+      'aspect_ratio', aliasedName, false,
+      type: const RealType(), requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, participantID, sessionID, platform, height, width, aspectRatio];
+  @override
+  String get aliasedName => _alias ?? 'drift_device';
+  @override
+  String get actualTableName => 'drift_device';
+  @override
+  VerificationContext validateIntegrity(Insertable<DriftDeviceData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('participant_i_d')) {
+      context.handle(
+          _participantIDMeta,
+          participantID.isAcceptableOrUnknown(
+              data['participant_i_d']!, _participantIDMeta));
+    } else if (isInserting) {
+      context.missing(_participantIDMeta);
+    }
+    if (data.containsKey('session_i_d')) {
+      context.handle(
+          _sessionIDMeta,
+          sessionID.isAcceptableOrUnknown(
+              data['session_i_d']!, _sessionIDMeta));
+    } else if (isInserting) {
+      context.missing(_sessionIDMeta);
+    }
+    if (data.containsKey('platform')) {
+      context.handle(_platformMeta,
+          platform.isAcceptableOrUnknown(data['platform']!, _platformMeta));
+    } else if (isInserting) {
+      context.missing(_platformMeta);
+    }
+    if (data.containsKey('height')) {
+      context.handle(_heightMeta,
+          height.isAcceptableOrUnknown(data['height']!, _heightMeta));
+    } else if (isInserting) {
+      context.missing(_heightMeta);
+    }
+    if (data.containsKey('width')) {
+      context.handle(
+          _widthMeta, width.isAcceptableOrUnknown(data['width']!, _widthMeta));
+    } else if (isInserting) {
+      context.missing(_widthMeta);
+    }
+    if (data.containsKey('aspect_ratio')) {
+      context.handle(
+          _aspectRatioMeta,
+          aspectRatio.isAcceptableOrUnknown(
+              data['aspect_ratio']!, _aspectRatioMeta));
+    } else if (isInserting) {
+      context.missing(_aspectRatioMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  DriftDeviceData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return DriftDeviceData.fromData(data,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $DriftDeviceTable createAlias(String alias) {
+    return $DriftDeviceTable(attachedDatabase, alias);
+  }
+}
+
 abstract class _$DriftDB extends GeneratedDatabase {
   _$DriftDB(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $DriftSessionMetadataTable driftSessionMetadata =
       $DriftSessionMetadataTable(this);
+  late final $DriftDeviceTable driftDevice = $DriftDeviceTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [driftSessionMetadata];
+  List<DatabaseSchemaEntity> get allSchemaEntities =>
+      [driftSessionMetadata, driftDevice];
 }
