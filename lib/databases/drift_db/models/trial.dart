@@ -1,4 +1,6 @@
+import 'package:cognitive_data/databases/drift_db/drift_db.dart';
 import 'package:cognitive_data/databases/drift_db/models/session.dart';
+import 'package:cognitive_data/models/trial.dart';
 import 'package:drift/drift.dart';
 
 class DriftTrial extends Table {
@@ -12,4 +14,15 @@ class DriftTrial extends Table {
   TextColumn get trialType => text()();
   TextColumn get stim => text()();
   TextColumn get response => text()();
+
+  static DriftTrialCompanion fromTrial(Trial baseTrial) {
+    final DriftTrialCompanion driftTrial = DriftTrialCompanion(
+      participantID: Value(baseTrial.participantID),
+      sessionID: Value(baseTrial.sessionID),
+      trialType: Value(baseTrial.trialType),
+      stim: Value(baseTrial.stim),
+      response: Value(baseTrial.response),
+    );
+    return driftTrial;
+  }
 }
