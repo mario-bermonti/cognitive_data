@@ -15,6 +15,8 @@ class DriftTrial extends Table {
   TextColumn get stim => text()();
   TextColumn get response => text()();
 
+  /// Instantiate a [DriftTrialCompanion] from a Trial base model. This
+  /// method serves as a constructor.
   static DriftTrialCompanion fromTrial(Trial baseTrial) {
     final DriftTrialCompanion driftTrial = DriftTrialCompanion(
       participantID: Value(baseTrial.participantID),
