@@ -675,14 +675,349 @@ class $DriftDeviceTable extends DriftDevice
   }
 }
 
+class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
+  final int id;
+  final String participantID;
+  final String sessionID;
+
+  /// [trialType] specifies the type of trial (practice or experimental)
+  final String trialType;
+  final String stim;
+  final String resp;
+  DriftTrialData(
+      {required this.id,
+      required this.participantID,
+      required this.sessionID,
+      required this.trialType,
+      required this.stim,
+      required this.resp});
+  factory DriftTrialData.fromData(Map<String, dynamic> data, {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return DriftTrialData(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      participantID: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}participant_i_d'])!,
+      sessionID: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
+      trialType: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}trial_type'])!,
+      stim: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}stim'])!,
+      resp: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}resp'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['participant_i_d'] = Variable<String>(participantID);
+    map['session_i_d'] = Variable<String>(sessionID);
+    map['trial_type'] = Variable<String>(trialType);
+    map['stim'] = Variable<String>(stim);
+    map['resp'] = Variable<String>(resp);
+    return map;
+  }
+
+  DriftTrialCompanion toCompanion(bool nullToAbsent) {
+    return DriftTrialCompanion(
+      id: Value(id),
+      participantID: Value(participantID),
+      sessionID: Value(sessionID),
+      trialType: Value(trialType),
+      stim: Value(stim),
+      resp: Value(resp),
+    );
+  }
+
+  factory DriftTrialData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DriftTrialData(
+      id: serializer.fromJson<int>(json['id']),
+      participantID: serializer.fromJson<String>(json['participantID']),
+      sessionID: serializer.fromJson<String>(json['sessionID']),
+      trialType: serializer.fromJson<String>(json['trialType']),
+      stim: serializer.fromJson<String>(json['stim']),
+      resp: serializer.fromJson<String>(json['resp']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'participantID': serializer.toJson<String>(participantID),
+      'sessionID': serializer.toJson<String>(sessionID),
+      'trialType': serializer.toJson<String>(trialType),
+      'stim': serializer.toJson<String>(stim),
+      'resp': serializer.toJson<String>(resp),
+    };
+  }
+
+  DriftTrialData copyWith(
+          {int? id,
+          String? participantID,
+          String? sessionID,
+          String? trialType,
+          String? stim,
+          String? resp}) =>
+      DriftTrialData(
+        id: id ?? this.id,
+        participantID: participantID ?? this.participantID,
+        sessionID: sessionID ?? this.sessionID,
+        trialType: trialType ?? this.trialType,
+        stim: stim ?? this.stim,
+        resp: resp ?? this.resp,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('DriftTrialData(')
+          ..write('id: $id, ')
+          ..write('participantID: $participantID, ')
+          ..write('sessionID: $sessionID, ')
+          ..write('trialType: $trialType, ')
+          ..write('stim: $stim, ')
+          ..write('resp: $resp')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, participantID, sessionID, trialType, stim, resp);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DriftTrialData &&
+          other.id == this.id &&
+          other.participantID == this.participantID &&
+          other.sessionID == this.sessionID &&
+          other.trialType == this.trialType &&
+          other.stim == this.stim &&
+          other.resp == this.resp);
+}
+
+class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
+  final Value<int> id;
+  final Value<String> participantID;
+  final Value<String> sessionID;
+  final Value<String> trialType;
+  final Value<String> stim;
+  final Value<String> resp;
+  const DriftTrialCompanion({
+    this.id = const Value.absent(),
+    this.participantID = const Value.absent(),
+    this.sessionID = const Value.absent(),
+    this.trialType = const Value.absent(),
+    this.stim = const Value.absent(),
+    this.resp = const Value.absent(),
+  });
+  DriftTrialCompanion.insert({
+    this.id = const Value.absent(),
+    required String participantID,
+    required String sessionID,
+    required String trialType,
+    required String stim,
+    required String resp,
+  })  : participantID = Value(participantID),
+        sessionID = Value(sessionID),
+        trialType = Value(trialType),
+        stim = Value(stim),
+        resp = Value(resp);
+  static Insertable<DriftTrialData> custom({
+    Expression<int>? id,
+    Expression<String>? participantID,
+    Expression<String>? sessionID,
+    Expression<String>? trialType,
+    Expression<String>? stim,
+    Expression<String>? resp,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (participantID != null) 'participant_i_d': participantID,
+      if (sessionID != null) 'session_i_d': sessionID,
+      if (trialType != null) 'trial_type': trialType,
+      if (stim != null) 'stim': stim,
+      if (resp != null) 'resp': resp,
+    });
+  }
+
+  DriftTrialCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? participantID,
+      Value<String>? sessionID,
+      Value<String>? trialType,
+      Value<String>? stim,
+      Value<String>? resp}) {
+    return DriftTrialCompanion(
+      id: id ?? this.id,
+      participantID: participantID ?? this.participantID,
+      sessionID: sessionID ?? this.sessionID,
+      trialType: trialType ?? this.trialType,
+      stim: stim ?? this.stim,
+      resp: resp ?? this.resp,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (participantID.present) {
+      map['participant_i_d'] = Variable<String>(participantID.value);
+    }
+    if (sessionID.present) {
+      map['session_i_d'] = Variable<String>(sessionID.value);
+    }
+    if (trialType.present) {
+      map['trial_type'] = Variable<String>(trialType.value);
+    }
+    if (stim.present) {
+      map['stim'] = Variable<String>(stim.value);
+    }
+    if (resp.present) {
+      map['resp'] = Variable<String>(resp.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DriftTrialCompanion(')
+          ..write('id: $id, ')
+          ..write('participantID: $participantID, ')
+          ..write('sessionID: $sessionID, ')
+          ..write('trialType: $trialType, ')
+          ..write('stim: $stim, ')
+          ..write('resp: $resp')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $DriftTrialTable extends DriftTrial
+    with TableInfo<$DriftTrialTable, DriftTrialData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DriftTrialTable(this.attachedDatabase, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      type: const IntType(),
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _participantIDMeta =
+      const VerificationMeta('participantID');
+  @override
+  late final GeneratedColumn<String?> participantID = GeneratedColumn<String?>(
+      'participant_i_d', aliasedName, false,
+      type: const StringType(),
+      requiredDuringInsert: true,
+      defaultConstraints:
+          'REFERENCES drift_session_metadata (participant_i_d)');
+  final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
+  @override
+  late final GeneratedColumn<String?> sessionID = GeneratedColumn<String?>(
+      'session_i_d', aliasedName, false,
+      type: const StringType(),
+      requiredDuringInsert: true,
+      defaultConstraints: 'REFERENCES drift_session_metadata (session_i_d)');
+  final VerificationMeta _trialTypeMeta = const VerificationMeta('trialType');
+  @override
+  late final GeneratedColumn<String?> trialType = GeneratedColumn<String?>(
+      'trial_type', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _stimMeta = const VerificationMeta('stim');
+  @override
+  late final GeneratedColumn<String?> stim = GeneratedColumn<String?>(
+      'stim', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _respMeta = const VerificationMeta('resp');
+  @override
+  late final GeneratedColumn<String?> resp = GeneratedColumn<String?>(
+      'resp', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, participantID, sessionID, trialType, stim, resp];
+  @override
+  String get aliasedName => _alias ?? 'drift_trial';
+  @override
+  String get actualTableName => 'drift_trial';
+  @override
+  VerificationContext validateIntegrity(Insertable<DriftTrialData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('participant_i_d')) {
+      context.handle(
+          _participantIDMeta,
+          participantID.isAcceptableOrUnknown(
+              data['participant_i_d']!, _participantIDMeta));
+    } else if (isInserting) {
+      context.missing(_participantIDMeta);
+    }
+    if (data.containsKey('session_i_d')) {
+      context.handle(
+          _sessionIDMeta,
+          sessionID.isAcceptableOrUnknown(
+              data['session_i_d']!, _sessionIDMeta));
+    } else if (isInserting) {
+      context.missing(_sessionIDMeta);
+    }
+    if (data.containsKey('trial_type')) {
+      context.handle(_trialTypeMeta,
+          trialType.isAcceptableOrUnknown(data['trial_type']!, _trialTypeMeta));
+    } else if (isInserting) {
+      context.missing(_trialTypeMeta);
+    }
+    if (data.containsKey('stim')) {
+      context.handle(
+          _stimMeta, stim.isAcceptableOrUnknown(data['stim']!, _stimMeta));
+    } else if (isInserting) {
+      context.missing(_stimMeta);
+    }
+    if (data.containsKey('resp')) {
+      context.handle(
+          _respMeta, resp.isAcceptableOrUnknown(data['resp']!, _respMeta));
+    } else if (isInserting) {
+      context.missing(_respMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  DriftTrialData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return DriftTrialData.fromData(data,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $DriftTrialTable createAlias(String alias) {
+    return $DriftTrialTable(attachedDatabase, alias);
+  }
+}
+
 abstract class _$DriftDB extends GeneratedDatabase {
   _$DriftDB(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $DriftSessionMetadataTable driftSessionMetadata =
       $DriftSessionMetadataTable(this);
   late final $DriftDeviceTable driftDevice = $DriftDeviceTable(this);
+  late final $DriftTrialTable driftTrial = $DriftTrialTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [driftSessionMetadata, driftDevice];
+      [driftSessionMetadata, driftDevice, driftTrial];
 }
