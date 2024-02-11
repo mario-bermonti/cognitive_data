@@ -26,7 +26,7 @@ void main() {
     );
 
     final DriftSessionMetadataCompanion driftSession =
-        await DriftSessionMetadata.fromSessionMetadata(baseSession);
+        DriftSessionMetadata.fromSessionMetadata(baseSession);
 
     expect(driftSession.participantID.value, baseSession.participantID);
     expect(driftSession.sessionID.value, baseSession.sessionID);
