@@ -3,6 +3,9 @@ import 'package:cognitive_data/databases/drift_db/models/session.dart';
 import 'package:cognitive_data/models/trial.dart';
 import 'package:drift/drift.dart';
 
+/// Drift table analogous to the base [Trial] model. It contains the same data
+/// and can be easily instantiated from a base [Trial] model. See the
+/// base [Trial] model for details.
 class DriftTrial extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get participantID =>
@@ -15,8 +18,8 @@ class DriftTrial extends Table {
   TextColumn get stim => text()();
   TextColumn get response => text()();
 
-  /// Instantiate a [DriftTrialCompanion] from a Trial base model. This
-  /// method serves as a constructor.
+  /// Instantiates a [DriftTrialCompanion] from a [Trial] base model. This
+  /// [DriftTrialCompanion] can be inserted into the drift db.
   static DriftTrialCompanion fromTrial(Trial baseTrial) {
     final DriftTrialCompanion driftTrial = DriftTrialCompanion(
       participantID: Value(baseTrial.participantID),

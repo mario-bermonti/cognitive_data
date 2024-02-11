@@ -4,6 +4,9 @@ import 'package:drift/drift.dart';
 
 import '../../../models/device.dart';
 
+/// Drift table analogous to the base [Device] model. It contains the same data
+/// and can be easily instantiated from a base [Device] model. See the
+/// base [Device] model for details.
 class DriftDevice extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get participantID =>
@@ -15,8 +18,8 @@ class DriftDevice extends Table {
   RealColumn get width => real()();
   RealColumn get aspectRatio => real()();
 
-  /// Instantiate a [DriftDeviceCompanion] from a Device base model. This
-  /// method serves as a constructor.
+  /// Instantiates a [DriftDeviceCompanion] from a [Device] base model. This
+  /// [DriftDeviceCompanion] can be inserted into the drift db.
   static DriftDeviceCompanion fromDevice(Device baseDevice) {
     final DriftDeviceCompanion driftDevice = DriftDeviceCompanion(
         participantID: Value(baseDevice.participantID),
