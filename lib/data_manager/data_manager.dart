@@ -17,17 +17,8 @@ class InMemoryDB implements DB {
 
   /// Add metadata about the data collection session
   @override
-  void addSessionMetadata(
-      {required String sessionID,
-      required String participantID,
-      required DateTime startTime,
-      required DateTime endTime}) {
-    sessionMetadata = SessionMetadata(
-      participantID: participantID,
-      sessionID: sessionID,
-      startTime: startTime,
-      endTime: endTime,
-    );
+  void addSessionMetadata({required SessionMetadata session}) {
+    sessionMetadata = session;
   }
 
   /// Add data for a single trial
