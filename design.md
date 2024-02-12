@@ -3,7 +3,7 @@
 - add device
 - add trial 
 
-# Data manager
+# In memory db
 ## Manager 
 
 - add trial
