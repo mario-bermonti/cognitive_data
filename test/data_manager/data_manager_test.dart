@@ -30,12 +30,7 @@ void main() {
     );
 
     final InMemoryDB manager = InMemoryDB();
-    manager.addSessionMetadata(
-      sessionID: metadata.sessionID,
-      participantID: metadata.participantID,
-      startTime: metadata.startTime,
-      endTime: metadata.endTime,
-    );
+    manager.addSessionMetadata(session: metadata);
 
     expect(manager.sessionMetadata.participantID, metadata.participantID);
     expect(manager.sessionMetadata.sessionID, metadata.sessionID);
