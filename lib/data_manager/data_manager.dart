@@ -11,46 +11,19 @@ class InMemoryDB implements DB {
 
   /// Add metadata about the device used to collect data
   @override
-  void addDevice({
-    required String sessionID,
-    required String participantID,
-  }) {
-    device = Device(
-      participantID: participantID,
-      sessionID: sessionID,
-    );
+  void addDevice({required Device device}) {
+    this.device = device;
   }
 
   /// Add metadata about the data collection session
   @override
-  void addSessionMetadata(
-      {required String sessionID,
-      required String participantID,
-      required DateTime startTime,
-      required DateTime endTime}) {
-    sessionMetadata = SessionMetadata(
-      participantID: participantID,
-      sessionID: sessionID,
-      startTime: startTime,
-      endTime: endTime,
-    );
+  void addSessionMetadata({required SessionMetadata session}) {
+    sessionMetadata = session;
   }
 
   /// Add data for a single trial
   @override
-  void addTrial(
-      {required String sessionID,
-      required String participantID,
-      required String stim,
-      required String resp,
-      required TrialType trialType}) {
-    final Trial trial = Trial(
-      participantID: participantID,
-      sessionID: sessionID,
-      trialType: trialType,
-      stim: stim,
-      response: resp,
-    );
+  void addTrial({required Trial trial}) {
     trials.add(trial);
   }
 }

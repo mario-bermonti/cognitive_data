@@ -13,8 +13,7 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     final Device device = Device(participantID: '101', sessionID: '001');
     final InMemoryDB manager = InMemoryDB();
-    manager.addDevice(
-        sessionID: device.sessionID, participantID: device.participantID);
+    manager.addDevice(device: device);
 
     expect(manager.device.participantID, device.participantID);
     expect(manager.device.sessionID, device.sessionID);
@@ -31,12 +30,7 @@ void main() {
     );
 
     final InMemoryDB manager = InMemoryDB();
-    manager.addSessionMetadata(
-      sessionID: metadata.sessionID,
-      participantID: metadata.participantID,
-      startTime: metadata.startTime,
-      endTime: metadata.endTime,
-    );
+    manager.addSessionMetadata(session: metadata);
 
     expect(manager.sessionMetadata.participantID, metadata.participantID);
     expect(manager.sessionMetadata.sessionID, metadata.sessionID);
@@ -55,13 +49,7 @@ void main() {
     );
     final InMemoryDB manager = InMemoryDB();
 
-    manager.addTrial(
-      sessionID: trial.sessionID,
-      participantID: trial.participantID,
-      stim: trial.stim,
-      resp: trial.response,
-      trialType: TrialType.practice,
-    );
+    manager.addTrial(trial: trial);
     final Trial trialInManager = manager.trials.first;
 
     expect(trialInManager.sessionID, trial.sessionID);
