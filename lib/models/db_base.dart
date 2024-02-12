@@ -1,3 +1,4 @@
+import 'package:cognitive_data/models/device.dart';
 import 'package:cognitive_data/models/session.dart';
 import 'trial_type.dart';
 
@@ -6,10 +7,7 @@ import 'trial_type.dart';
 abstract class DB {
   void addSessionMetadata({required SessionMetadata session}) {}
 
-  void addDevice({
-    required String sessionID,
-    required String participantID,
-  }) {}
+  void addDevice({required Device device}) {}
 
   void addTrial({
     required String sessionID,
