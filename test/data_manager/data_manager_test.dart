@@ -49,13 +49,7 @@ void main() {
     );
     final InMemoryDB manager = InMemoryDB();
 
-    manager.addTrial(
-      sessionID: trial.sessionID,
-      participantID: trial.participantID,
-      stim: trial.stim,
-      resp: trial.response,
-      trialType: TrialType.practice,
-    );
+    manager.addTrial(trial: trial);
     final Trial trialInManager = manager.trials.first;
 
     expect(trialInManager.sessionID, trial.sessionID);
