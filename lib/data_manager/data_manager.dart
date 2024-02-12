@@ -3,6 +3,8 @@ import 'package:cognitive_data/models/device.dart';
 import 'package:cognitive_data/models/session.dart';
 import 'package:cognitive_data/models/trial.dart';
 
+/// In-memory db to be used to store data while the app is running. Data is
+/// not persisted to disk.
 class InMemoryDB implements DB {
   late final Device device;
   late final SessionMetadata sessionMetadata;
