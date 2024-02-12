@@ -11,14 +11,8 @@ class InMemoryDB implements DB {
 
   /// Add metadata about the device used to collect data
   @override
-  void addDevice({
-    required String sessionID,
-    required String participantID,
-  }) {
-    device = Device(
-      participantID: participantID,
-      sessionID: sessionID,
-    );
+  void addDevice({required Device device}) {
+    this.device = device;
   }
 
   /// Add metadata about the data collection session
