@@ -1,5 +1,7 @@
 import 'package:cognitive_data/models/device.dart';
 import 'package:cognitive_data/models/session.dart';
+import 'package:cognitive_data/models/trial.dart';
+
 import 'trial_type.dart';
 
 /// Serves as the design contract between the different implementations of
@@ -9,11 +11,5 @@ abstract class DB {
 
   void addDevice({required Device device}) {}
 
-  void addTrial({
-    required String sessionID,
-    required String participantID,
-    required String stim,
-    required String resp,
-    required TrialType trialType,
-  }) {}
+  void addTrial({required Trial trial}) {}
 }
