@@ -23,19 +23,7 @@ class InMemoryDB implements DB {
 
   /// Add data for a single trial
   @override
-  void addTrial(
-      {required String sessionID,
-      required String participantID,
-      required String stim,
-      required String resp,
-      required TrialType trialType}) {
-    final Trial trial = Trial(
-      participantID: participantID,
-      sessionID: sessionID,
-      trialType: trialType,
-      stim: stim,
-      response: resp,
-    );
+  void addTrial({required Trial trial}) {
     trials.add(trial);
   }
 }
