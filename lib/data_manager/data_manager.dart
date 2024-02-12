@@ -4,7 +4,7 @@ import 'package:cognitive_data/models/session.dart';
 import 'package:cognitive_data/models/trial.dart';
 import 'package:cognitive_data/models/trial_type.dart';
 
-class DataManager implements DB {
+class InMemoryDB implements DB {
   late final Device device;
   late final SessionMetadata sessionMetadata;
   final List<Trial> trials = <Trial>[];

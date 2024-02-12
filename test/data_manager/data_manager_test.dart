@@ -12,7 +12,7 @@ void main() {
       () {
     WidgetsFlutterBinding.ensureInitialized();
     final Device device = Device(participantID: '101', sessionID: '001');
-    final DataManager manager = DataManager();
+    final InMemoryDB manager = InMemoryDB();
     manager.addDevice(
         sessionID: device.sessionID, participantID: device.participantID);
 
@@ -30,7 +30,7 @@ void main() {
       endTime: DateTime.now(),
     );
 
-    final DataManager manager = DataManager();
+    final InMemoryDB manager = InMemoryDB();
     manager.addSessionMetadata(
       sessionID: metadata.sessionID,
       participantID: metadata.participantID,
@@ -53,7 +53,7 @@ void main() {
       stim: '987',
       response: '987',
     );
-    final DataManager manager = DataManager();
+    final InMemoryDB manager = InMemoryDB();
 
     manager.addTrial(
       sessionID: trial.sessionID,
