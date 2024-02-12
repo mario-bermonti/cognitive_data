@@ -2,7 +2,6 @@ import 'package:cognitive_data/models/db_base.dart';
 import 'package:cognitive_data/models/device.dart';
 import 'package:cognitive_data/models/session.dart';
 import 'package:cognitive_data/models/trial.dart';
-import 'package:cognitive_data/models/trial_type.dart';
 
 class InMemoryDB implements DB {
   late final Device device;
