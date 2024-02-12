@@ -13,8 +13,7 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     final Device device = Device(participantID: '101', sessionID: '001');
     final InMemoryDB manager = InMemoryDB();
-    manager.addDevice(
-        sessionID: device.sessionID, participantID: device.participantID);
+    manager.addDevice(device: device);
 
     expect(manager.device.participantID, device.participantID);
     expect(manager.device.sessionID, device.sessionID);
