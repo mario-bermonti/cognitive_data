@@ -30,7 +30,8 @@ void main() {
 
           await db.addTrial(trial: baseTrial);
 
-          final trialFromDB = await db.select(db.driftTrial).getSingle();
+          final DriftTrialData trialFromDB =
+              await db.select(db.driftTrial).getSingle();
 
           expect(trialFromDB.participantID, baseTrial.participantID);
           expect(trialFromDB.sessionID, baseTrial.sessionID);
