@@ -31,14 +31,12 @@ void main() {
           await db.addTrial(trial: baseTrial);
 
           final trialFromDB = await db.select(db.driftTrial).getSingle();
-          final DriftTrialCompanion trialCompanion =
-              trialFromDB.toCompanion(true);
 
-          expect(trialCompanion.participantID.value, baseTrial.participantID);
-          expect(trialCompanion.sessionID.value, baseTrial.sessionID);
-          expect(trialCompanion.trialType.value, baseTrial.trialType);
-          expect(trialCompanion.stim.value, baseTrial.stim);
-          expect(trialCompanion.response.value, baseTrial.response);
+          expect(trialFromDB.participantID, baseTrial.participantID);
+          expect(trialFromDB.sessionID, baseTrial.sessionID);
+          expect(trialFromDB.trialType, baseTrial.trialType);
+          expect(trialFromDB.stim, baseTrial.stim);
+          expect(trialFromDB.response, baseTrial.response);
         },
       );
     },
