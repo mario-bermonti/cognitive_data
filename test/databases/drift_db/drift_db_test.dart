@@ -15,31 +15,26 @@ void main() {
     await db.close();
   });
 
-  group(
-    "DriftDB.addTrials adds trials to DriftDB given a Trial object",
-    () {
-      test(
-        "Drift.addTrials inserts a trial into the DriftDB with same appropriate data fields",
-        () async {
-          final Trial baseTrial = Trial(
-              participantID: '101',
-              sessionID: '001',
-              trialType: TrialType.practice,
-              stim: '456',
-              response: '654');
+  test(
+    "Drift.addTrials inserts a trial into the DriftDB with same appropriate data fields",
+    () async {
+      final Trial baseTrial = Trial(
+          participantID: '101',
+          sessionID: '001',
+          trialType: TrialType.practice,
+          stim: '456',
+          response: '654');
 
-          await db.addTrial(trial: baseTrial);
+      await db.addTrial(trial: baseTrial);
 
-          final DriftTrialData driftTrial =
-              await db.select(db.driftTrial).getSingle();
+      final DriftTrialData driftTrial =
+          await db.select(db.driftTrial).getSingle();
 
-          expect(driftTrial.participantID, baseTrial.participantID);
-          expect(driftTrial.sessionID, baseTrial.sessionID);
-          expect(driftTrial.trialType, baseTrial.trialType);
-          expect(driftTrial.stim, baseTrial.stim);
-          expect(driftTrial.response, baseTrial.response);
-        },
-      );
+      expect(driftTrial.participantID, baseTrial.participantID);
+      expect(driftTrial.sessionID, baseTrial.sessionID);
+      expect(driftTrial.trialType, baseTrial.trialType);
+      expect(driftTrial.stim, baseTrial.stim);
+      expect(driftTrial.response, baseTrial.response);
     },
   );
 }
