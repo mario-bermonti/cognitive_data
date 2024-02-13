@@ -1,4 +1,4 @@
-import 'package:cognitive_data/data_manager/data_manager.dart';
+import 'package:cognitive_data/databases/in_memory_db.dart';
 import 'package:cognitive_data/models/device.dart';
 import 'package:cognitive_data/models/session.dart';
 import 'package:cognitive_data/models/trial.dart';
