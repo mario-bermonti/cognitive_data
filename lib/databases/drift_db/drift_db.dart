@@ -17,6 +17,8 @@ class DriftDB extends _$DriftDB implements DB {
   @override
   int get schemaVersion => 1;
 
+  /// Adds the data from a single device object to the drift.
+  /// Requires a base [Device] object as param.
   @override
   Future<int> addDevice({required Device device}) async {
     final DriftDeviceCompanion deviceCompanion = DriftDevice.fromDevice(device);
