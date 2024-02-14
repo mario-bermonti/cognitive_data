@@ -27,8 +27,13 @@ class DriftDB extends _$DriftDB implements DB {
   }
 
   @override
-  void addSessionMetadata({required SessionMetadata session}) {
-    // TODO: implement addSessionMetadata
+  Future<int> addSessionMetadata({required SessionMetadata session}) async {
+    final DriftSessionMetadataCompanion sessionMetadataCompanion =
+        DriftSessionMetadata.fromSessionMetadata(session);
+    final int id =
+        await into(driftSessionMetadata).insert(sessionMetadataCompanion);
+
+    return id;
   }
 
   /// Adds a single trial to the drift db from a base [Trial] object.
