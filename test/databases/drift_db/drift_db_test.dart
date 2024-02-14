@@ -1,4 +1,5 @@
 import 'package:cognitive_data/databases/drift_db/drift_db.dart';
+import 'package:cognitive_data/models/device.dart';
 import 'package:cognitive_data/models/trial.dart';
 import 'package:cognitive_data/models/trial_type.dart';
 import 'package:drift/native.dart';
@@ -35,6 +36,28 @@ void main() {
       expect(driftTrial.trialType, baseTrial.trialType);
       expect(driftTrial.stim, baseTrial.stim);
       expect(driftTrial.response, baseTrial.response);
+    },
+  );
+  test(
+    "Drift.addDevice inserts a device into the DriftDb with a the same appropriate data fields",
+    () async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      final Device baseDevice = Device(
+        participantID: '101',
+        sessionID: '001',
+      );
+
+      await db.addDevice(device: baseDevice);
+
+      final DriftDeviceData driftDevice =
+          await db.select(db.driftDevice).getSingle();
+
+      expect(driftDevice.participantID, baseDevice.participantID);
+      expect(driftDevice.sessionID, baseDevice.sessionID);
+      expect(driftDevice.platform, baseDevice.platform);
+      expect(driftDevice.height, baseDevice.height);
+      expect(driftDevice.width, baseDevice.width);
+      expect(driftDevice.aspectRatio, baseDevice.aspectRatio);
     },
   );
 }
