@@ -1,5 +1,6 @@
 import 'package:cognitive_data/databases/drift_db/drift_db.dart';
 import 'package:cognitive_data/models/device.dart';
+import 'package:cognitive_data/models/session.dart';
 import 'package:cognitive_data/models/trial.dart';
 import 'package:cognitive_data/models/trial_type.dart';
 import 'package:drift/native.dart';
@@ -58,6 +59,37 @@ void main() {
       expect(driftDevice.height, baseDevice.height);
       expect(driftDevice.width, baseDevice.width);
       expect(driftDevice.aspectRatio, baseDevice.aspectRatio);
+    },
+  );
+
+  test(
+    "Drift.addSession inserts a session into the DriftDB with appropriate data fields",
+    () async {
+      final SessionMetadata baseSession = SessionMetadata(
+        participantID: '101',
+        sessionID: '001',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
+      );
+
+      await db.addSessionMetadata(session: baseSession);
+
+      final DriftSessionMetadataData driftSession =
+          await db.select(db.driftSessionMetadata).getSingle();
+
+      expect(driftSession.participantID, baseSession.participantID);
+      expect(driftSession.sessionID, baseSession.sessionID);
+
+      /// Drift truncates milliseconds so we accept less than 1s differences
+      /// between the actual and expected.
+      const Duration tolerance = Duration(seconds: 1);
+      final Duration differenceStartTime =
+          driftSession.startTime.difference(baseSession.startTime);
+      expect(differenceStartTime, lessThan(tolerance));
+
+      final Duration differenceEndTime =
+          driftSession.endTime.difference(baseSession.startTime);
+      expect(differenceEndTime, lessThan(tolerance));
     },
   );
 }
