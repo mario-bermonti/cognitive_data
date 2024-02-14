@@ -26,6 +26,8 @@ class DriftDB extends _$DriftDB implements DB {
     return id;
   }
 
+  /// Adds the metadata from a single Session object to the drift db.
+  /// Requires a base [SessionMetadata] object as param.
   @override
   Future<int> addSessionMetadata({required SessionMetadata session}) async {
     final DriftSessionMetadataCompanion sessionMetadataCompanion =
