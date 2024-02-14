@@ -18,8 +18,10 @@ class DriftDB extends _$DriftDB implements DB {
   int get schemaVersion => 1;
 
   @override
-  void addDevice({required Device device}) {
-    // TODO: implement addDevice
+  Future<int> addDevice({required Device device}) async {
+    final DriftDeviceCompanion deviceCompanion = DriftDevice.fromDevice(device);
+    final int id = await into(driftDevice).insert(deviceCompanion);
+    return id;
   }
 
   @override
