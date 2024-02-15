@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:cognitive_data/databases/drift_db/drift_db.dart';
 import 'package:cognitive_data/models/device.dart';
 import 'package:cognitive_data/models/session.dart';
@@ -7,7 +10,7 @@ import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  late final DriftDB db;
+  late DriftDB db;
 
   setUp(() {
     db = DriftDB(NativeDatabase.memory());
@@ -90,6 +93,15 @@ void main() {
       final Duration differenceEndTime =
           driftSession.endTime.difference(baseSession.startTime);
       expect(differenceEndTime, lessThan(tolerance));
+    },
+  );
+      test(
+        "Returns a drift NativeDatabase that contains at least 1 table",
+        () {
+          final int numberOfTables = db.allTables.toList().length;
+          expect(numberOfTables, greaterThan(0));
+        },
+      );
     },
   );
 }
