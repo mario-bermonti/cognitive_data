@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:cognitive_data/databases/drift_db/models/session.dart';
 
 void main() {
-  late final DriftDB db;
+  late DriftDB db;
 
   setUp(() {
     db = DriftDB(NativeDatabase.memory());

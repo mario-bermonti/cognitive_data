@@ -6,7 +6,7 @@ import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  late final DriftDB db;
+  late DriftDB db;
 
   setUp(() {
     db = DriftDB(NativeDatabase.memory());
