@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cognitive_data/databases/drift_db/models/device.dart';
 import 'package:cognitive_data/databases/drift_db/models/session.dart';
 import 'package:cognitive_data/databases/drift_db/models/trial.dart';
@@ -5,6 +7,7 @@ import 'package:cognitive_data/models/trial.dart';
 import 'package:cognitive_data/models/session.dart';
 import 'package:cognitive_data/models/device.dart';
 import 'package:drift/drift.dart';
+import 'package:drift/native.dart';
 
 import '../../models/db_base.dart';
 
@@ -16,6 +19,21 @@ class DriftDB extends _$DriftDB implements DB {
 
   @override
   int get schemaVersion => 1;
+
+  /// Initialize a [DriftDB] in the provided [path] and return it.
+  /// This static method is meant to be used as a constructor to make it
+  /// easier for users to init a [DriftDB]. Instantiate the [DriftDB] directly
+  /// if you need more flexibility.
+  static DriftDB init({required String path}) {
+    final file = File(path);
+
+    LazyDatabase nativeDB = LazyDatabase(() async {
+      return NativeDatabase(file);
+    });
+
+    final DriftDB db = DriftDB(nativeDB);
+    return db;
+  }
 
   /// Adds the data from a single device object to the drift.
   /// Requires a base [Device] object as param.
