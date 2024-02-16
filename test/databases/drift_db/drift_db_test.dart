@@ -20,7 +20,7 @@ void main() {
   });
 
   test(
-    "Drift.addTrials correctly inserts a trial into the DriftDB",
+    "Drift.addTrial correctly inserts a trial into the DriftDB",
     () async {
       final Trial baseTrial = Trial(
           participantID: '101',
