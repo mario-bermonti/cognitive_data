@@ -24,7 +24,7 @@ class DriftDB extends _$DriftDB implements DB {
   /// This static method is meant to be used as a constructor to make it
   /// easier for users to init a [DriftDB]. Instantiate the [DriftDB] directly
   /// if you need more flexibility.
-  static Future<DriftDB> init({required String path}) async {
+  static DriftDB init({required String path}) {
     final file = File(path);
 
     LazyDatabase nativeDB = LazyDatabase(() async {
