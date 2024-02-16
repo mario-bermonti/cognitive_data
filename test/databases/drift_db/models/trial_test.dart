@@ -16,7 +16,9 @@ void main() {
     await db.close();
   });
 
-  test('Correctly instantiate a DriftTrial object from a base Trial model', () {
+  test(
+      'DriftTrial.fromTrial correctly instantiates a DriftTrial object from a base Trial model',
+      () {
     final Trial baseTrial = Trial(
         participantID: '101',
         sessionID: '001',

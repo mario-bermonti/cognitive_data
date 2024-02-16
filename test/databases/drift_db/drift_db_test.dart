@@ -20,7 +20,7 @@ void main() {
   });
 
   test(
-    "Drift.addTrials inserts a trial into the DriftDB with same appropriate data fields",
+    "Drift.addTrials correctly inserts a trial into the DriftDB",
     () async {
       final Trial baseTrial = Trial(
           participantID: '101',
@@ -42,7 +42,7 @@ void main() {
     },
   );
   test(
-    "Drift.addDevice inserts a device into the DriftDb with a the same appropriate data fields",
+    "Drift.addDevice correctly inserts a device into the DriftDb",
     () async {
       TestWidgetsFlutterBinding.ensureInitialized();
       final Device baseDevice = Device(
@@ -65,7 +65,7 @@ void main() {
   );
 
   test(
-    "Drift.addSession inserts a session into the DriftDB with appropriate data fields",
+    "Drift.addSession correctly inserts a session into the DriftDB",
     () async {
       final SessionMetadata baseSession = SessionMetadata(
         participantID: '101',
@@ -95,7 +95,7 @@ void main() {
     },
   );
   group(
-    "DriftDB.init",
+    "DriftDB.init returns a drift NativeDatabase",
     () {
       late Directory tempDir;
       late DriftDB tempDB;
@@ -112,7 +112,7 @@ void main() {
       });
 
       test(
-        "Returns a drift NativeDatabase that contains at least 1 table",
+        "that contains at least 1 table",
         () {
           final int numberOfTables = tempDB.allTables.toList().length;
           expect(numberOfTables, greaterThan(0));
