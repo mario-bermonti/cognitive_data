@@ -16,7 +16,7 @@ void main() {
   });
 
   test(
-    "Correctly instantiate a DriftDevice object from a base Device model",
+    "DriftDevice.fromDevice correctly instantiates a DriftDevice object from a base Device model",
     () {
       TestWidgetsFlutterBinding.ensureInitialized();
 
