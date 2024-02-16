@@ -21,6 +21,10 @@ class DriftDB extends _$DriftDB implements DB {
   @override
   int get schemaVersion => 1;
 
+  /// Initialize a [DriftDB] in the provided [path] and return it.
+  /// This static method is meant to be used as a constructor to make it
+  /// easier for users to init a [DriftDB]. Instantiate the [DriftDB] directly
+  /// if you need more flexibility.
   static Future<DriftDB> init({required String path}) async {
     final file = File(path);
 
