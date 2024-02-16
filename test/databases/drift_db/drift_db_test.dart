@@ -94,6 +94,23 @@ void main() {
       expect(differenceEndTime, lessThan(tolerance));
     },
   );
+  group(
+    "DriftDB.init",
+    () {
+      late Directory tempDir;
+      late DriftDB db;
+
+      setUp(() async {
+        tempDir = await Directory.systemTemp.createTemp('test_dir');
+        final String path = "${tempDir.path}/cognitive_data_test.sqlite";
+        db = await DriftDB.init(path: path);
+      });
+
+      tearDown(() async {
+        await db.close();
+        await tempDir.delete(recursive: true);
+      });
+
       test(
         "Returns a drift NativeDatabase that contains at least 1 table",
         () {
