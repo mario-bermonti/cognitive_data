@@ -26,7 +26,7 @@ void main() {
         stim: '456',
         response: '654');
 
-    final DriftTrialCompanion driftTrial = DriftTrial.fromTrial(baseTrial);
+    final DriftTrialCompanion driftTrial = DriftTrials.fromTrial(baseTrial);
 
     expect(driftTrial.participantID.value, baseTrial.participantID);
     expect(driftTrial.sessionID.value, baseTrial.sessionID);

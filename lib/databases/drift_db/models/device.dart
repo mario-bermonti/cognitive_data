@@ -7,7 +7,7 @@ import '../../../models/device.dart';
 /// Drift table analogous to the base [Device] model. It contains the same data
 /// and can be easily instantiated from a base [Device] model. See the
 /// base [Device] model for details.
-class DriftDevice extends Table {
+class DriftDevices extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get participantID =>
       text().references(DriftSessionMetadata, #participantID)();

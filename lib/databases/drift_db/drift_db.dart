@@ -13,7 +13,7 @@ import '../../models/db_base.dart';
 
 part 'drift_db.g.dart';
 
-@DriftDatabase(tables: [DriftSessionMetadata, DriftDevice, DriftTrial])
+@DriftDatabase(tables: [DriftSessionMetadata, DriftDevices, DriftTrials])
 class DriftDB extends _$DriftDB implements DB {
   DriftDB(QueryExecutor dbConnection) : super(dbConnection);
 
@@ -39,7 +39,8 @@ class DriftDB extends _$DriftDB implements DB {
   /// Requires a base [Device] object as param.
   @override
   Future<int> addDevice({required Device device}) async {
-    final DriftDeviceCompanion deviceCompanion = DriftDevice.fromDevice(device);
+    final DriftDeviceCompanion deviceCompanion =
+        DriftDevices.fromDevice(device);
     final int id = await into(driftDevice).insert(deviceCompanion);
     return id;
   }
@@ -59,7 +60,7 @@ class DriftDB extends _$DriftDB implements DB {
   /// Adds a single trial to the drift db from a base [Trial] object.
   @override
   Future<int> addTrial({required Trial trial}) async {
-    final DriftTrialCompanion trialCompanion = DriftTrial.fromTrial(trial);
+    final DriftTrialCompanion trialCompanion = DriftTrials.fromTrial(trial);
     final int id = await into(driftTrial).insert(trialCompanion);
     return id;
   }
