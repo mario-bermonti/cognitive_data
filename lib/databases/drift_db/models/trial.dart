@@ -6,7 +6,7 @@ import 'package:drift/drift.dart';
 /// Drift table analogous to the base [Trial] model. It contains the same data
 /// and can be easily instantiated from a base [Trial] model. See the
 /// base [Trial] model for details.
-class DriftTrial extends Table {
+class DriftTrials extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get participantID =>
       text().references(DriftSessionMetadata, #participantID)();

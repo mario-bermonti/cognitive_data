@@ -551,7 +551,7 @@ class DriftDeviceCompanion extends UpdateCompanion<DriftDeviceData> {
   }
 }
 
-class $DriftDeviceTable extends DriftDevice
+class $DriftDeviceTable extends DriftDevices
     with TableInfo<$DriftDeviceTable, DriftDeviceData> {
   @override
   final GeneratedDatabase attachedDatabase;
@@ -899,7 +899,7 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
   }
 }
 
-class $DriftTrialTable extends DriftTrial
+class $DriftTrialTable extends DriftTrials
     with TableInfo<$DriftTrialTable, DriftTrialData> {
   @override
   final GeneratedDatabase attachedDatabase;
