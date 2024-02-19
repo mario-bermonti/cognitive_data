@@ -1,37 +1,31 @@
-# ABC to standardize db implementations
-- add session
-- add device
-- add trial 
+# Software design
 
-# In memory db
-## Manager 
+## Models
+
+- trials
+- TrialType
+- session
+- device
+- BD: ABC to standardize db implementations
+  - add session
+  - add device
+  - add trial 
+
+## In memory db
 
 - add trial
 - add session
 - add device
 - save drift
-- get data from db? (general or by type of data?)
 
-## Models
-- trials
-- session
-- device
-
-# Drift db
-## db
+## Drift db
+### db
 - init db
-- insert trial
-- insert trials
-- insert session
-- insert device
-<!-- - get trial? -->
-- get trials
-<!-- - get session? -->
-- get sessions
-<!-- - get device? -->
-- get devices
+- add trial
+- add session
+- add device
 
-## Models
+### Models
 - trial
 - session
 - device
