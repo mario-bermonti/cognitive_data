@@ -25,7 +25,7 @@ void main() {
         sessionID: '001',
       );
 
-      final DriftDeviceCompanion driftDevice =
+      final DriftDevicesCompanion driftDevice =
           DriftDevices.fromDevice(baseDevice);
 
       expect(driftDevice.participantID.value, baseDevice.participantID);

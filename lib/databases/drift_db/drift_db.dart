@@ -39,9 +39,9 @@ class DriftDB extends _$DriftDB implements DB {
   /// Requires a base [Device] object as param.
   @override
   Future<int> addDevice({required Device device}) async {
-    final DriftDeviceCompanion deviceCompanion =
+    final DriftDevicesCompanion deviceCompanion =
         DriftDevices.fromDevice(device);
-    final int id = await into(driftDevice).insert(deviceCompanion);
+    final int id = await into(driftDevices).insert(deviceCompanion);
     return id;
   }
 
@@ -60,8 +60,8 @@ class DriftDB extends _$DriftDB implements DB {
   /// Adds a single trial to the drift db from a base [Trial] object.
   @override
   Future<int> addTrial({required Trial trial}) async {
-    final DriftTrialCompanion trialCompanion = DriftTrials.fromTrial(trial);
-    final int id = await into(driftTrial).insert(trialCompanion);
+    final DriftTrialsCompanion trialCompanion = DriftTrials.fromTrial(trial);
+    final int id = await into(driftTrials).insert(trialCompanion);
     return id;
   }
 }

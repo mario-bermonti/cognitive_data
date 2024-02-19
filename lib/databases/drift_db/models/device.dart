@@ -20,8 +20,8 @@ class DriftDevices extends Table {
 
   /// Instantiates a [DriftDeviceCompanion] from a [Device] base model. This
   /// [DriftDeviceCompanion] can be inserted into the drift db.
-  static DriftDeviceCompanion fromDevice(Device baseDevice) {
-    final DriftDeviceCompanion driftDevice = DriftDeviceCompanion(
+  static DriftDevicesCompanion fromDevice(Device baseDevice) {
+    final DriftDevicesCompanion driftDevice = DriftDevicesCompanion(
         participantID: Value(baseDevice.participantID),
         sessionID: Value(baseDevice.sessionID),
         platform: Value(baseDevice.platform),
