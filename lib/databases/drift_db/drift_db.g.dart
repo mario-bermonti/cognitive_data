@@ -304,7 +304,7 @@ class $DriftSessionMetadataTable extends DriftSessionMetadata
   }
 }
 
-class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
+class DriftDevice extends DataClass implements Insertable<DriftDevice> {
   final int id;
   final String participantID;
   final String sessionID;
@@ -312,7 +312,7 @@ class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
   final double height;
   final double width;
   final double aspectRatio;
-  DriftDeviceData(
+  DriftDevice(
       {required this.id,
       required this.participantID,
       required this.sessionID,
@@ -320,10 +320,9 @@ class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
       required this.height,
       required this.width,
       required this.aspectRatio});
-  factory DriftDeviceData.fromData(Map<String, dynamic> data,
-      {String? prefix}) {
+  factory DriftDevice.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return DriftDeviceData(
+    return DriftDevice(
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       participantID: const StringType()
@@ -353,8 +352,8 @@ class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
     return map;
   }
 
-  DriftDeviceCompanion toCompanion(bool nullToAbsent) {
-    return DriftDeviceCompanion(
+  DriftDevicesCompanion toCompanion(bool nullToAbsent) {
+    return DriftDevicesCompanion(
       id: Value(id),
       participantID: Value(participantID),
       sessionID: Value(sessionID),
@@ -365,10 +364,10 @@ class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
     );
   }
 
-  factory DriftDeviceData.fromJson(Map<String, dynamic> json,
+  factory DriftDevice.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DriftDeviceData(
+    return DriftDevice(
       id: serializer.fromJson<int>(json['id']),
       participantID: serializer.fromJson<String>(json['participantID']),
       sessionID: serializer.fromJson<String>(json['sessionID']),
@@ -392,7 +391,7 @@ class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
     };
   }
 
-  DriftDeviceData copyWith(
+  DriftDevice copyWith(
           {int? id,
           String? participantID,
           String? sessionID,
@@ -400,7 +399,7 @@ class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
           double? height,
           double? width,
           double? aspectRatio}) =>
-      DriftDeviceData(
+      DriftDevice(
         id: id ?? this.id,
         participantID: participantID ?? this.participantID,
         sessionID: sessionID ?? this.sessionID,
@@ -411,7 +410,7 @@ class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
       );
   @override
   String toString() {
-    return (StringBuffer('DriftDeviceData(')
+    return (StringBuffer('DriftDevice(')
           ..write('id: $id, ')
           ..write('participantID: $participantID, ')
           ..write('sessionID: $sessionID, ')
@@ -429,7 +428,7 @@ class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DriftDeviceData &&
+      (other is DriftDevice &&
           other.id == this.id &&
           other.participantID == this.participantID &&
           other.sessionID == this.sessionID &&
@@ -439,7 +438,7 @@ class DriftDeviceData extends DataClass implements Insertable<DriftDeviceData> {
           other.aspectRatio == this.aspectRatio);
 }
 
-class DriftDeviceCompanion extends UpdateCompanion<DriftDeviceData> {
+class DriftDevicesCompanion extends UpdateCompanion<DriftDevice> {
   final Value<int> id;
   final Value<String> participantID;
   final Value<String> sessionID;
@@ -447,7 +446,7 @@ class DriftDeviceCompanion extends UpdateCompanion<DriftDeviceData> {
   final Value<double> height;
   final Value<double> width;
   final Value<double> aspectRatio;
-  const DriftDeviceCompanion({
+  const DriftDevicesCompanion({
     this.id = const Value.absent(),
     this.participantID = const Value.absent(),
     this.sessionID = const Value.absent(),
@@ -456,7 +455,7 @@ class DriftDeviceCompanion extends UpdateCompanion<DriftDeviceData> {
     this.width = const Value.absent(),
     this.aspectRatio = const Value.absent(),
   });
-  DriftDeviceCompanion.insert({
+  DriftDevicesCompanion.insert({
     this.id = const Value.absent(),
     required String participantID,
     required String sessionID,
@@ -470,7 +469,7 @@ class DriftDeviceCompanion extends UpdateCompanion<DriftDeviceData> {
         height = Value(height),
         width = Value(width),
         aspectRatio = Value(aspectRatio);
-  static Insertable<DriftDeviceData> custom({
+  static Insertable<DriftDevice> custom({
     Expression<int>? id,
     Expression<String>? participantID,
     Expression<String>? sessionID,
@@ -490,7 +489,7 @@ class DriftDeviceCompanion extends UpdateCompanion<DriftDeviceData> {
     });
   }
 
-  DriftDeviceCompanion copyWith(
+  DriftDevicesCompanion copyWith(
       {Value<int>? id,
       Value<String>? participantID,
       Value<String>? sessionID,
@@ -498,7 +497,7 @@ class DriftDeviceCompanion extends UpdateCompanion<DriftDeviceData> {
       Value<double>? height,
       Value<double>? width,
       Value<double>? aspectRatio}) {
-    return DriftDeviceCompanion(
+    return DriftDevicesCompanion(
       id: id ?? this.id,
       participantID: participantID ?? this.participantID,
       sessionID: sessionID ?? this.sessionID,
@@ -538,7 +537,7 @@ class DriftDeviceCompanion extends UpdateCompanion<DriftDeviceData> {
 
   @override
   String toString() {
-    return (StringBuffer('DriftDeviceCompanion(')
+    return (StringBuffer('DriftDevicesCompanion(')
           ..write('id: $id, ')
           ..write('participantID: $participantID, ')
           ..write('sessionID: $sessionID, ')
@@ -551,12 +550,12 @@ class DriftDeviceCompanion extends UpdateCompanion<DriftDeviceData> {
   }
 }
 
-class $DriftDeviceTable extends DriftDevices
-    with TableInfo<$DriftDeviceTable, DriftDeviceData> {
+class $DriftDevicesTable extends DriftDevices
+    with TableInfo<$DriftDevicesTable, DriftDevice> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DriftDeviceTable(this.attachedDatabase, [this._alias]);
+  $DriftDevicesTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
@@ -605,11 +604,11 @@ class $DriftDeviceTable extends DriftDevices
   List<GeneratedColumn> get $columns =>
       [id, participantID, sessionID, platform, height, width, aspectRatio];
   @override
-  String get aliasedName => _alias ?? 'drift_device';
+  String get aliasedName => _alias ?? 'drift_devices';
   @override
-  String get actualTableName => 'drift_device';
+  String get actualTableName => 'drift_devices';
   @override
-  VerificationContext validateIntegrity(Insertable<DriftDeviceData> instance,
+  VerificationContext validateIntegrity(Insertable<DriftDevice> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -664,18 +663,18 @@ class $DriftDeviceTable extends DriftDevices
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DriftDeviceData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return DriftDeviceData.fromData(data,
+  DriftDevice map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return DriftDevice.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
-  $DriftDeviceTable createAlias(String alias) {
-    return $DriftDeviceTable(attachedDatabase, alias);
+  $DriftDevicesTable createAlias(String alias) {
+    return $DriftDevicesTable(attachedDatabase, alias);
   }
 }
 
-class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
+class DriftTrial extends DataClass implements Insertable<DriftTrial> {
   final int id;
   final String participantID;
   final String sessionID;
@@ -684,16 +683,16 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
   final String trialType;
   final String stim;
   final String response;
-  DriftTrialData(
+  DriftTrial(
       {required this.id,
       required this.participantID,
       required this.sessionID,
       required this.trialType,
       required this.stim,
       required this.response});
-  factory DriftTrialData.fromData(Map<String, dynamic> data, {String? prefix}) {
+  factory DriftTrial.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return DriftTrialData(
+    return DriftTrial(
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       participantID: const StringType()
@@ -720,8 +719,8 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
     return map;
   }
 
-  DriftTrialCompanion toCompanion(bool nullToAbsent) {
-    return DriftTrialCompanion(
+  DriftTrialsCompanion toCompanion(bool nullToAbsent) {
+    return DriftTrialsCompanion(
       id: Value(id),
       participantID: Value(participantID),
       sessionID: Value(sessionID),
@@ -731,10 +730,10 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
     );
   }
 
-  factory DriftTrialData.fromJson(Map<String, dynamic> json,
+  factory DriftTrial.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DriftTrialData(
+    return DriftTrial(
       id: serializer.fromJson<int>(json['id']),
       participantID: serializer.fromJson<String>(json['participantID']),
       sessionID: serializer.fromJson<String>(json['sessionID']),
@@ -756,14 +755,14 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
     };
   }
 
-  DriftTrialData copyWith(
+  DriftTrial copyWith(
           {int? id,
           String? participantID,
           String? sessionID,
           String? trialType,
           String? stim,
           String? response}) =>
-      DriftTrialData(
+      DriftTrial(
         id: id ?? this.id,
         participantID: participantID ?? this.participantID,
         sessionID: sessionID ?? this.sessionID,
@@ -773,7 +772,7 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
       );
   @override
   String toString() {
-    return (StringBuffer('DriftTrialData(')
+    return (StringBuffer('DriftTrial(')
           ..write('id: $id, ')
           ..write('participantID: $participantID, ')
           ..write('sessionID: $sessionID, ')
@@ -790,7 +789,7 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DriftTrialData &&
+      (other is DriftTrial &&
           other.id == this.id &&
           other.participantID == this.participantID &&
           other.sessionID == this.sessionID &&
@@ -799,14 +798,14 @@ class DriftTrialData extends DataClass implements Insertable<DriftTrialData> {
           other.response == this.response);
 }
 
-class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
+class DriftTrialsCompanion extends UpdateCompanion<DriftTrial> {
   final Value<int> id;
   final Value<String> participantID;
   final Value<String> sessionID;
   final Value<String> trialType;
   final Value<String> stim;
   final Value<String> response;
-  const DriftTrialCompanion({
+  const DriftTrialsCompanion({
     this.id = const Value.absent(),
     this.participantID = const Value.absent(),
     this.sessionID = const Value.absent(),
@@ -814,7 +813,7 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
     this.stim = const Value.absent(),
     this.response = const Value.absent(),
   });
-  DriftTrialCompanion.insert({
+  DriftTrialsCompanion.insert({
     this.id = const Value.absent(),
     required String participantID,
     required String sessionID,
@@ -826,7 +825,7 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
         trialType = Value(trialType),
         stim = Value(stim),
         response = Value(response);
-  static Insertable<DriftTrialData> custom({
+  static Insertable<DriftTrial> custom({
     Expression<int>? id,
     Expression<String>? participantID,
     Expression<String>? sessionID,
@@ -844,14 +843,14 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
     });
   }
 
-  DriftTrialCompanion copyWith(
+  DriftTrialsCompanion copyWith(
       {Value<int>? id,
       Value<String>? participantID,
       Value<String>? sessionID,
       Value<String>? trialType,
       Value<String>? stim,
       Value<String>? response}) {
-    return DriftTrialCompanion(
+    return DriftTrialsCompanion(
       id: id ?? this.id,
       participantID: participantID ?? this.participantID,
       sessionID: sessionID ?? this.sessionID,
@@ -887,7 +886,7 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
 
   @override
   String toString() {
-    return (StringBuffer('DriftTrialCompanion(')
+    return (StringBuffer('DriftTrialsCompanion(')
           ..write('id: $id, ')
           ..write('participantID: $participantID, ')
           ..write('sessionID: $sessionID, ')
@@ -899,12 +898,12 @@ class DriftTrialCompanion extends UpdateCompanion<DriftTrialData> {
   }
 }
 
-class $DriftTrialTable extends DriftTrials
-    with TableInfo<$DriftTrialTable, DriftTrialData> {
+class $DriftTrialsTable extends DriftTrials
+    with TableInfo<$DriftTrialsTable, DriftTrial> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DriftTrialTable(this.attachedDatabase, [this._alias]);
+  $DriftTrialsTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
@@ -947,11 +946,11 @@ class $DriftTrialTable extends DriftTrials
   List<GeneratedColumn> get $columns =>
       [id, participantID, sessionID, trialType, stim, response];
   @override
-  String get aliasedName => _alias ?? 'drift_trial';
+  String get aliasedName => _alias ?? 'drift_trials';
   @override
-  String get actualTableName => 'drift_trial';
+  String get actualTableName => 'drift_trials';
   @override
-  VerificationContext validateIntegrity(Insertable<DriftTrialData> instance,
+  VerificationContext validateIntegrity(Insertable<DriftTrial> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -998,14 +997,14 @@ class $DriftTrialTable extends DriftTrials
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DriftTrialData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return DriftTrialData.fromData(data,
+  DriftTrial map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return DriftTrial.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
-  $DriftTrialTable createAlias(String alias) {
-    return $DriftTrialTable(attachedDatabase, alias);
+  $DriftTrialsTable createAlias(String alias) {
+    return $DriftTrialsTable(attachedDatabase, alias);
   }
 }
 
@@ -1013,11 +1012,11 @@ abstract class _$DriftDB extends GeneratedDatabase {
   _$DriftDB(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $DriftSessionMetadataTable driftSessionMetadata =
       $DriftSessionMetadataTable(this);
-  late final $DriftDeviceTable driftDevice = $DriftDeviceTable(this);
-  late final $DriftTrialTable driftTrial = $DriftTrialTable(this);
+  late final $DriftDevicesTable driftDevices = $DriftDevicesTable(this);
+  late final $DriftTrialsTable driftTrials = $DriftTrialsTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [driftSessionMetadata, driftDevice, driftTrial];
+      [driftSessionMetadata, driftDevices, driftTrials];
 }
