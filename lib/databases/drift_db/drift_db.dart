@@ -60,8 +60,8 @@ class DriftDB extends _$DriftDB implements DB {
   /// Adds a single trial to the drift db from a base [Trial] object.
   @override
   Future<int> addTrial({required Trial trial}) async {
-    final DriftTrialCompanion trialCompanion = DriftTrials.fromTrial(trial);
-    final int id = await into(driftTrial).insert(trialCompanion);
+    final DriftTrialsCompanion trialCompanion = DriftTrials.fromTrial(trial);
+    final int id = await into(driftTrials).insert(trialCompanion);
     return id;
   }
 }

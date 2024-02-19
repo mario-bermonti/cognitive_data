@@ -20,8 +20,8 @@ class DriftTrials extends Table {
 
   /// Instantiates a [DriftTrialCompanion] from a [Trial] base model. This
   /// [DriftTrialCompanion] can be inserted into the drift db.
-  static DriftTrialCompanion fromTrial(Trial baseTrial) {
-    final DriftTrialCompanion driftTrial = DriftTrialCompanion(
+  static DriftTrialsCompanion fromTrial(Trial baseTrial) {
+    final DriftTrialsCompanion driftTrial = DriftTrialsCompanion(
       participantID: Value(baseTrial.participantID),
       sessionID: Value(baseTrial.sessionID),
       trialType: Value(baseTrial.trialType),
