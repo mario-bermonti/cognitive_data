@@ -1,11 +1,22 @@
 import 'trial_type.dart';
 
-/// Model for the data of a single trial
+/// Represents the data of a single trial.
 class Trial {
+  /// Unique identifier for the participant
   final String participantID;
+
+  /// Unique identifier for the current session of the
+  /// current participant.
   final String sessionID;
+
+  /// Whether the trial is a practice ([TrialType.practice]) or
+  /// experimental ([TrialType.experimental]).
   late final String trialType;
+
+  /// Stimulus presented to the participant.
   final String stim;
+
+  /// Response provided by the participant.
   final String response;
 
   Trial({
