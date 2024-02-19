@@ -39,9 +39,9 @@ class DriftDB extends _$DriftDB implements DB {
   /// Requires a base [Device] object as param.
   @override
   Future<int> addDevice({required Device device}) async {
-    final DriftDeviceCompanion deviceCompanion =
+    final DriftDevicesCompanion deviceCompanion =
         DriftDevices.fromDevice(device);
-    final int id = await into(driftDevice).insert(deviceCompanion);
+    final int id = await into(driftDevices).insert(deviceCompanion);
     return id;
   }
 
