@@ -12,11 +12,11 @@ void main() {
       () {
     WidgetsFlutterBinding.ensureInitialized();
     final Device device = Device(participantID: '101', sessionID: '001');
-    final InMemoryDB manager = InMemoryDB();
-    manager.addDevice(device: device);
+    final InMemoryDB inMemoryDB = InMemoryDB();
+    inMemoryDB.addDevice(device: device);
 
-    expect(manager.device.participantID, device.participantID);
-    expect(manager.device.sessionID, device.sessionID);
+    expect(inMemoryDB.device.participantID, device.participantID);
+    expect(inMemoryDB.device.sessionID, device.sessionID);
   });
 
   test(
@@ -29,13 +29,13 @@ void main() {
       endTime: DateTime.now(),
     );
 
-    final InMemoryDB manager = InMemoryDB();
-    manager.addSession(session: session);
+    final InMemoryDB inMemoryDB = InMemoryDB();
+    inMemoryDB.addSession(session: session);
 
-    expect(manager.session.participantID, session.participantID);
-    expect(manager.session.sessionID, session.sessionID);
-    expect(manager.session.startTime, session.startTime);
-    expect(manager.session.endTime, session.endTime);
+    expect(inMemoryDB.session.participantID, session.participantID);
+    expect(inMemoryDB.session.sessionID, session.sessionID);
+    expect(inMemoryDB.session.startTime, session.startTime);
+    expect(inMemoryDB.session.endTime, session.endTime);
   });
 
   test('addTrial correctly defines a Trial model and adds it to the trial list',
@@ -47,15 +47,15 @@ void main() {
       stim: '987',
       response: '987',
     );
-    final InMemoryDB manager = InMemoryDB();
+    final InMemoryDB inMemoryDB = InMemoryDB();
 
-    manager.addTrial(trial: trial);
-    final Trial trialInManager = manager.trials.first;
+    inMemoryDB.addTrial(trial: trial);
+    final Trial trialInMemoryDB = inMemoryDB.trials.first;
 
-    expect(trialInManager.sessionID, trial.sessionID);
-    expect(trialInManager.participantID, trial.participantID);
-    expect(trialInManager.stim, trial.stim);
-    expect(trialInManager.response, trial.response);
-    expect(trialInManager.trialType, trial.trialType);
+    expect(trialInMemoryDB.sessionID, trial.sessionID);
+    expect(trialInMemoryDB.participantID, trial.participantID);
+    expect(trialInMemoryDB.stim, trial.stim);
+    expect(trialInMemoryDB.response, trial.response);
+    expect(trialInMemoryDB.trialType, trial.trialType);
   });
 }
