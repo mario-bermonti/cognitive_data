@@ -7,23 +7,21 @@ part of 'drift_db.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
-class DriftSessionMetadataData extends DataClass
-    implements Insertable<DriftSessionMetadataData> {
+class DriftSession extends DataClass implements Insertable<DriftSession> {
   final int id;
   final String participantID;
   final String sessionID;
   final DateTime startTime;
   final DateTime endTime;
-  DriftSessionMetadataData(
+  DriftSession(
       {required this.id,
       required this.participantID,
       required this.sessionID,
       required this.startTime,
       required this.endTime});
-  factory DriftSessionMetadataData.fromData(Map<String, dynamic> data,
-      {String? prefix}) {
+  factory DriftSession.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return DriftSessionMetadataData(
+    return DriftSession(
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       participantID: const StringType()
@@ -47,8 +45,8 @@ class DriftSessionMetadataData extends DataClass
     return map;
   }
 
-  DriftSessionMetadataCompanion toCompanion(bool nullToAbsent) {
-    return DriftSessionMetadataCompanion(
+  DriftSessionsCompanion toCompanion(bool nullToAbsent) {
+    return DriftSessionsCompanion(
       id: Value(id),
       participantID: Value(participantID),
       sessionID: Value(sessionID),
@@ -57,10 +55,10 @@ class DriftSessionMetadataData extends DataClass
     );
   }
 
-  factory DriftSessionMetadataData.fromJson(Map<String, dynamic> json,
+  factory DriftSession.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DriftSessionMetadataData(
+    return DriftSession(
       id: serializer.fromJson<int>(json['id']),
       participantID: serializer.fromJson<String>(json['participantID']),
       sessionID: serializer.fromJson<String>(json['sessionID']),
@@ -80,13 +78,13 @@ class DriftSessionMetadataData extends DataClass
     };
   }
 
-  DriftSessionMetadataData copyWith(
+  DriftSession copyWith(
           {int? id,
           String? participantID,
           String? sessionID,
           DateTime? startTime,
           DateTime? endTime}) =>
-      DriftSessionMetadataData(
+      DriftSession(
         id: id ?? this.id,
         participantID: participantID ?? this.participantID,
         sessionID: sessionID ?? this.sessionID,
@@ -95,7 +93,7 @@ class DriftSessionMetadataData extends DataClass
       );
   @override
   String toString() {
-    return (StringBuffer('DriftSessionMetadataData(')
+    return (StringBuffer('DriftSession(')
           ..write('id: $id, ')
           ..write('participantID: $participantID, ')
           ..write('sessionID: $sessionID, ')
@@ -111,7 +109,7 @@ class DriftSessionMetadataData extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DriftSessionMetadataData &&
+      (other is DriftSession &&
           other.id == this.id &&
           other.participantID == this.participantID &&
           other.sessionID == this.sessionID &&
@@ -119,21 +117,20 @@ class DriftSessionMetadataData extends DataClass
           other.endTime == this.endTime);
 }
 
-class DriftSessionMetadataCompanion
-    extends UpdateCompanion<DriftSessionMetadataData> {
+class DriftSessionsCompanion extends UpdateCompanion<DriftSession> {
   final Value<int> id;
   final Value<String> participantID;
   final Value<String> sessionID;
   final Value<DateTime> startTime;
   final Value<DateTime> endTime;
-  const DriftSessionMetadataCompanion({
+  const DriftSessionsCompanion({
     this.id = const Value.absent(),
     this.participantID = const Value.absent(),
     this.sessionID = const Value.absent(),
     this.startTime = const Value.absent(),
     this.endTime = const Value.absent(),
   });
-  DriftSessionMetadataCompanion.insert({
+  DriftSessionsCompanion.insert({
     this.id = const Value.absent(),
     required String participantID,
     required String sessionID,
@@ -143,7 +140,7 @@ class DriftSessionMetadataCompanion
         sessionID = Value(sessionID),
         startTime = Value(startTime),
         endTime = Value(endTime);
-  static Insertable<DriftSessionMetadataData> custom({
+  static Insertable<DriftSession> custom({
     Expression<int>? id,
     Expression<String>? participantID,
     Expression<String>? sessionID,
@@ -159,13 +156,13 @@ class DriftSessionMetadataCompanion
     });
   }
 
-  DriftSessionMetadataCompanion copyWith(
+  DriftSessionsCompanion copyWith(
       {Value<int>? id,
       Value<String>? participantID,
       Value<String>? sessionID,
       Value<DateTime>? startTime,
       Value<DateTime>? endTime}) {
-    return DriftSessionMetadataCompanion(
+    return DriftSessionsCompanion(
       id: id ?? this.id,
       participantID: participantID ?? this.participantID,
       sessionID: sessionID ?? this.sessionID,
@@ -197,7 +194,7 @@ class DriftSessionMetadataCompanion
 
   @override
   String toString() {
-    return (StringBuffer('DriftSessionMetadataCompanion(')
+    return (StringBuffer('DriftSessionsCompanion(')
           ..write('id: $id, ')
           ..write('participantID: $participantID, ')
           ..write('sessionID: $sessionID, ')
@@ -208,12 +205,12 @@ class DriftSessionMetadataCompanion
   }
 }
 
-class $DriftSessionMetadataTable extends DriftSessionMetadata
-    with TableInfo<$DriftSessionMetadataTable, DriftSessionMetadataData> {
+class $DriftSessionsTable extends DriftSessions
+    with TableInfo<$DriftSessionsTable, DriftSession> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DriftSessionMetadataTable(this.attachedDatabase, [this._alias]);
+  $DriftSessionsTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
@@ -246,12 +243,11 @@ class $DriftSessionMetadataTable extends DriftSessionMetadata
   List<GeneratedColumn> get $columns =>
       [id, participantID, sessionID, startTime, endTime];
   @override
-  String get aliasedName => _alias ?? 'drift_session_metadata';
+  String get aliasedName => _alias ?? 'drift_sessions';
   @override
-  String get actualTableName => 'drift_session_metadata';
+  String get actualTableName => 'drift_sessions';
   @override
-  VerificationContext validateIntegrity(
-      Insertable<DriftSessionMetadataData> instance,
+  VerificationContext validateIntegrity(Insertable<DriftSession> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -292,15 +288,14 @@ class $DriftSessionMetadataTable extends DriftSessionMetadata
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DriftSessionMetadataData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
-    return DriftSessionMetadataData.fromData(data,
+  DriftSession map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return DriftSession.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
-  $DriftSessionMetadataTable createAlias(String alias) {
-    return $DriftSessionMetadataTable(attachedDatabase, alias);
+  $DriftSessionsTable createAlias(String alias) {
+    return $DriftSessionsTable(attachedDatabase, alias);
   }
 }
 
@@ -570,15 +565,14 @@ class $DriftDevicesTable extends DriftDevices
       'participant_i_d', aliasedName, false,
       type: const StringType(),
       requiredDuringInsert: true,
-      defaultConstraints:
-          'REFERENCES drift_session_metadata (participant_i_d)');
+      defaultConstraints: 'REFERENCES drift_sessions (participant_i_d)');
   final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
   @override
   late final GeneratedColumn<String?> sessionID = GeneratedColumn<String?>(
       'session_i_d', aliasedName, false,
       type: const StringType(),
       requiredDuringInsert: true,
-      defaultConstraints: 'REFERENCES drift_session_metadata (session_i_d)');
+      defaultConstraints: 'REFERENCES drift_sessions (session_i_d)');
   final VerificationMeta _platformMeta = const VerificationMeta('platform');
   @override
   late final GeneratedColumn<String?> platform = GeneratedColumn<String?>(
@@ -918,15 +912,14 @@ class $DriftTrialsTable extends DriftTrials
       'participant_i_d', aliasedName, false,
       type: const StringType(),
       requiredDuringInsert: true,
-      defaultConstraints:
-          'REFERENCES drift_session_metadata (participant_i_d)');
+      defaultConstraints: 'REFERENCES drift_sessions (participant_i_d)');
   final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
   @override
   late final GeneratedColumn<String?> sessionID = GeneratedColumn<String?>(
       'session_i_d', aliasedName, false,
       type: const StringType(),
       requiredDuringInsert: true,
-      defaultConstraints: 'REFERENCES drift_session_metadata (session_i_d)');
+      defaultConstraints: 'REFERENCES drift_sessions (session_i_d)');
   final VerificationMeta _trialTypeMeta = const VerificationMeta('trialType');
   @override
   late final GeneratedColumn<String?> trialType = GeneratedColumn<String?>(
@@ -1010,13 +1003,12 @@ class $DriftTrialsTable extends DriftTrials
 
 abstract class _$DriftDB extends GeneratedDatabase {
   _$DriftDB(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
-  late final $DriftSessionMetadataTable driftSessionMetadata =
-      $DriftSessionMetadataTable(this);
+  late final $DriftSessionsTable driftSessions = $DriftSessionsTable(this);
   late final $DriftDevicesTable driftDevices = $DriftDevicesTable(this);
   late final $DriftTrialsTable driftTrials = $DriftTrialsTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [driftSessionMetadata, driftDevices, driftTrials];
+      [driftSessions, driftDevices, driftTrials];
 }

@@ -2,18 +2,17 @@ import 'package:cognitive_data/models/session.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('SessionMetadata.toString produces correct representation', () {
-    final SessionMetadata sessionMetadata = SessionMetadata(
+  test('Session.toString produces correct representation', () {
+    final Session session = Session(
       participantID: '101',
       sessionID: '001',
       startTime: DateTime.now(),
       endTime: DateTime.now(),
     );
-    final String strRep =
-        "Session(participantID: ${sessionMetadata.participantID}, "
-        "sessionID: ${sessionMetadata.sessionID}, "
-        "startTime: ${sessionMetadata.startTime}, "
-        "endTime: ${sessionMetadata.endTime})";
-    expect(sessionMetadata.toString(), strRep);
+    final String strRep = "Session(participantID: ${session.participantID}, "
+        "sessionID: ${session.sessionID}, "
+        "startTime: ${session.startTime}, "
+        "endTime: ${session.endTime})";
+    expect(session.toString(), strRep);
   });
 }

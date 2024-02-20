@@ -7,7 +7,7 @@ import 'package:cognitive_data/models/trial.dart';
 /// not persisted to disk.
 class InMemoryDB implements DB {
   late final Device device;
-  late final SessionMetadata sessionMetadata;
+  late final Session session;
   final List<Trial> trials = <Trial>[];
 
   /// Add metadata about the device used to collect data
@@ -18,8 +18,8 @@ class InMemoryDB implements DB {
 
   /// Add metadata about the data collection session
   @override
-  void addSessionMetadata({required SessionMetadata session}) {
-    sessionMetadata = session;
+  void addSession({required Session session}) {
+    this.session = session;
   }
 
   /// Add data for a single trial

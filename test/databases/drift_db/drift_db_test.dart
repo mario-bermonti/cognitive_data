@@ -66,17 +66,17 @@ void main() {
   test(
     "Drift.addSession correctly inserts a session into the DriftDB",
     () async {
-      final SessionMetadata baseSession = SessionMetadata(
+      final Session baseSession = Session(
         participantID: '101',
         sessionID: '001',
         startTime: DateTime.now(),
         endTime: DateTime.now(),
       );
 
-      await db.addSessionMetadata(session: baseSession);
+      await db.addSession(session: baseSession);
 
-      final DriftSessionMetadataData driftSession =
-          await db.select(db.driftSessionMetadata).getSingle();
+      final DriftSession driftSession =
+          await db.select(db.driftSessions).getSingle();
 
       expect(driftSession.participantID, baseSession.participantID);
       expect(driftSession.sessionID, baseSession.sessionID);

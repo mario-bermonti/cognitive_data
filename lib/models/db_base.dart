@@ -7,7 +7,7 @@ import 'trial_type.dart';
 /// Serves as the design contract between the different implementations of
 /// the databases.
 abstract class DB {
-  void addSessionMetadata({required SessionMetadata session}) {}
+  void addSession({required Session session}) {}
 
   void addDevice({required Device device}) {}
 
