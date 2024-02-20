@@ -10,4 +10,6 @@ abstract class DB {
   void addDevice({required Device device}) {}
 
   void addTrial({required Trial trial}) {}
+
+  void addTrials({required List<Trial> trials}) {}
 }
