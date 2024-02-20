@@ -10,9 +10,8 @@ import '../../../models/device.dart';
 class DriftDevices extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get participantID =>
-      text().references(DriftSessionMetadata, #participantID)();
-  TextColumn get sessionID =>
-      text().references(DriftSessionMetadata, #sessionID)();
+      text().references(DriftSessions, #participantID)();
+  TextColumn get sessionID => text().references(DriftSessions, #sessionID)();
   TextColumn get platform => text()();
   RealColumn get height => real()();
   RealColumn get width => real()();

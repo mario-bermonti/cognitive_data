@@ -73,10 +73,10 @@ void main() {
         endTime: DateTime.now(),
       );
 
-      await db.addSessionMetadata(session: baseSession);
+      await db.addSession(session: baseSession);
 
-      final DriftSessionMetadataData driftSession =
-          await db.select(db.driftSessionMetadata).getSingle();
+      final DriftSession driftSession =
+          await db.select(db.driftSessions).getSingle();
 
       expect(driftSession.participantID, baseSession.participantID);
       expect(driftSession.sessionID, baseSession.sessionID);

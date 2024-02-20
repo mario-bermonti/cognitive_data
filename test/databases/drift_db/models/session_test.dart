@@ -16,7 +16,7 @@ void main() {
   });
 
   test(
-      'DriftSessionMetadata.fromSessionMetadata correctly instantiates a DriftSessionMetadata object from a base SessionMetadata model',
+      'DriftSession.fromSession correctly instantiates a DriftSession object from a base Session model',
       () async {
     final Session baseSession = Session(
       participantID: '101',
@@ -25,8 +25,8 @@ void main() {
       endTime: DateTime.now(),
     );
 
-    final DriftSessionMetadataCompanion driftSession =
-        DriftSessionMetadata.fromSessionMetadata(baseSession);
+    final DriftSessionsCompanion driftSession =
+        DriftSessions.fromSession(baseSession);
 
     expect(driftSession.participantID.value, baseSession.participantID);
     expect(driftSession.sessionID.value, baseSession.sessionID);

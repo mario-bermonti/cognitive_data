@@ -13,7 +13,7 @@ import '../../models/db_base.dart';
 
 part 'drift_db.g.dart';
 
-@DriftDatabase(tables: [DriftSessionMetadata, DriftDevices, DriftTrials])
+@DriftDatabase(tables: [DriftSessions, DriftDevices, DriftTrials])
 class DriftDB extends _$DriftDB implements DB {
   DriftDB(QueryExecutor dbConnection) : super(dbConnection);
 
@@ -46,13 +46,12 @@ class DriftDB extends _$DriftDB implements DB {
   }
 
   /// Adds the metadata from a single Session object to the drift db.
-  /// Requires a base [SessionMetadata] object as param.
+  /// Requires a base [Session] object as param.
   @override
-  Future<int> addSessionMetadata({required SessionMetadata session}) async {
-    final DriftSessionMetadataCompanion sessionMetadataCompanion =
-        DriftSessionMetadata.fromSessionMetadata(session);
-    final int id =
-        await into(driftSessionMetadata).insert(sessionMetadataCompanion);
+  Future<int> addSession({required Session session}) async {
+    final DriftSessionsCompanion sessionCompanion =
+        DriftSessions.fromSession(session);
+    final int id = await into(driftSessions).insert(sessionCompanion);
 
     return id;
   }

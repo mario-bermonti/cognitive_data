@@ -9,9 +9,8 @@ import 'package:drift/drift.dart';
 class DriftTrials extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get participantID =>
-      text().references(DriftSessionMetadata, #participantID)();
-  TextColumn get sessionID =>
-      text().references(DriftSessionMetadata, #sessionID)();
+      text().references(DriftSessions, #participantID)();
+  TextColumn get sessionID => text().references(DriftSessions, #sessionID)();
 
   /// [trialType] specifies the type of trial (practice or experimental)
   TextColumn get trialType => text()();
