@@ -1,5 +1,5 @@
 /// Represents the metadata for data collection session.
-class SessionMetadata {
+class Session {
   /// Unique identifier for the participant
   final String participantID;
 
@@ -12,7 +12,7 @@ class SessionMetadata {
   /// Time at which the session ended.
   final DateTime endTime;
 
-  SessionMetadata({
+  Session({
     required this.participantID,
     required this.sessionID,
     required this.startTime,

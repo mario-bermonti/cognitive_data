@@ -18,7 +18,7 @@ void main() {
   test(
       'DriftSessionMetadata.fromSessionMetadata correctly instantiates a DriftSessionMetadata object from a base SessionMetadata model',
       () async {
-    final SessionMetadata baseSession = SessionMetadata(
+    final Session baseSession = Session(
       participantID: '101',
       sessionID: '001',
       startTime: DateTime.now(),

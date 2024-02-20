@@ -20,9 +20,9 @@ void main() {
   });
 
   test(
-      'addSessionMetadata correctly defines a SessionMetadata model and assigns it to the SessionMetadata field',
+      'addSession correctly defines a Session model and assigns it to the Session field',
       () {
-    final SessionMetadata metadata = SessionMetadata(
+    final Session session = Session(
       participantID: '101',
       sessionID: '001',
       startTime: DateTime.now(),
@@ -30,12 +30,12 @@ void main() {
     );
 
     final InMemoryDB manager = InMemoryDB();
-    manager.addSessionMetadata(session: metadata);
+    manager.addSession(session: session);
 
-    expect(manager.sessionMetadata.participantID, metadata.participantID);
-    expect(manager.sessionMetadata.sessionID, metadata.sessionID);
-    expect(manager.sessionMetadata.startTime, metadata.startTime);
-    expect(manager.sessionMetadata.endTime, metadata.endTime);
+    expect(manager.session.participantID, session.participantID);
+    expect(manager.session.sessionID, session.sessionID);
+    expect(manager.session.startTime, session.startTime);
+    expect(manager.session.endTime, session.endTime);
   });
 
   test('addTrial correctly defines a Trial model and adds it to the trial list',

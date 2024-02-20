@@ -66,7 +66,7 @@ void main() {
   test(
     "Drift.addSession correctly inserts a session into the DriftDB",
     () async {
-      final SessionMetadata baseSession = SessionMetadata(
+      final Session baseSession = Session(
         participantID: '101',
         sessionID: '001',
         startTime: DateTime.now(),
