@@ -41,6 +41,34 @@ void main() {
     },
   );
   test(
+    "Given a list of valid Trial objects, Drift.addTrials correctly inserts the trials into the DriftDB",
+    () async {
+      final Trial trial1 = Trial(
+        participantID: '101',
+        sessionID: '001',
+        trialType: TrialType.practice,
+        stim: '123',
+        response: '123',
+      );
+
+      final Trial trial2 = Trial(
+        participantID: '102',
+        sessionID: '002',
+        trialType: TrialType.experimental,
+        stim: '456',
+        response: '654',
+      );
+      final List<Trial> baseTrials = [trial1, trial2];
+
+      await db.addTrials(trials: baseTrials);
+      final List<DriftTrial> driftTrials =
+          await db.select(db.driftTrials).get();
+
+      expect(driftTrials.first.participantID, baseTrials.first.participantID);
+      expect(driftTrials.last.participantID, baseTrials.last.participantID);
+    },
+  );
+  test(
     "Drift.addDevice correctly inserts a device into the DriftDb",
     () async {
       TestWidgetsFlutterBinding.ensureInitialized();

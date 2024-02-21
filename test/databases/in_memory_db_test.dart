@@ -58,4 +58,33 @@ void main() {
     expect(trialInMemoryDB.response, trial.response);
     expect(trialInMemoryDB.trialType, trial.trialType);
   });
+
+  test(
+    "Given a list of valid Trial objects, addTrials correctly adds the received trials to the list of trials",
+    () {
+      final Trial trial1 = Trial(
+        participantID: '101',
+        sessionID: '001',
+        trialType: TrialType.practice,
+        stim: '123',
+        response: '123',
+      );
+
+      final Trial trial2 = Trial(
+        participantID: '102',
+        sessionID: '002',
+        trialType: TrialType.experimental,
+        stim: '456',
+        response: '654',
+      );
+
+      final List<Trial> trials = [trial1, trial2];
+
+      final InMemoryDB db = InMemoryDB();
+      db.addTrials(trials: trials);
+
+      expect(db.trials.first.participantID, trial1.participantID);
+      expect(db.trials.last.participantID, trial2.participantID);
+    },
+  );
 }

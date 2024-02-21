@@ -63,4 +63,15 @@ class DriftDB extends _$DriftDB implements DB {
     final int id = await into(driftTrials).insert(trialCompanion);
     return id;
   }
+
+  /// Adds a list of [trials] to the db.
+  /// The [trials] must be a list of base [Trial] objects. These [Trial] objects
+  /// are converted into objects insertable into drift and inserted using a
+  /// batch operation.
+  @override
+  Future<void> addTrials({required List<Trial> trials}) async {
+    final Iterable<DriftTrialsCompanion> trialCompanions =
+        trials.map((trial) => DriftTrials.fromTrial(trial));
+    await batch((batch) => batch.insertAll(driftTrials, trialCompanions));
+  }
 }

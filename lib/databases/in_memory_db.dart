@@ -27,4 +27,11 @@ class InMemoryDB implements DB {
   void addTrial({required Trial trial}) {
     trials.add(trial);
   }
+
+  /// Adds a list of [trials] to the db.
+  /// The [trials] must be a list of base [Trial] objects.
+  @override
+  void addTrials({required List<Trial> trials}) {
+    this.trials.addAll(trials);
+  }
 }
