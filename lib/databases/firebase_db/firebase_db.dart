@@ -8,6 +8,8 @@ import 'package:cognitive_data/models/device.dart';
 class FirebaseDB implements DB {
   late final FirebaseFirestore _db;
 
+  /// Initialize the db.
+  /// Must be run before using the FirebaseDB.
   void init() {
     _db = FirebaseFirestore.instance;
   }
