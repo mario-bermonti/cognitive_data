@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cognitive_data/models/db_base.dart';
 import 'package:cognitive_data/models/trial.dart';
 import 'package:cognitive_data/models/session.dart';
@@ -5,6 +6,7 @@ import 'package:cognitive_data/models/device.dart';
 
 /// DB used to store data in Firebase.
 class FirebaseDB implements DB {
+  late final FirebaseFirestore _db;
   @override
   void addDevice({required Device device}) {
     // TODO: implement addDevice
