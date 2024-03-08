@@ -59,10 +59,12 @@ longitudinal design and ecological momentary assessment studies.
 
 The data will be organized in the following manner:
 
-- participants: collection
-  - participant id: document
-    - task name: collection
-      - sessionID: document
-        - device (map)
-        - session (map)
-        - trials (list)
+- collection: participants
+  - document: participantID
+    - collection: cognitive_tasks
+      - document: taskID
+        - collection: sessions
+          - document: sessionID
+            - field: session_metadata {map}
+            - field: device_metadata {map}
+            - field: trials [list of {map}]
