@@ -13,8 +13,9 @@ class FirebaseDB implements DB {
 
   /// Initialize the db.
   /// Must be run before using the FirebaseDB.
-  void init() {
-    _db = FirebaseFirestore.instance;
+  static FirebaseDB init() {
+    final FirebaseDB db = FirebaseDB(FirebaseFirestore.instance);
+    return db;
   }
 
   @override
