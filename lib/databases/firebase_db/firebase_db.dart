@@ -8,13 +8,32 @@ import 'package:cognitive_data/models/device.dart';
 /// Requires passing a [FirebaseFirestore] instance at instantiation.
 class FirebaseDB implements DB {
   final FirebaseFirestore _db;
+  final String participantID;
+  final String sessionID;
+  String taskName;
 
-  FirebaseDB(this._db);
+  FirebaseDB(
+    this._db, {
+    required this.participantID,
+    required this.sessionID,
+    required this.taskName,
+  });
 
-  /// Initialize the db.
-  /// Must be run before using the FirebaseDB.
-  static FirebaseDB init() {
-    final FirebaseDB db = FirebaseDB(FirebaseFirestore.instance);
+  /// Initializes the db with data required by all methods.
+  /// Behaves as a constructor to facilitate [FirebaseDB] usage. The params
+  /// [participantID], [sessionID], and [taskID] are used by methods to
+  /// interact with the db since data is structured hierarchically.
+  static FirebaseDB init({
+    required participantID,
+    required sessionID,
+    required taskID,
+  }) {
+    final FirebaseDB db = FirebaseDB(
+      FirebaseFirestore.instance,
+      participantID: participantID,
+      sessionID: sessionID,
+      taskName: taskID,
+    );
     return db;
   }
 
