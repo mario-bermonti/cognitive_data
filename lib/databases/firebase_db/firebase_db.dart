@@ -23,6 +23,17 @@ class FirebaseDB implements DB {
   /// Must be run before using the FirebaseDB.
   static FirebaseDB init() {
     final FirebaseDB db = FirebaseDB(FirebaseFirestore.instance);
+  static FirebaseDB init({
+    required participantID,
+    required sessionID,
+    required taskName,
+  }) {
+    final FirebaseDB db = FirebaseDB(
+      FirebaseFirestore.instance,
+      participantID: participantID,
+      sessionID: sessionID,
+      taskName: taskName,
+    );
     return db;
   }
 
