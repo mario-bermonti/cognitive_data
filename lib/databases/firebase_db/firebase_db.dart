@@ -19,10 +19,10 @@ class FirebaseDB implements DB {
     required this.taskName,
   });
 
-  /// Initialize the db.
-  /// Must be run before using the FirebaseDB.
-  static FirebaseDB init() {
-    final FirebaseDB db = FirebaseDB(FirebaseFirestore.instance);
+  /// Initializes the db with data required by all methods.
+  /// Behaves as a constructor to facilitate [FirebaseDB] usage. The params
+  /// [participantID], [sessionID], and [taskName] are used by methods to
+  /// interact with the db since data is structured hierarchically.
   static FirebaseDB init({
     required participantID,
     required sessionID,
