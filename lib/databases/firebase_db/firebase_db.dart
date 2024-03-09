@@ -21,18 +21,18 @@ class FirebaseDB implements DB {
 
   /// Initializes the db with data required by all methods.
   /// Behaves as a constructor to facilitate [FirebaseDB] usage. The params
-  /// [participantID], [sessionID], and [taskName] are used by methods to
+  /// [participantID], [sessionID], and [taskID] are used by methods to
   /// interact with the db since data is structured hierarchically.
   static FirebaseDB init({
     required participantID,
     required sessionID,
-    required taskName,
+    required taskID,
   }) {
     final FirebaseDB db = FirebaseDB(
       FirebaseFirestore.instance,
       participantID: participantID,
       sessionID: sessionID,
-      taskName: taskName,
+      taskName: taskID,
     );
     return db;
   }
