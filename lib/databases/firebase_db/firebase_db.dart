@@ -7,7 +7,7 @@ import 'package:cognitive_data/models/device.dart';
 /// DB used to store data in Firebase.
 /// Requires passing a [FirebaseFirestore] instance at instantiation.
 class FirebaseDB implements DB {
-  late final FirebaseFirestore _db;
+  final FirebaseFirestore _db;
 
   FirebaseDB(this._db);
 
