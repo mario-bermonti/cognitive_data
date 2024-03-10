@@ -51,6 +51,22 @@ class _MyHomePageState extends State<MyHomePage> {
               'Save data to firebase',
               style: Theme.of(context).textTheme.headline6,
             ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text("Save Session metadata to firebase"),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text("Save Device metadata to firebase"),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text("Save trial to firebase"),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text("Save trials to firebase"),
+            )
           ],
         ),
       ),
