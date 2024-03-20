@@ -34,14 +34,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // String _message = '';
-
-  // void _updateMessage(String message) {
-  //   setState(() {
-  //     _message = message;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
