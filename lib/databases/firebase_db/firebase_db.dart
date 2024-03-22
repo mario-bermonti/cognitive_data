@@ -46,8 +46,16 @@ class FirebaseDB implements DB {
   }
 
   @override
-  void addSession({required Session session}) {
-    // TODO: implement addSession
+  Future<void> addSession({required Session session}) async {
+    final CollectionReference dataRef = _db.collection(
+        'participants/$participantID/cognitive_tasks/$taskName/sessions');
+
+    await dataRef.doc(sessionID).set({
+      'participantID': session.participantID,
+      'sessionID': session.sessionID,
+      'startTime': session.startTime.toString(),
+      'endTime': session.endTime.toString(),
+    });
   }
 
   @override
