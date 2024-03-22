@@ -61,10 +61,12 @@ The data will be organized in the following manner:
 
 - collection: participants
   - document: participantID
+    - field: participantID
     - collection: cognitive_tasks
       - document: taskID
+        - field: taskID
         - collection: sessions
           - document: sessionID
-            - field: session_metadata {map}
-            - field: device_metadata {map}
-            - field: trials [list of {map}]
+            - field: sessionMetadata {map}
+            - field: deviceMetadata {map}
+            - field: trials [array {map}]
