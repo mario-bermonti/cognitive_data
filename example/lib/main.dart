@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cognitive_data/databases/firebase_db/firebase_db.dart';
+import 'package:cognitive_data/models/session.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -52,7 +53,15 @@ class MyHomePage extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final Session session = Session(
+                  participantID: _db.participantID,
+                  sessionID: _db.sessionID,
+                  startTime: DateTime.now(),
+                  endTime: DateTime.now(),
+                );
+                await _db.addSession(session: session);
+              },
               child: const Text("Save Session metadata to firebase"),
             ),
             ElevatedButton(
