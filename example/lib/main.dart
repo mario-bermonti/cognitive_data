@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cognitive_data/databases/firebase_db/firebase_db.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -28,6 +30,12 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({super.key, required this.title});
 
   final String title;
+  final _db = FirebaseDB(
+    FirebaseFirestore.instance,
+    participantID: '101,',
+    sessionID: '001',
+    taskName: 'dsb',
+  );
 
   @override
   Widget build(BuildContext context) {
