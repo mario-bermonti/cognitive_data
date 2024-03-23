@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cognitive_data/databases/firebase_db/firebase_db.dart';
+import 'package:cognitive_data/models/session.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -19,15 +22,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'cognitive_data example'),
+      home: MyHomePage(title: 'cognitive_data example'),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
+  MyHomePage({super.key, required this.title});
 
   final String title;
+  final _db = FirebaseDB(
+    FirebaseFirestore.instance,
+    participantID: '101,',
+    sessionID: '001',
+    taskName: 'dsb',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +53,15 @@ class MyHomePage extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final Session session = Session(
+                  participantID: _db.participantID,
+                  sessionID: _db.sessionID,
+                  startTime: DateTime.now(),
+                  endTime: DateTime.now(),
+                );
+                await _db.addSession(session: session);
+              },
               child: const Text("Save Session metadata to firebase"),
             ),
             ElevatedButton(

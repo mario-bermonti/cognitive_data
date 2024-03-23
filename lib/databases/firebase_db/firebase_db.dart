@@ -45,9 +45,23 @@ class FirebaseDB implements DB {
     // TODO: implement addDevice
   }
 
+  /// Adds metadata for the [session] to [FirebaseFirestore].
+  ///
+  /// It will override any data previously saved for the current session. The
+  /// current session is determined based on the [participantID], [sessionID],
+  /// and [taskName] specified when the [FirebaseDB] was instantiated, and not
+  /// from the values in [session].
   @override
-  void addSession({required Session session}) {
-    // TODO: implement addSession
+  Future<void> addSession({required Session session}) async {
+    final CollectionReference dataRef = _db.collection(
+        'participants/$participantID/cognitive_tasks/$taskName/sessions');
+
+    await dataRef.doc(sessionID).set({
+      'participantID': session.participantID,
+      'sessionID': session.sessionID,
+      'startTime': session.startTime.toString(),
+      'endTime': session.endTime.toString(),
+    });
   }
 
   @override
