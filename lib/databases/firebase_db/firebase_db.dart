@@ -41,8 +41,23 @@ class FirebaseDB implements DB {
   }
 
   @override
-  void addDevice({required Device device}) {
-    // TODO: implement addDevice
+  Future<void> addDevice({required Device device}) async {
+    final Map<String, dynamic> deviceData = {
+      'participantID': device.participantID,
+      'sessionID': device.sessionID,
+      'height': device.height,
+      'width': device.width,
+      'aspectRatio': device.aspectRatio,
+      'platform': device.platform,
+    };
+
+    final DocumentReference sessionRef = _db.doc(
+        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID');
+
+    await sessionRef.set(
+      {'deviceMetadata': deviceData},
+      SetOptions(merge: true),
+    );
   }
 
   /// Adds metadata for the [session] to [FirebaseFirestore].
