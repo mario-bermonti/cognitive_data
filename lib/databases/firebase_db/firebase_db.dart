@@ -40,6 +40,12 @@ class FirebaseDB implements DB {
     return db;
   }
 
+  /// Adds [device] metadata to [FirebaseFirestore].
+  ///
+  /// It will override any device metadata previously saved for the current
+  /// session. The current device is determined based on the [participantID],
+  /// [sessionID], and [taskName] specified when the [FirebaseDB] was
+  /// instantiated, and not from the values in [device].
   @override
   Future<void> addDevice({required Device device}) async {
     final Map<String, dynamic> deviceData = {
