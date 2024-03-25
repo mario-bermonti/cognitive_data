@@ -83,7 +83,10 @@ class FirebaseDB implements DB {
       'startTime': session.startTime.toString(),
       'endTime': session.endTime.toString(),
     };
-    await dataRef.doc(sessionID).set({'sessionMetadata': sessionData});
+    await dataRef.doc(sessionID).set(
+      {'sessionMetadata': sessionData},
+      SetOptions(merge: true),
+    );
   }
 
   @override
