@@ -81,10 +81,10 @@ class FirebaseDB implements DB {
       'endTime': session.endTime.toString(),
     };
 
-    final CollectionReference dataRef = _db.collection(
-        'participants/$participantID/cognitive_tasks/$taskName/sessions');
+    final DocumentReference sessionRef = _db.doc(
+        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID');
 
-    await dataRef.doc(sessionID).set(
+    await sessionRef.set(
       {'sessionMetadata': sessionData},
       SetOptions(merge: true),
     );
