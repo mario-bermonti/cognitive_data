@@ -74,15 +74,20 @@ class FirebaseDB implements DB {
   /// from the values in [session].
   @override
   Future<void> addSession({required Session session}) async {
-    final CollectionReference dataRef = _db.collection(
-        'participants/$participantID/cognitive_tasks/$taskName/sessions');
-
-    await dataRef.doc(sessionID).set({
+    final Map<String, dynamic> sessionData = {
       'participantID': session.participantID,
       'sessionID': session.sessionID,
       'startTime': session.startTime.toString(),
       'endTime': session.endTime.toString(),
-    });
+    };
+
+    final DocumentReference sessionRef = _db.doc(
+        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID');
+
+    await sessionRef.set(
+      {'sessionMetadata': sessionData},
+      SetOptions(merge: true),
+    );
   }
 
   @override
