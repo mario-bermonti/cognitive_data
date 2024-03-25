@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cognitive_data/databases/firebase_db/firebase_db.dart';
+import 'package:cognitive_data/models/device.dart';
 import 'package:cognitive_data/models/session.dart';
 import 'package:flutter/material.dart';
 
@@ -65,7 +66,11 @@ class MyHomePage extends StatelessWidget {
               child: const Text("Save Session metadata to firebase"),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final Device device =
+                    Device(participantID: '101', sessionID: '001');
+                await _db.addDevice(device: device);
+              },
               child: const Text("Save Device metadata to firebase"),
             ),
             ElevatedButton(
