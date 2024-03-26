@@ -62,11 +62,9 @@ class FirebaseDB implements DB {
   }
 
   /// Adds metadata for the [session] to [FirebaseFirestore].
-  ///
-  /// It will override any data previously saved for the current session. The
-  /// current session is determined based on the [participantID], [sessionID],
-  /// and [taskName] specified when the [FirebaseDB] was instantiated, and not
-  /// from the values in [session].
+  /// Stores the [session] metadata in independent docs inside a collection
+  /// named `sessionMetadata`. It will override previous [session] metadata for
+  /// the session.
   @override
   Future<void> addSession({required Session session}) async {
     final Map<String, dynamic> sessionData = {
