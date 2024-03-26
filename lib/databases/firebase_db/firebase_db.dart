@@ -81,8 +81,19 @@ class FirebaseDB implements DB {
   }
 
   @override
-  void addTrial({required Trial trial}) {
-    // TODO: implement addTrial
+  Future<void> addTrial({required Trial trial}) async {
+    final Map<String, dynamic> trialMap = {
+      'participantID': trial.participantID,
+      'sessionID': trial.sessionID,
+      'trialType': trial.trialType,
+      'stim': trial.stim,
+      'response': trial.response,
+    };
+
+    final CollectionReference trialsRef = _db.collection(
+        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/trials');
+
+    await trialsRef.add(trialMap);
   }
 
   @override
