@@ -66,7 +66,13 @@ The data will be organized in the following manner:
       - document: taskID
         - field: taskID
         - collection: sessions
-          - document: sessionID
-            - field: sessionMetadata {map}
-            - field: deviceMetadata {map}
-            - field: trials [array {map}]
+          - document: sessionID 
+            - collection: sessionMetadata
+              - document: sessionMetadata
+                - fields
+            - collection: deviceMetadata
+              - document: deviceMetadata
+                - fields
+            - collection: trials
+              - document: firebase_auto_generated_id
+                - fields
