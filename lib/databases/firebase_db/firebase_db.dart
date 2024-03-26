@@ -79,7 +79,7 @@ class FirebaseDB implements DB {
     final CollectionReference sessionRef = _db.collection(
         'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/sessionMetadata');
 
-    await sessionRef.add(sessionData);
+    await sessionRef.doc('sessionMetadata').set(sessionData);
   }
 
   @override
