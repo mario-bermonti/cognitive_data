@@ -90,7 +90,25 @@ class MyHomePage extends StatelessWidget {
               child: const Text("Save trial to firebase"),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final Trial trial1 = Trial(
+                  participantID: _db.participantID,
+                  sessionID: _db.sessionID,
+                  trialType: TrialType.practice,
+                  stim: '123',
+                  response: '321',
+                );
+                final Trial trial2 = Trial(
+                  participantID: _db.participantID,
+                  sessionID: _db.sessionID,
+                  trialType: TrialType.practice,
+                  stim: '456',
+                  response: '654',
+                );
+                final List<Trial> trials = <Trial>[trial1, trial2];
+
+                await _db.addTrials(trials: trials);
+              },
               child: const Text("Save trials to firebase"),
             )
           ],
