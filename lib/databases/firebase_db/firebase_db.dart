@@ -80,6 +80,9 @@ class FirebaseDB implements DB {
     await sessionRef.doc('sessionMetadata').set(sessionData);
   }
 
+  /// Adds a single [trial] to [FirebaseFirestore].
+  /// Stores each [trial] data in an independent doc inside a collection
+  /// named `trials`.
   @override
   Future<void> addTrial({required Trial trial}) async {
     final Map<String, dynamic> trialMap = {
