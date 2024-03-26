@@ -99,6 +99,9 @@ class FirebaseDB implements DB {
     await trialsRef.add(trialMap);
   }
 
+  /// Adds a list of [trial] to [FirebaseFirestore].
+  /// Stores each [trial] data in an independent doc inside a collection
+  /// named `trials`.
   @override
   Future<void> addTrials({required List<Trial> trials}) async {
     final CollectionReference trialsRef = _db.collection(
