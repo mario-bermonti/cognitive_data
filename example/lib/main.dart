@@ -34,7 +34,7 @@ class MyHomePage extends StatelessWidget {
   final String title;
   final _db = FirebaseDB(
     FirebaseFirestore.instance,
-    participantID: '101,',
+    participantID: '101',
     sessionID: '001',
     taskName: 'dsb',
   );
