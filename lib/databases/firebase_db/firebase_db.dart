@@ -19,27 +19,6 @@ class FirebaseDB implements DB {
     required this.taskName,
   });
 
-  /// Initializes the db with data required by all methods.
-  /// Behaves as a constructor to facilitate [FirebaseDB] usage. The params
-  /// [participantID], [sessionID], and [taskID] are used by methods to
-  /// interact with the db since data is structured hierarchically.
-  /// [firebaseFirestore] has to be an instance of [FirebaseFirestore],
-  /// e.g., FirebaseFirestore.instance.
-  static FirebaseDB init(
-    FirebaseFirestore firebaseFirestore, {
-    required participantID,
-    required sessionID,
-    required taskID,
-  }) {
-    final FirebaseDB db = FirebaseDB(
-      firebaseFirestore,
-      participantID: participantID,
-      sessionID: sessionID,
-      taskName: taskID,
-    );
-    return db;
-  }
-
   /// Adds [device] metadata to [FirebaseFirestore].
   /// Stores the [device] metadata in an independent doc inside a collection
   /// named `deviceMetadata`. It will override previous [device] metadata for
