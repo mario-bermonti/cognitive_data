@@ -80,9 +80,23 @@ class FirebaseDB implements DB {
     await sessionRef.doc('sessionMetadata').set(sessionData);
   }
 
+  /// Adds a single [trial] to [FirebaseFirestore].
+  /// Stores each [trial] data in an independent doc inside a collection
+  /// named `trials`.
   @override
-  void addTrial({required Trial trial}) {
-    // TODO: implement addTrial
+  Future<void> addTrial({required Trial trial}) async {
+    final Map<String, dynamic> trialMap = {
+      'participantID': trial.participantID,
+      'sessionID': trial.sessionID,
+      'trialType': trial.trialType,
+      'stim': trial.stim,
+      'response': trial.response,
+    };
+
+    final CollectionReference trialsRef = _db.collection(
+        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/trials');
+
+    await trialsRef.add(trialMap);
   }
 
   @override

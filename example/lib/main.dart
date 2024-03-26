@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cognitive_data/databases/firebase_db/firebase_db.dart';
 import 'package:cognitive_data/models/device.dart';
 import 'package:cognitive_data/models/session.dart';
+import 'package:cognitive_data/models/trial.dart';
+import 'package:cognitive_data/models/trial_type.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -34,7 +36,7 @@ class MyHomePage extends StatelessWidget {
   final String title;
   final _db = FirebaseDB(
     FirebaseFirestore.instance,
-    participantID: '101,',
+    participantID: '101',
     sessionID: '001',
     taskName: 'dsb',
   );
@@ -74,7 +76,17 @@ class MyHomePage extends StatelessWidget {
               child: const Text("Save Device metadata to firebase"),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final Trial trial = Trial(
+                  participantID: _db.participantID,
+                  sessionID: _db.sessionID,
+                  trialType: TrialType.practice,
+                  stim: '123',
+                  response: '321',
+                );
+
+                await _db.addTrial(trial: trial);
+              },
               child: const Text("Save trial to firebase"),
             ),
             ElevatedButton(
