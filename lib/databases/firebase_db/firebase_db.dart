@@ -41,11 +41,9 @@ class FirebaseDB implements DB {
   }
 
   /// Adds [device] metadata to [FirebaseFirestore].
-  ///
-  /// It will override any device metadata previously saved for the current
-  /// session. The current device is determined based on the [participantID],
-  /// [sessionID], and [taskName] specified when the [FirebaseDB] was
-  /// instantiated, and not from the values in [device].
+  /// Stores the [device] metadata in an independent doc inside a collection
+  /// named `deviceMetadata`. It will override previous [device] metadata for
+  /// the session.
   @override
   Future<void> addDevice({required Device device}) async {
     final Map<String, dynamic> deviceData = {
@@ -57,21 +55,16 @@ class FirebaseDB implements DB {
       'platform': device.platform,
     };
 
-    final DocumentReference sessionRef = _db.doc(
-        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID');
+    final CollectionReference deviceRef = _db.collection(
+        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/deviceMetadata');
 
-    await sessionRef.set(
-      {'deviceMetadata': deviceData},
-      SetOptions(merge: true),
-    );
+    await deviceRef.doc('deviceMetadata').set(deviceData);
   }
 
   /// Adds metadata for the [session] to [FirebaseFirestore].
-  ///
-  /// It will override any data previously saved for the current session. The
-  /// current session is determined based on the [participantID], [sessionID],
-  /// and [taskName] specified when the [FirebaseDB] was instantiated, and not
-  /// from the values in [session].
+  /// Stores the [session] metadata in independent docs inside a collection
+  /// named `sessionMetadata`. It will override previous [session] metadata for
+  /// the session.
   @override
   Future<void> addSession({required Session session}) async {
     final Map<String, dynamic> sessionData = {
@@ -81,13 +74,10 @@ class FirebaseDB implements DB {
       'endTime': session.endTime.toString(),
     };
 
-    final DocumentReference sessionRef = _db.doc(
-        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID');
+    final CollectionReference sessionRef = _db.collection(
+        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/sessionMetadata');
 
-    await sessionRef.set(
-      {'sessionMetadata': sessionData},
-      SetOptions(merge: true),
-    );
+    await sessionRef.doc('sessionMetadata').set(sessionData);
   }
 
   @override
