@@ -57,13 +57,10 @@ class FirebaseDB implements DB {
       'platform': device.platform,
     };
 
-    final DocumentReference sessionRef = _db.doc(
-        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID');
+    final CollectionReference deviceRef = _db.collection(
+        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/deviceMetadata');
 
-    await sessionRef.set(
-      {'deviceMetadata': deviceData},
-      SetOptions(merge: true),
-    );
+    await deviceRef.add(deviceData);
   }
 
   /// Adds metadata for the [session] to [FirebaseFirestore].
