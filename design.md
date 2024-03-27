@@ -32,7 +32,6 @@
 
 ## Firebase db
 ### db
-- init db
 - add trial
 - add trials
 - add session
