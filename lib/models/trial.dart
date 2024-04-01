@@ -1,6 +1,11 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import 'trial_type.dart';
 
+part 'trial.g.dart';
+
 /// Represents the data of a single trial.
+@JsonSerializable()
 class Trial {
   /// Unique identifier for the participant
   final String participantID;
@@ -34,4 +39,9 @@ class Trial {
     return "Trial(participantID: $participantID, sessionID: $sessionID, "
         "trialType: $trialType, stim: $stim, response: $response)";
   }
+
+  /// Convert the [Trial] object to its json representation.
+  /// This method is particularly useful when uploading data to Firebase and
+  /// similar no-sql dbs.
+  Map<String, dynamic> toJson() => _$TrialToJson(this);
 }
