@@ -32,9 +32,12 @@ class Device {
     required this.sessionID,
   }) {
     platform = Platform.operatingSystem;
-    height = WidgetsBinding.instance.window.physicalSize.height;
-    width = WidgetsBinding.instance.window.physicalSize.width;
-    aspectRatio = WidgetsBinding.instance.window.physicalSize.aspectRatio;
+    height =
+        WidgetsBinding.instance.platformDispatcher.displays.first.size.height;
+    width =
+        WidgetsBinding.instance.platformDispatcher.displays.first.size.width;
+    aspectRatio = WidgetsBinding
+        .instance.platformDispatcher.displays.first.size.aspectRatio;
   }
 
   @override

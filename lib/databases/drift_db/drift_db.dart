@@ -15,7 +15,7 @@ part 'drift_db.g.dart';
 
 @DriftDatabase(tables: [DriftSessions, DriftDevices, DriftTrials])
 class DriftDB extends _$DriftDB implements DB {
-  DriftDB(QueryExecutor dbConnection) : super(dbConnection);
+  DriftDB(super.dbConnection);
 
   @override
   int get schemaVersion => 1;

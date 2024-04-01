@@ -53,7 +53,7 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             Text(
               'Save data to firebase',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             ElevatedButton(
               onPressed: () async {

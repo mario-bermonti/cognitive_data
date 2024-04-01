@@ -2,38 +2,130 @@
 
 part of 'drift_db.dart';
 
-// **************************************************************************
-// MoorGenerator
-// **************************************************************************
-
 // ignore_for_file: type=lint
+class $DriftSessionsTable extends DriftSessions
+    with TableInfo<$DriftSessionsTable, DriftSession> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DriftSessionsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _participantIDMeta =
+      const VerificationMeta('participantID');
+  @override
+  late final GeneratedColumn<String> participantID = GeneratedColumn<String>(
+      'participant_i_d', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _sessionIDMeta =
+      const VerificationMeta('sessionID');
+  @override
+  late final GeneratedColumn<String> sessionID = GeneratedColumn<String>(
+      'session_i_d', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _startTimeMeta =
+      const VerificationMeta('startTime');
+  @override
+  late final GeneratedColumn<DateTime> startTime = GeneratedColumn<DateTime>(
+      'start_time', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _endTimeMeta =
+      const VerificationMeta('endTime');
+  @override
+  late final GeneratedColumn<DateTime> endTime = GeneratedColumn<DateTime>(
+      'end_time', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, participantID, sessionID, startTime, endTime];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'drift_sessions';
+  @override
+  VerificationContext validateIntegrity(Insertable<DriftSession> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('participant_i_d')) {
+      context.handle(
+          _participantIDMeta,
+          participantID.isAcceptableOrUnknown(
+              data['participant_i_d']!, _participantIDMeta));
+    } else if (isInserting) {
+      context.missing(_participantIDMeta);
+    }
+    if (data.containsKey('session_i_d')) {
+      context.handle(
+          _sessionIDMeta,
+          sessionID.isAcceptableOrUnknown(
+              data['session_i_d']!, _sessionIDMeta));
+    } else if (isInserting) {
+      context.missing(_sessionIDMeta);
+    }
+    if (data.containsKey('start_time')) {
+      context.handle(_startTimeMeta,
+          startTime.isAcceptableOrUnknown(data['start_time']!, _startTimeMeta));
+    } else if (isInserting) {
+      context.missing(_startTimeMeta);
+    }
+    if (data.containsKey('end_time')) {
+      context.handle(_endTimeMeta,
+          endTime.isAcceptableOrUnknown(data['end_time']!, _endTimeMeta));
+    } else if (isInserting) {
+      context.missing(_endTimeMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  DriftSession map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DriftSession(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      participantID: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}participant_i_d'])!,
+      sessionID: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}session_i_d'])!,
+      startTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}start_time'])!,
+      endTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}end_time'])!,
+    );
+  }
+
+  @override
+  $DriftSessionsTable createAlias(String alias) {
+    return $DriftSessionsTable(attachedDatabase, alias);
+  }
+}
+
 class DriftSession extends DataClass implements Insertable<DriftSession> {
   final int id;
   final String participantID;
   final String sessionID;
   final DateTime startTime;
   final DateTime endTime;
-  DriftSession(
+  const DriftSession(
       {required this.id,
       required this.participantID,
       required this.sessionID,
       required this.startTime,
       required this.endTime});
-  factory DriftSession.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return DriftSession(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      participantID: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}participant_i_d'])!,
-      sessionID: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
-      startTime: const DateTimeType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}start_time'])!,
-      endTime: const DateTimeType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}end_time'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -205,49 +297,71 @@ class DriftSessionsCompanion extends UpdateCompanion<DriftSession> {
   }
 }
 
-class $DriftSessionsTable extends DriftSessions
-    with TableInfo<$DriftSessionsTable, DriftSession> {
+class $DriftDevicesTable extends DriftDevices
+    with TableInfo<$DriftDevicesTable, DriftDevice> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DriftSessionsTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  $DriftDevicesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: const IntType(),
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _participantIDMeta =
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _participantIDMeta =
       const VerificationMeta('participantID');
   @override
-  late final GeneratedColumn<String?> participantID = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> participantID = GeneratedColumn<String>(
       'participant_i_d', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES drift_sessions (participant_i_d)'));
+  static const VerificationMeta _sessionIDMeta =
+      const VerificationMeta('sessionID');
   @override
-  late final GeneratedColumn<String?> sessionID = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> sessionID = GeneratedColumn<String>(
       'session_i_d', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _startTimeMeta = const VerificationMeta('startTime');
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES drift_sessions (session_i_d)'));
+  static const VerificationMeta _platformMeta =
+      const VerificationMeta('platform');
   @override
-  late final GeneratedColumn<DateTime?> startTime = GeneratedColumn<DateTime?>(
-      'start_time', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
-  final VerificationMeta _endTimeMeta = const VerificationMeta('endTime');
+  late final GeneratedColumn<String> platform = GeneratedColumn<String>(
+      'platform', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _heightMeta = const VerificationMeta('height');
   @override
-  late final GeneratedColumn<DateTime?> endTime = GeneratedColumn<DateTime?>(
-      'end_time', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
+  late final GeneratedColumn<double> height = GeneratedColumn<double>(
+      'height', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _widthMeta = const VerificationMeta('width');
+  @override
+  late final GeneratedColumn<double> width = GeneratedColumn<double>(
+      'width', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _aspectRatioMeta =
+      const VerificationMeta('aspectRatio');
+  @override
+  late final GeneratedColumn<double> aspectRatio = GeneratedColumn<double>(
+      'aspect_ratio', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, participantID, sessionID, startTime, endTime];
+      [id, participantID, sessionID, platform, height, width, aspectRatio];
   @override
-  String get aliasedName => _alias ?? 'drift_sessions';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'drift_sessions';
+  String get actualTableName => $name;
+  static const String $name = 'drift_devices';
   @override
-  VerificationContext validateIntegrity(Insertable<DriftSession> instance,
+  VerificationContext validateIntegrity(Insertable<DriftDevice> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -270,17 +384,31 @@ class $DriftSessionsTable extends DriftSessions
     } else if (isInserting) {
       context.missing(_sessionIDMeta);
     }
-    if (data.containsKey('start_time')) {
-      context.handle(_startTimeMeta,
-          startTime.isAcceptableOrUnknown(data['start_time']!, _startTimeMeta));
+    if (data.containsKey('platform')) {
+      context.handle(_platformMeta,
+          platform.isAcceptableOrUnknown(data['platform']!, _platformMeta));
     } else if (isInserting) {
-      context.missing(_startTimeMeta);
+      context.missing(_platformMeta);
     }
-    if (data.containsKey('end_time')) {
-      context.handle(_endTimeMeta,
-          endTime.isAcceptableOrUnknown(data['end_time']!, _endTimeMeta));
+    if (data.containsKey('height')) {
+      context.handle(_heightMeta,
+          height.isAcceptableOrUnknown(data['height']!, _heightMeta));
     } else if (isInserting) {
-      context.missing(_endTimeMeta);
+      context.missing(_heightMeta);
+    }
+    if (data.containsKey('width')) {
+      context.handle(
+          _widthMeta, width.isAcceptableOrUnknown(data['width']!, _widthMeta));
+    } else if (isInserting) {
+      context.missing(_widthMeta);
+    }
+    if (data.containsKey('aspect_ratio')) {
+      context.handle(
+          _aspectRatioMeta,
+          aspectRatio.isAcceptableOrUnknown(
+              data['aspect_ratio']!, _aspectRatioMeta));
+    } else if (isInserting) {
+      context.missing(_aspectRatioMeta);
     }
     return context;
   }
@@ -288,14 +416,29 @@ class $DriftSessionsTable extends DriftSessions
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DriftSession map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return DriftSession.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  DriftDevice map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DriftDevice(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      participantID: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}participant_i_d'])!,
+      sessionID: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}session_i_d'])!,
+      platform: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}platform'])!,
+      height: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}height'])!,
+      width: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}width'])!,
+      aspectRatio: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}aspect_ratio'])!,
+    );
   }
 
   @override
-  $DriftSessionsTable createAlias(String alias) {
-    return $DriftSessionsTable(attachedDatabase, alias);
+  $DriftDevicesTable createAlias(String alias) {
+    return $DriftDevicesTable(attachedDatabase, alias);
   }
 }
 
@@ -307,7 +450,7 @@ class DriftDevice extends DataClass implements Insertable<DriftDevice> {
   final double height;
   final double width;
   final double aspectRatio;
-  DriftDevice(
+  const DriftDevice(
       {required this.id,
       required this.participantID,
       required this.sessionID,
@@ -315,25 +458,6 @@ class DriftDevice extends DataClass implements Insertable<DriftDevice> {
       required this.height,
       required this.width,
       required this.aspectRatio});
-  factory DriftDevice.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return DriftDevice(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      participantID: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}participant_i_d'])!,
-      sessionID: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
-      platform: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}platform'])!,
-      height: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}height'])!,
-      width: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}width'])!,
-      aspectRatio: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}aspect_ratio'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -545,64 +669,66 @@ class DriftDevicesCompanion extends UpdateCompanion<DriftDevice> {
   }
 }
 
-class $DriftDevicesTable extends DriftDevices
-    with TableInfo<$DriftDevicesTable, DriftDevice> {
+class $DriftTrialsTable extends DriftTrials
+    with TableInfo<$DriftTrialsTable, DriftTrial> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DriftDevicesTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  $DriftTrialsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: const IntType(),
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _participantIDMeta =
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _participantIDMeta =
       const VerificationMeta('participantID');
   @override
-  late final GeneratedColumn<String?> participantID = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> participantID = GeneratedColumn<String>(
       'participant_i_d', aliasedName, false,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
-      defaultConstraints: 'REFERENCES drift_sessions (participant_i_d)');
-  final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES drift_sessions (participant_i_d)'));
+  static const VerificationMeta _sessionIDMeta =
+      const VerificationMeta('sessionID');
   @override
-  late final GeneratedColumn<String?> sessionID = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> sessionID = GeneratedColumn<String>(
       'session_i_d', aliasedName, false,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
-      defaultConstraints: 'REFERENCES drift_sessions (session_i_d)');
-  final VerificationMeta _platformMeta = const VerificationMeta('platform');
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES drift_sessions (session_i_d)'));
+  static const VerificationMeta _trialTypeMeta =
+      const VerificationMeta('trialType');
   @override
-  late final GeneratedColumn<String?> platform = GeneratedColumn<String?>(
-      'platform', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _heightMeta = const VerificationMeta('height');
+  late final GeneratedColumn<String> trialType = GeneratedColumn<String>(
+      'trial_type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _stimMeta = const VerificationMeta('stim');
   @override
-  late final GeneratedColumn<double?> height = GeneratedColumn<double?>(
-      'height', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _widthMeta = const VerificationMeta('width');
+  late final GeneratedColumn<String> stim = GeneratedColumn<String>(
+      'stim', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _responseMeta =
+      const VerificationMeta('response');
   @override
-  late final GeneratedColumn<double?> width = GeneratedColumn<double?>(
-      'width', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _aspectRatioMeta =
-      const VerificationMeta('aspectRatio');
-  @override
-  late final GeneratedColumn<double?> aspectRatio = GeneratedColumn<double?>(
-      'aspect_ratio', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
+  late final GeneratedColumn<String> response = GeneratedColumn<String>(
+      'response', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, participantID, sessionID, platform, height, width, aspectRatio];
+      [id, participantID, sessionID, trialType, stim, response];
   @override
-  String get aliasedName => _alias ?? 'drift_devices';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'drift_devices';
+  String get actualTableName => $name;
+  static const String $name = 'drift_trials';
   @override
-  VerificationContext validateIntegrity(Insertable<DriftDevice> instance,
+  VerificationContext validateIntegrity(Insertable<DriftTrial> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -625,31 +751,23 @@ class $DriftDevicesTable extends DriftDevices
     } else if (isInserting) {
       context.missing(_sessionIDMeta);
     }
-    if (data.containsKey('platform')) {
-      context.handle(_platformMeta,
-          platform.isAcceptableOrUnknown(data['platform']!, _platformMeta));
+    if (data.containsKey('trial_type')) {
+      context.handle(_trialTypeMeta,
+          trialType.isAcceptableOrUnknown(data['trial_type']!, _trialTypeMeta));
     } else if (isInserting) {
-      context.missing(_platformMeta);
+      context.missing(_trialTypeMeta);
     }
-    if (data.containsKey('height')) {
-      context.handle(_heightMeta,
-          height.isAcceptableOrUnknown(data['height']!, _heightMeta));
-    } else if (isInserting) {
-      context.missing(_heightMeta);
-    }
-    if (data.containsKey('width')) {
+    if (data.containsKey('stim')) {
       context.handle(
-          _widthMeta, width.isAcceptableOrUnknown(data['width']!, _widthMeta));
+          _stimMeta, stim.isAcceptableOrUnknown(data['stim']!, _stimMeta));
     } else if (isInserting) {
-      context.missing(_widthMeta);
+      context.missing(_stimMeta);
     }
-    if (data.containsKey('aspect_ratio')) {
-      context.handle(
-          _aspectRatioMeta,
-          aspectRatio.isAcceptableOrUnknown(
-              data['aspect_ratio']!, _aspectRatioMeta));
+    if (data.containsKey('response')) {
+      context.handle(_responseMeta,
+          response.isAcceptableOrUnknown(data['response']!, _responseMeta));
     } else if (isInserting) {
-      context.missing(_aspectRatioMeta);
+      context.missing(_responseMeta);
     }
     return context;
   }
@@ -657,14 +775,27 @@ class $DriftDevicesTable extends DriftDevices
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DriftDevice map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return DriftDevice.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  DriftTrial map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DriftTrial(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      participantID: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}participant_i_d'])!,
+      sessionID: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}session_i_d'])!,
+      trialType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}trial_type'])!,
+      stim: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}stim'])!,
+      response: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}response'])!,
+    );
   }
 
   @override
-  $DriftDevicesTable createAlias(String alias) {
-    return $DriftDevicesTable(attachedDatabase, alias);
+  $DriftTrialsTable createAlias(String alias) {
+    return $DriftTrialsTable(attachedDatabase, alias);
   }
 }
 
@@ -677,30 +808,13 @@ class DriftTrial extends DataClass implements Insertable<DriftTrial> {
   final String trialType;
   final String stim;
   final String response;
-  DriftTrial(
+  const DriftTrial(
       {required this.id,
       required this.participantID,
       required this.sessionID,
       required this.trialType,
       required this.stim,
       required this.response});
-  factory DriftTrial.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return DriftTrial(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      participantID: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}participant_i_d'])!,
-      sessionID: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}session_i_d'])!,
-      trialType: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}trial_type'])!,
-      stim: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}stim'])!,
-      response: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}response'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -892,122 +1006,14 @@ class DriftTrialsCompanion extends UpdateCompanion<DriftTrial> {
   }
 }
 
-class $DriftTrialsTable extends DriftTrials
-    with TableInfo<$DriftTrialsTable, DriftTrial> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $DriftTrialsTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, false,
-      type: const IntType(),
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _participantIDMeta =
-      const VerificationMeta('participantID');
-  @override
-  late final GeneratedColumn<String?> participantID = GeneratedColumn<String?>(
-      'participant_i_d', aliasedName, false,
-      type: const StringType(),
-      requiredDuringInsert: true,
-      defaultConstraints: 'REFERENCES drift_sessions (participant_i_d)');
-  final VerificationMeta _sessionIDMeta = const VerificationMeta('sessionID');
-  @override
-  late final GeneratedColumn<String?> sessionID = GeneratedColumn<String?>(
-      'session_i_d', aliasedName, false,
-      type: const StringType(),
-      requiredDuringInsert: true,
-      defaultConstraints: 'REFERENCES drift_sessions (session_i_d)');
-  final VerificationMeta _trialTypeMeta = const VerificationMeta('trialType');
-  @override
-  late final GeneratedColumn<String?> trialType = GeneratedColumn<String?>(
-      'trial_type', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _stimMeta = const VerificationMeta('stim');
-  @override
-  late final GeneratedColumn<String?> stim = GeneratedColumn<String?>(
-      'stim', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _responseMeta = const VerificationMeta('response');
-  @override
-  late final GeneratedColumn<String?> response = GeneratedColumn<String?>(
-      'response', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns =>
-      [id, participantID, sessionID, trialType, stim, response];
-  @override
-  String get aliasedName => _alias ?? 'drift_trials';
-  @override
-  String get actualTableName => 'drift_trials';
-  @override
-  VerificationContext validateIntegrity(Insertable<DriftTrial> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('participant_i_d')) {
-      context.handle(
-          _participantIDMeta,
-          participantID.isAcceptableOrUnknown(
-              data['participant_i_d']!, _participantIDMeta));
-    } else if (isInserting) {
-      context.missing(_participantIDMeta);
-    }
-    if (data.containsKey('session_i_d')) {
-      context.handle(
-          _sessionIDMeta,
-          sessionID.isAcceptableOrUnknown(
-              data['session_i_d']!, _sessionIDMeta));
-    } else if (isInserting) {
-      context.missing(_sessionIDMeta);
-    }
-    if (data.containsKey('trial_type')) {
-      context.handle(_trialTypeMeta,
-          trialType.isAcceptableOrUnknown(data['trial_type']!, _trialTypeMeta));
-    } else if (isInserting) {
-      context.missing(_trialTypeMeta);
-    }
-    if (data.containsKey('stim')) {
-      context.handle(
-          _stimMeta, stim.isAcceptableOrUnknown(data['stim']!, _stimMeta));
-    } else if (isInserting) {
-      context.missing(_stimMeta);
-    }
-    if (data.containsKey('response')) {
-      context.handle(_responseMeta,
-          response.isAcceptableOrUnknown(data['response']!, _responseMeta));
-    } else if (isInserting) {
-      context.missing(_responseMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  DriftTrial map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return DriftTrial.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
-  }
-
-  @override
-  $DriftTrialsTable createAlias(String alias) {
-    return $DriftTrialsTable(attachedDatabase, alias);
-  }
-}
-
 abstract class _$DriftDB extends GeneratedDatabase {
-  _$DriftDB(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
+  _$DriftDB(QueryExecutor e) : super(e);
   late final $DriftSessionsTable driftSessions = $DriftSessionsTable(this);
   late final $DriftDevicesTable driftDevices = $DriftDevicesTable(this);
   late final $DriftTrialsTable driftTrials = $DriftTrialsTable(this);
   @override
-  Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
+  Iterable<TableInfo<Table, Object?>> get allTables =>
+      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
       [driftSessions, driftDevices, driftTrials];
