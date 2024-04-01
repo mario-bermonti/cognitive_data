@@ -71,13 +71,7 @@ class FirebaseDB implements DB {
     final WriteBatch batch = _db.batch();
 
     for (final Trial trial in trials) {
-      final Map<String, dynamic> trialMap = {
-        'participantID': trial.participantID,
-        'sessionID': trial.sessionID,
-        'trialType': trial.trialType,
-        'stim': trial.stim,
-        'response': trial.response,
-      };
+      final Map<String, dynamic> trialMap = trial.toJson();
 
       batch.set(trialsRef.doc(), trialMap);
     }
