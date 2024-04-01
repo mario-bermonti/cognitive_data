@@ -1,9 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'device.g.dart';
 
 /// Represents the characteristics of the device on which the data
 /// was collected. It serves as metadata about the data collected.
+@JsonSerializable()
 class Device {
   /// Unique identifier for the participant
   final String participantID;
@@ -46,4 +50,9 @@ class Device {
         "platform: $platform, height: $height, width: $width, "
         "aspectRatio: $aspectRatio)";
   }
+
+  /// Convert the [Device] object to its json representation.
+  /// This method is particularly useful when uploading data to Firebase and
+  /// similar no-sql dbs.
+  Map<String, dynamic> toJson() => _$DeviceToJson(this);
 }
