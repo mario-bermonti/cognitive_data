@@ -1,4 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'session.g.dart';
+
 /// Represents the metadata for data collection session.
+@JsonSerializable()
 class Session {
   /// Unique identifier for the participant
   final String participantID;
@@ -24,4 +29,6 @@ class Session {
     return "Session(participantID: $participantID, sessionID: $sessionID, "
         "startTime: $startTime, endTime: $endTime)";
   }
+
+  Map<String, dynamic> toJson() => _$SessionToJson(this);
 }
