@@ -30,5 +30,8 @@ class Session {
         "startTime: $startTime, endTime: $endTime)";
   }
 
+  /// Convert the [Session] object to its json representation.
+  /// This method is particularly useful when uploading data to Firebase and
+  /// similar no-sql dbs.
   Map<String, dynamic> toJson() => _$SessionToJson(this);
 }
