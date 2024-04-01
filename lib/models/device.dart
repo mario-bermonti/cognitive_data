@@ -51,5 +51,8 @@ class Device {
         "aspectRatio: $aspectRatio)";
   }
 
+  /// Convert the [Device] object to its json representation.
+  /// This method is particularly useful when uploading data to Firebase and
+  /// similar no-sql dbs.
   Map<String, dynamic> toJson() => _$DeviceToJson(this);
 }
