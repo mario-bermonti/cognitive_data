@@ -25,14 +25,7 @@ class FirebaseDB implements DB {
   /// the session.
   @override
   Future<void> addDevice({required Device device}) async {
-    final Map<String, dynamic> deviceData = {
-      'participantID': device.participantID,
-      'sessionID': device.sessionID,
-      'height': device.height,
-      'width': device.width,
-      'aspectRatio': device.aspectRatio,
-      'platform': device.platform,
-    };
+    final Map<String, dynamic> deviceData = device.toJson();
 
     final CollectionReference deviceRef = _db.collection(
         'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/deviceMetadata');
@@ -46,12 +39,7 @@ class FirebaseDB implements DB {
   /// the session.
   @override
   Future<void> addSession({required Session session}) async {
-    final Map<String, dynamic> sessionData = {
-      'participantID': session.participantID,
-      'sessionID': session.sessionID,
-      'startTime': session.startTime.toString(),
-      'endTime': session.endTime.toString(),
-    };
+    final Map<String, dynamic> sessionData = session.toJson();
 
     final CollectionReference sessionRef = _db.collection(
         'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/sessionMetadata');
@@ -64,13 +52,7 @@ class FirebaseDB implements DB {
   /// named `trials`.
   @override
   Future<void> addTrial({required Trial trial}) async {
-    final Map<String, dynamic> trialMap = {
-      'participantID': trial.participantID,
-      'sessionID': trial.sessionID,
-      'trialType': trial.trialType,
-      'stim': trial.stim,
-      'response': trial.response,
-    };
+    final Map<String, dynamic> trialMap = trial.toJson();
 
     final CollectionReference trialsRef = _db.collection(
         'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/trials');
@@ -89,13 +71,7 @@ class FirebaseDB implements DB {
     final WriteBatch batch = _db.batch();
 
     for (final Trial trial in trials) {
-      final Map<String, dynamic> trialMap = {
-        'participantID': trial.participantID,
-        'sessionID': trial.sessionID,
-        'trialType': trial.trialType,
-        'stim': trial.stim,
-        'response': trial.response,
-      };
+      final Map<String, dynamic> trialMap = trial.toJson();
 
       batch.set(trialsRef.doc(), trialMap);
     }
