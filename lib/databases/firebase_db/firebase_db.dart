@@ -7,13 +7,13 @@ import 'package:cognitive_data/models/device.dart';
 /// DB used to store data in Firebase.
 /// Requires passing a [FirebaseFirestore] instance at instantiation.
 class FirebaseDB implements DB {
-  final FirebaseFirestore _db;
+  final FirebaseFirestore db;
   final String participantID;
   final String sessionID;
   String taskName;
 
   FirebaseDB(
-    this._db, {
+    this.db, {
     required this.participantID,
     required this.sessionID,
     required this.taskName,
@@ -27,7 +27,7 @@ class FirebaseDB implements DB {
   Future<void> addDevice({required Device device}) async {
     final Map<String, dynamic> deviceData = device.toJson();
 
-    final CollectionReference deviceRef = _db.collection(
+    final CollectionReference deviceRef = db.collection(
         'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/deviceMetadata');
 
     await deviceRef.doc('deviceMetadata').set(deviceData);
@@ -41,7 +41,7 @@ class FirebaseDB implements DB {
   Future<void> addSession({required Session session}) async {
     final Map<String, dynamic> sessionData = session.toJson();
 
-    final CollectionReference sessionRef = _db.collection(
+    final CollectionReference sessionRef = db.collection(
         'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/sessionMetadata');
 
     await sessionRef.doc('sessionMetadata').set(sessionData);
@@ -54,7 +54,7 @@ class FirebaseDB implements DB {
   Future<void> addTrial({required Trial trial}) async {
     final Map<String, dynamic> trialMap = trial.toJson();
 
-    final CollectionReference trialsRef = _db.collection(
+    final CollectionReference trialsRef = db.collection(
         'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/trials');
 
     await trialsRef.add(trialMap);
@@ -65,10 +65,10 @@ class FirebaseDB implements DB {
   /// named `trials`.
   @override
   Future<void> addTrials({required List<Trial> trials}) async {
-    final CollectionReference trialsRef = _db.collection(
+    final CollectionReference trialsRef = db.collection(
         'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/trials');
 
-    final WriteBatch batch = _db.batch();
+    final WriteBatch batch = db.batch();
 
     for (final Trial trial in trials) {
       final Map<String, dynamic> trialMap = trial.toJson();
