@@ -25,14 +25,7 @@ class FirebaseDB implements DB {
   /// the session.
   @override
   Future<void> addDevice({required Device device}) async {
-    final Map<String, dynamic> deviceData = {
-      'participantID': device.participantID,
-      'sessionID': device.sessionID,
-      'height': device.height,
-      'width': device.width,
-      'aspectRatio': device.aspectRatio,
-      'platform': device.platform,
-    };
+    final Map<String, dynamic> deviceData = device.toJson();
 
     final CollectionReference deviceRef = _db.collection(
         'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/deviceMetadata');
