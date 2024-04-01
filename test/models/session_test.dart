@@ -15,4 +15,20 @@ void main() {
         "endTime: ${session.endTime})";
     expect(session.toString(), strRep);
   });
+
+  test(
+    "Session.toJson() returns a valid json representation",
+    () {
+      final Session session = Session(
+        participantID: '101',
+        sessionID: '001',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
+      );
+
+      final Map<String, dynamic> sessionJson = session.toJson();
+
+      expect(sessionJson, isMap);
+    },
+  );
 }
