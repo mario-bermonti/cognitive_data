@@ -13,4 +13,15 @@ void main() {
 
     expect(device.toString(), strRep);
   });
+
+  test(
+    "Device.toJson returns a valid json representation",
+    () {
+      final Device device = Device(participantID: '101', sessionID: '001');
+
+      final Map<String, dynamic> deviceJson = device.toJson();
+
+      expect(deviceJson, isMap);
+    },
+  );
 }
