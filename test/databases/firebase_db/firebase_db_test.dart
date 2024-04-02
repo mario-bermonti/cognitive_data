@@ -87,4 +87,39 @@ void main() {
       expect(trialFirebaseData, trialLocal.toJson());
     },
   );
+  test(
+    "FirebaseDB.addTrials correctly adds data to Firebase",
+    () async {
+      final Trial trial1Local = Trial(
+        participantID: db.participantID,
+        sessionID: db.sessionID,
+        trialType: TrialType.practice,
+        stim: '123',
+        response: '321',
+      );
+      final Trial trial2Local = Trial(
+        participantID: db.participantID,
+        sessionID: db.sessionID,
+        trialType: TrialType.practice,
+        stim: '456',
+        response: '654',
+      );
+
+      final List<Trial> trialsLocal = <Trial>[trial1Local, trial2Local];
+
+      await db.addTrials(trials: trialsLocal);
+
+      final QuerySnapshot trialSnapshot =
+          await db.db.collection('$currentSessionPath/trials').get();
+
+      final Map<String, dynamic> trial1FirebaseData =
+          trialSnapshot.docs.first.data() as Map<String, dynamic>;
+
+      final Map<String, dynamic> trial2FirebaseData =
+          trialSnapshot.docs.last.data() as Map<String, dynamic>;
+
+      expect(trial1FirebaseData, trial1Local.toJson());
+      expect(trial2FirebaseData, trial2Local.toJson());
+    },
+  );
 }
