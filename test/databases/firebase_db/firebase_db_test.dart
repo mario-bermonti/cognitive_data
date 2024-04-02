@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cognitive_data/databases/firebase_db/firebase_db.dart';
+import 'package:cognitive_data/models/device.dart';
 import 'package:cognitive_data/models/session.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -39,6 +40,27 @@ void main() {
           sessionFirebaseSnapshot.data() as Map<String, dynamic>;
 
       expect(sessionFirebaseData, sessionLocal.toJson());
+    },
+  );
+  test(
+    "FirebaseDB.addDevice correctly adds data to Firebase",
+    () async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      final Device deviceLocal = Device(
+        participantID: db.participantID,
+        sessionID: db.sessionID,
+      );
+
+      await db.addDevice(device: deviceLocal);
+
+      final DocumentSnapshot deviceFirebaseSnapshot = await db.db
+          .doc('$currentSessionPath/deviceMetadata/deviceMetadata')
+          .get();
+
+      final Map<String, dynamic> deviceFirebaseData =
+          deviceFirebaseSnapshot.data() as Map<String, dynamic>;
+
+      expect(deviceFirebaseData, deviceLocal.toJson());
     },
   );
 }
