@@ -38,10 +38,10 @@ void main() {
           .doc('$currentSessionPath/sessionMetadata/sessionMetadata')
           .get();
 
-      final Map<String, dynamic> sessionFirebaseData =
+      final Map<String, dynamic> sessionFirebase =
           sessionFirebaseSnapshot.data() as Map<String, dynamic>;
 
-      expect(sessionFirebaseData, sessionLocal.toJson());
+      expect(sessionFirebase, sessionLocal.toJson());
     },
   );
   test(
@@ -59,10 +59,10 @@ void main() {
           .doc('$currentSessionPath/deviceMetadata/deviceMetadata')
           .get();
 
-      final Map<String, dynamic> deviceFirebaseData =
+      final Map<String, dynamic> deviceFirebase =
           deviceFirebaseSnapshot.data() as Map<String, dynamic>;
 
-      expect(deviceFirebaseData, deviceLocal.toJson());
+      expect(deviceFirebase, deviceLocal.toJson());
     },
   );
   test(
@@ -81,10 +81,10 @@ void main() {
       final QuerySnapshot trialSnapshot =
           await db.db.collection('$currentSessionPath/trials').get();
 
-      final Map<String, dynamic> trialFirebaseData =
+      final Map<String, dynamic> trialFirebase =
           trialSnapshot.docs.first.data() as Map<String, dynamic>;
 
-      expect(trialFirebaseData, trialLocal.toJson());
+      expect(trialFirebase, trialLocal.toJson());
     },
   );
   test(
@@ -112,14 +112,14 @@ void main() {
       final QuerySnapshot trialSnapshot =
           await db.db.collection('$currentSessionPath/trials').get();
 
-      final Map<String, dynamic> trial1FirebaseData =
+      final Map<String, dynamic> trial1Firebase =
           trialSnapshot.docs.first.data() as Map<String, dynamic>;
 
-      final Map<String, dynamic> trial2FirebaseData =
+      final Map<String, dynamic> trial2Firebase =
           trialSnapshot.docs.last.data() as Map<String, dynamic>;
 
-      expect(trial1FirebaseData, trial1Local.toJson());
-      expect(trial2FirebaseData, trial2Local.toJson());
+      expect(trial1Firebase, trial1Local.toJson());
+      expect(trial2Firebase, trial2Local.toJson());
     },
   );
 }
