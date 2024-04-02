@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   late FirebaseDB db;
+  late String currentSessionPath;
 
   setUp(() {
     db = FirebaseDB(
@@ -12,5 +13,7 @@ void main() {
       sessionID: '001',
       taskName: 'dsb',
     );
+    currentSessionPath =
+        'participants/${db.participantID}/cognitive_tasks/${db.taskName}/sessions/${db.sessionID}';
   });
 }
