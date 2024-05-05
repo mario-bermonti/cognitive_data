@@ -19,7 +19,7 @@ void main() {
       taskName: 'dsb',
     );
     currentSessionPath =
-        'participants/${db.participantID}/cognitive_tasks/${db.taskName}/sessions/${db.sessionID}';
+        'cognitive_measures/${db.taskName}/participants/${db.participantID}/sessions/${db.sessionID}';
   });
 
   test(
