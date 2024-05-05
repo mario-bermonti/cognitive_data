@@ -28,7 +28,7 @@ class FirebaseDB implements DB {
     final Map<String, dynamic> deviceData = device.toJson();
 
     final CollectionReference deviceRef = db.collection(
-        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/deviceMetadata');
+        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/deviceMetadata');
 
     await deviceRef.doc('deviceMetadata').set(deviceData);
   }
@@ -42,7 +42,7 @@ class FirebaseDB implements DB {
     final Map<String, dynamic> sessionData = session.toJson();
 
     final CollectionReference sessionRef = db.collection(
-        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/sessionMetadata');
+        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/sessionMetadata');
 
     await sessionRef.doc('sessionMetadata').set(sessionData);
   }
@@ -55,7 +55,7 @@ class FirebaseDB implements DB {
     final Map<String, dynamic> trialMap = trial.toJson();
 
     final CollectionReference trialsRef = db.collection(
-        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/trials');
+        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/trials');
 
     await trialsRef.add(trialMap);
   }
@@ -66,7 +66,7 @@ class FirebaseDB implements DB {
   @override
   Future<void> addTrials({required List<Trial> trials}) async {
     final CollectionReference trialsRef = db.collection(
-        'participants/$participantID/cognitive_tasks/$taskName/sessions/$sessionID/trials');
+        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/trials');
 
     final WriteBatch batch = db.batch();
 
