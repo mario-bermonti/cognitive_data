@@ -21,30 +21,30 @@ class FirebaseDB implements DB {
 
   /// Adds [device] metadata to [FirebaseFirestore].
   /// Stores the [device] metadata in an independent doc inside a collection
-  /// named `deviceMetadata`. It will override previous [device] metadata for
+  /// named `device`. It will override previous [device] metadata for
   /// the session.
   @override
   Future<void> addDevice({required Device device}) async {
     final Map<String, dynamic> deviceData = device.toJson();
 
     final CollectionReference deviceRef = db.collection(
-        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/deviceMetadata');
+        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/device');
 
-    await deviceRef.doc('deviceMetadata').set(deviceData);
+    await deviceRef.doc('device').set(deviceData);
   }
 
   /// Adds metadata for the [session] to [FirebaseFirestore].
   /// Stores the [session] metadata in independent docs inside a collection
-  /// named `sessionMetadata`. It will override previous [session] metadata for
+  /// named `session`. It will override previous [session] metadata for
   /// the session.
   @override
   Future<void> addSession({required Session session}) async {
     final Map<String, dynamic> sessionData = session.toJson();
 
     final CollectionReference sessionRef = db.collection(
-        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/sessionMetadata');
+        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/session');
 
-    await sessionRef.doc('sessionMetadata').set(sessionData);
+    await sessionRef.doc('session').set(sessionData);
   }
 
   /// Adds a single [trial] to [FirebaseFirestore].

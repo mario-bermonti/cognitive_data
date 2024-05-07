@@ -34,9 +34,8 @@ void main() {
 
       await db.addSession(session: sessionLocal);
 
-      final DocumentSnapshot sessionFirebaseSnapshot = await db.db
-          .doc('$currentSessionPath/sessionMetadata/sessionMetadata')
-          .get();
+      final DocumentSnapshot sessionFirebaseSnapshot =
+          await db.db.doc('$currentSessionPath/session/session').get();
 
       final Map<String, dynamic> sessionFirebase =
           sessionFirebaseSnapshot.data() as Map<String, dynamic>;
@@ -55,9 +54,8 @@ void main() {
 
       await db.addDevice(device: deviceLocal);
 
-      final DocumentSnapshot deviceFirebaseSnapshot = await db.db
-          .doc('$currentSessionPath/deviceMetadata/deviceMetadata')
-          .get();
+      final DocumentSnapshot deviceFirebaseSnapshot =
+          await db.db.doc('$currentSessionPath/device/device').get();
 
       final Map<String, dynamic> deviceFirebase =
           deviceFirebaseSnapshot.data() as Map<String, dynamic>;
