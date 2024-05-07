@@ -21,16 +21,16 @@ class FirebaseDB implements DB {
 
   /// Adds [device] metadata to [FirebaseFirestore].
   /// Stores the [device] metadata in an independent doc inside a collection
-  /// named `deviceMetadata`. It will override previous [device] metadata for
+  /// named `device`. It will override previous [device] metadata for
   /// the session.
   @override
   Future<void> addDevice({required Device device}) async {
     final Map<String, dynamic> deviceData = device.toJson();
 
     final CollectionReference deviceRef = db.collection(
-        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/deviceMetadata');
+        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/device');
 
-    await deviceRef.doc('deviceMetadata').set(deviceData);
+    await deviceRef.doc('device').set(deviceData);
   }
 
   /// Adds metadata for the [session] to [FirebaseFirestore].
