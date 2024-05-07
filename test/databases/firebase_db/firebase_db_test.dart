@@ -34,9 +34,8 @@ void main() {
 
       await db.addSession(session: sessionLocal);
 
-      final DocumentSnapshot sessionFirebaseSnapshot = await db.db
-          .doc('$currentSessionPath/sessionMetadata/sessionMetadata')
-          .get();
+      final DocumentSnapshot sessionFirebaseSnapshot =
+          await db.db.doc('$currentSessionPath/session/session').get();
 
       final Map<String, dynamic> sessionFirebase =
           sessionFirebaseSnapshot.data() as Map<String, dynamic>;
