@@ -1017,4 +1017,7 @@ abstract class _$DriftDB extends GeneratedDatabase {
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
       [driftSessions, driftDevices, driftTrials];
+  @override
+  DriftDatabaseOptions get options =>
+      const DriftDatabaseOptions(storeDateTimeAsText: true);
 }
