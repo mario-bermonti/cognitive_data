@@ -10,11 +10,15 @@ void main() {
       trialType: TrialType.practice,
       stim: 'stimuli',
       response: 'participant response',
+      startTime: DateTime.now(),
+      endTime: DateTime.now(),
     );
     final String strRep =
         "Trial(participantID: ${trial.participantID}, sessionID: ${trial.sessionID}, "
         "trialType: ${trial.trialType}, stim: ${trial.stim}, "
-        "response: ${trial.response})";
+        "response: ${trial.response}, "
+        "startTime: ${trial.startTime}, "
+        "endTime: ${trial.endTime})";
     expect(trial.toString(), strRep);
   });
 
@@ -27,9 +31,12 @@ void main() {
         trialType: TrialType.practice,
         stim: 'stimuli',
         response: 'participant response',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
       );
 
       final Map<String, dynamic> trialJson = trial.toJson();
+      print(trialJson);
 
       expect(trialJson, isMap);
     },
