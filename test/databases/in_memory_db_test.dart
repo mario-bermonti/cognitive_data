@@ -46,6 +46,8 @@ void main() {
       trialType: TrialType.practice,
       stim: '987',
       response: '987',
+      startTime: DateTime.now(),
+      endTime: DateTime.now(),
     );
     final InMemoryDB inMemoryDB = InMemoryDB();
 
@@ -68,6 +70,8 @@ void main() {
         trialType: TrialType.practice,
         stim: '123',
         response: '123',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
       );
 
       final Trial trial2 = Trial(
@@ -76,6 +80,8 @@ void main() {
         trialType: TrialType.experimental,
         stim: '456',
         response: '654',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
       );
 
       final List<Trial> trials = [trial1, trial2];
