@@ -23,11 +23,14 @@ void main() {
     "Drift.addTrial correctly inserts a trial into the DriftDB",
     () async {
       final Trial baseTrial = Trial(
-          participantID: '101',
-          sessionID: '001',
-          trialType: TrialType.practice,
-          stim: '456',
-          response: '654');
+        participantID: '101',
+        sessionID: '001',
+        trialType: TrialType.practice,
+        stim: '456',
+        response: '654',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
+      );
 
       await db.addTrial(trial: baseTrial);
 
@@ -49,6 +52,8 @@ void main() {
         trialType: TrialType.practice,
         stim: '123',
         response: '123',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
       );
 
       final Trial trial2 = Trial(
@@ -57,6 +62,8 @@ void main() {
         trialType: TrialType.experimental,
         stim: '456',
         response: '654',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
       );
       final List<Trial> baseTrials = [trial1, trial2];
 
