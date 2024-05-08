@@ -83,6 +83,8 @@ class MyHomePage extends StatelessWidget {
                   trialType: TrialType.practice,
                   stim: '123',
                   response: '321',
+                  startTime: DateTime.now(),
+                  endTime: DateTime.now(),
                 );
 
                 await _db.addTrial(trial: trial);
@@ -97,6 +99,8 @@ class MyHomePage extends StatelessWidget {
                   trialType: TrialType.practice,
                   stim: '123',
                   response: '321',
+                  startTime: DateTime.now(),
+                  endTime: DateTime.now(),
                 );
                 final Trial trial2 = Trial(
                   participantID: _db.participantID,
@@ -104,6 +108,8 @@ class MyHomePage extends StatelessWidget {
                   trialType: TrialType.practice,
                   stim: '456',
                   response: '654',
+                  startTime: DateTime.now(),
+                  endTime: DateTime.now(),
                 );
                 final List<Trial> trials = <Trial>[trial1, trial2];
 
