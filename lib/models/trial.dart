@@ -45,7 +45,8 @@ class Trial {
   @override
   String toString() {
     return "Trial(participantID: $participantID, sessionID: $sessionID, "
-        "trialType: $trialType, stim: $stim, response: $response)";
+        "trialType: $trialType, stim: $stim, response: $response, "
+        "startTime: $startTime, endTime: $endTime)";
   }
 
   /// Convert the [Trial] object to its json representation.
