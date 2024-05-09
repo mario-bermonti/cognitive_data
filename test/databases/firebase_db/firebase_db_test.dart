@@ -72,6 +72,8 @@ void main() {
         trialType: TrialType.practice,
         stim: '456',
         response: '654',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
       );
 
       await db.addTrial(trial: trialLocal);
@@ -94,6 +96,8 @@ void main() {
         trialType: TrialType.practice,
         stim: '123',
         response: '321',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
       );
       final Trial trial2Local = Trial(
         participantID: db.participantID,
@@ -101,6 +105,8 @@ void main() {
         trialType: TrialType.practice,
         stim: '456',
         response: '654',
+        startTime: DateTime.now(),
+        endTime: DateTime.now(),
       );
 
       final List<Trial> trialsLocal = <Trial>[trial1Local, trial2Local];

@@ -24,12 +24,20 @@ class Trial {
   /// Response provided by the participant.
   final String response;
 
+  /// Timestamp indicating when the trial started.
+  final DateTime startTime;
+
+  /// Timestamp indicating when the trial ended.
+  final DateTime endTime;
+
   Trial({
     required this.participantID,
     required this.sessionID,
     required TrialType trialType,
     required this.stim,
     required this.response,
+    required this.startTime,
+    required this.endTime,
   }) {
     this.trialType = trialType.name;
   }
@@ -37,7 +45,8 @@ class Trial {
   @override
   String toString() {
     return "Trial(participantID: $participantID, sessionID: $sessionID, "
-        "trialType: $trialType, stim: $stim, response: $response)";
+        "trialType: $trialType, stim: $stim, response: $response, "
+        "startTime: $startTime, endTime: $endTime)";
   }
 
   /// Convert the [Trial] object to its json representation.

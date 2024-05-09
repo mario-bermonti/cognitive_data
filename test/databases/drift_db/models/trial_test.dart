@@ -20,11 +20,14 @@ void main() {
       'DriftTrial.fromTrial correctly instantiates a DriftTrial object from a base Trial model',
       () {
     final Trial baseTrial = Trial(
-        participantID: '101',
-        sessionID: '001',
-        trialType: TrialType.practice,
-        stim: '456',
-        response: '654');
+      participantID: '101',
+      sessionID: '001',
+      trialType: TrialType.practice,
+      stim: '456',
+      response: '654',
+      startTime: DateTime.now(),
+      endTime: DateTime.now(),
+    );
 
     final DriftTrialsCompanion driftTrial = DriftTrials.fromTrial(baseTrial);
 
