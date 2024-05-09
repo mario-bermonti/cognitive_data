@@ -36,7 +36,6 @@ void main() {
       );
 
       final Map<String, dynamic> trialJson = trial.toJson();
-      print(trialJson);
 
       expect(trialJson, isMap);
     },
