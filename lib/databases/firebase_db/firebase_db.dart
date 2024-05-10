@@ -27,8 +27,14 @@ class FirebaseDB implements DB {
   Future<void> addDevice({required Device device}) async {
     final Map<String, dynamic> deviceData = device.toJson();
 
-    final CollectionReference deviceRef = db.collection(
-        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/device');
+    final CollectionReference deviceRef = db
+        .collection('cognitive_measures')
+        .doc(taskName)
+        .collection('participants')
+        .doc(participantID)
+        .collection('sessions')
+        .doc(sessionID)
+        .collection('device');
 
     await deviceRef.doc('device').set(deviceData);
   }
