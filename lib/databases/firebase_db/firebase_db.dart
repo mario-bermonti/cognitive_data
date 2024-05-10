@@ -47,8 +47,14 @@ class FirebaseDB implements DB {
   Future<void> addSession({required Session session}) async {
     final Map<String, dynamic> sessionData = session.toJson();
 
-    final CollectionReference sessionRef = db.collection(
-        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/session');
+    final CollectionReference sessionRef = db
+        .collection('cognitive_measures')
+        .doc(taskName)
+        .collection('participants')
+        .doc(participantID)
+        .collection('sessions')
+        .doc(sessionID)
+        .collection('session');
 
     await sessionRef.doc('session').set(sessionData);
   }
