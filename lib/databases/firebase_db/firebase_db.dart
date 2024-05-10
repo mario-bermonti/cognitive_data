@@ -66,8 +66,14 @@ class FirebaseDB implements DB {
   Future<void> addTrial({required Trial trial}) async {
     final Map<String, dynamic> trialMap = trial.toJson();
 
-    final CollectionReference trialsRef = db.collection(
-        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/trials');
+    final CollectionReference trialsRef = db
+        .collection('cognitive_measures')
+        .doc(taskName)
+        .collection('participants')
+        .doc(participantID)
+        .collection('sessions')
+        .doc(sessionID)
+        .collection('trials');
 
     await trialsRef.add(trialMap);
   }
