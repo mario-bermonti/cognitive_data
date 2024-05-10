@@ -83,8 +83,14 @@ class FirebaseDB implements DB {
   /// named `trials`.
   @override
   Future<void> addTrials({required List<Trial> trials}) async {
-    final CollectionReference trialsRef = db.collection(
-        'cognitive_measures/$taskName/participants/$participantID/sessions/$sessionID/trials');
+    final CollectionReference trialsRef = db
+        .collection('cognitive_measures')
+        .doc(taskName)
+        .collection('participants')
+        .doc(participantID)
+        .collection('sessions')
+        .doc(sessionID)
+        .collection('trials');
 
     final WriteBatch batch = db.batch();
 
